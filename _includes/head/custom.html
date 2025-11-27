@@ -4,50 +4,51 @@
 <style>
   .mermaid-container {
     position: relative;
-    border: 1px solid #e1e4e8;
+    border: 1px solid #333;
     border-radius: 6px;
-    background-color: #ffffff;
+    background-color: #1e1e1e;
     overflow: hidden;
     margin-bottom: 16px;
+    height: 90vh;
   }
   .mermaid-controls {
     position: absolute;
     bottom: 10px;
     right: 10px;
     z-index: 10;
-    background: white;
-    border: 1px solid #ccc;
+    background: #252a34;
+    border: 1px solid #444;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
   }
   .mermaid-controls button {
     background: none;
     border: none;
     padding: 5px;
     cursor: pointer;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #444;
     width: 30px;
     height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 16px;
-    color: #586069;
+    color: #c9d1d9;
     outline: none;
   }
   .mermaid-controls button:last-child {
     border-bottom: none;
   }
   .mermaid-controls button:hover {
-    background-color: #f6f8fa;
-    color: #0366d6;
+    background-color: #30363d;
+    color: #58a6ff;
   }
 </style>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    mermaid.initialize({ startOnLoad: false, theme: "default" });
+    mermaid.initialize({ startOnLoad: false, theme: "dark" });
     
     // Find all code blocks with language-mermaid
     var mermaidBlocks = document.querySelectorAll('code.language-mermaid');
@@ -57,6 +58,8 @@
       var div = document.createElement('div');
       div.className = 'mermaid';
       div.textContent = content;
+      div.style.height = '100%';
+      div.style.width = '100%';
       
       var container = document.createElement('div');
       container.className = 'mermaid-container';
@@ -83,8 +86,8 @@
             var svg = div.querySelector('svg');
             if (svg) {
                 // Ensure SVG fits and allows zooming
-                svg.style.maxWidth = '100%';
-                svg.style.height = 'auto';
+                svg.style.width = '100%';
+                svg.style.height = '100%';
                 
                 // Initialize svg-pan-zoom
                 var panZoom = svgPanZoom(svg, {
