@@ -8,6 +8,8 @@ toc: true
 
 ```sql
 
+
+
 -- ============================================
 -- MISSING DATA FOR KARNATAKA AND DELHI ELECTIONS
 -- ============================================

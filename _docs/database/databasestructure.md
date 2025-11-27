@@ -343,4 +343,6 @@ INSERT INTO dummy_passport_records (passport_number, full_name, date_of_birth) V
 ('P8800007', 'Aavdut Joshi', '2000-01-01'),
 ('P8800008', 'Aaman Sayyad', '2000-01-01'),
 ('P8800009', 'Deepak Revgade', '2000-01-01');
+
+
 ```

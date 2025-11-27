@@ -7,7 +7,7 @@ mermaid: true
 toc: true
 ---
 
-![Database ER Diagram](https://github.com/yadnyeshkolte/online-voting-system/blob/docs/assets/images/erdiagram.png)
+![Database ER Diagram]({{ "/assets/images/erdiagram.png" | relative_url }})
 *Visual representation of the database schema*
 
 
