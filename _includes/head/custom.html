@@ -1,5 +1,50 @@
 {% if page.mermaid %}
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+<style>
+  .mermaid-container {
+    position: relative;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    background-color: #ffffff;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .mermaid-controls {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .mermaid-controls button {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #586069;
+    outline: none;
+  }
+  .mermaid-controls button:last-child {
+    border-bottom: none;
+  }
+  .mermaid-controls button:hover {
+    background-color: #f6f8fa;
+    color: #0366d6;
+  }
+</style>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     mermaid.initialize({ startOnLoad: false, theme: "default" });
@@ -13,22 +58,76 @@
       div.className = 'mermaid';
       div.textContent = content;
       
+      var container = document.createElement('div');
+      container.className = 'mermaid-container';
+      container.appendChild(div);
+      
       // We want to replace the pre tag or the wrapper div
       var pre = block.closest('pre');
       if (pre) {
           // If wrapped in div.highlight (Rouge), maybe replace that too?
           var wrapper = pre.closest('div.highlighter-rouge');
           if (wrapper) {
-              wrapper.parentNode.replaceChild(div, wrapper);
+              wrapper.parentNode.replaceChild(container, wrapper);
           } else {
-              pre.parentNode.replaceChild(div, pre);
+              pre.parentNode.replaceChild(container, pre);
           }
       } else {
-          block.parentNode.replaceChild(div, block);
+          block.parentNode.replaceChild(container, block);
       }
     });
     
-    mermaid.run();
+    mermaid.run().then(function() {
+        var mermaidDivs = document.querySelectorAll('.mermaid');
+        mermaidDivs.forEach(function(div) {
+            var svg = div.querySelector('svg');
+            if (svg) {
+                // Ensure SVG fits and allows zooming
+                svg.style.maxWidth = '100%';
+                svg.style.height = 'auto';
+                
+                // Initialize svg-pan-zoom
+                var panZoom = svgPanZoom(svg, {
+                    zoomEnabled: true,
+                    controlIconsEnabled: false,
+                    fit: true,
+                    center: true,
+                    minZoom: 0.1,
+                    maxZoom: 10
+                });
+                
+                // Create controls
+                var controls = document.createElement('div');
+                controls.className = 'mermaid-controls';
+                
+                var zoomInBtn = document.createElement('button');
+                zoomInBtn.innerHTML = '+';
+                zoomInBtn.title = 'Zoom In';
+                zoomInBtn.onclick = function(e) { e.stopPropagation(); panZoom.zoomIn(); };
+                
+                var zoomOutBtn = document.createElement('button');
+                zoomOutBtn.innerHTML = '-';
+                zoomOutBtn.title = 'Zoom Out';
+                zoomOutBtn.onclick = function(e) { e.stopPropagation(); panZoom.zoomOut(); };
+                
+                var resetBtn = document.createElement('button');
+                resetBtn.innerHTML = '&#x21ba;'; // Reset icon
+                resetBtn.title = 'Reset';
+                resetBtn.onclick = function(e) { 
+                    e.stopPropagation(); 
+                    panZoom.resetZoom(); 
+                    panZoom.resetPan(); 
+                };
+                
+                controls.appendChild(zoomInBtn);
+                controls.appendChild(zoomOutBtn);
+                controls.appendChild(resetBtn);
+                
+                // Append controls to the container (parent of .mermaid div)
+                div.parentNode.appendChild(controls);
+            }
+        });
+    });
   });
 </script>
 {% endif %}

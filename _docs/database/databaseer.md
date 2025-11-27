@@ -7,158 +7,129 @@ mermaid: true
 toc: true
 ---
 
-![Database ER Diagram]({{ "/assets/images/erdiagram.png" | relative_url }})
-*Visual representation of the database schema*
-
-
 
 ```mermaid
-erDiagram
-    users ||--o| admins : "has"
-    users ||--o{ candidates : "can be"
+
+erDiagram    
+    admins ||--o{ elections : "creates"
+    admins ||--o{ elections : "publishes_results"
+    admins ||--o{ election_reports : "generates"
+    
+    users ||--o{ candidates : "can_be"
     users ||--o{ votes : "casts"
     users ||--o{ voter_election_status : "has"
-    users ||--o{ elections : "creates"
-    users ||--o{ elections : "publishes results"
-    users ||--o{ election_reports : "generates"
     
     elections ||--o{ candidates : "has"
     elections ||--o{ votes : "receives"
     elections ||--o{ voter_election_status : "tracks"
-    elections ||--o{ election_results : "has"
-    elections ||--o| election_reports : "has"
+    elections ||--o{ election_results : "produces"
+    elections ||--o| election_reports : "summarized_in"
     
     candidates ||--o{ votes : "receives"
-    candidates ||--o{ election_results : "has"
+    candidates ||--o{ election_results : "appears_in"
     candidates ||--o| election_reports : "wins"
     
     users {
-        BIGINT user_id PK
-        VARCHAR email UK
-        VARCHAR password_hash
-        VARCHAR full_name
-        VARCHAR phone_number
-        DATE date_of_birth
-        ENUM gender
-        TEXT address
-        VARCHAR city
-        VARCHAR state
-        VARCHAR pincode
-        ENUM id_proof_type
-        VARCHAR profile_image_url
-        ENUM role
-        BOOLEAN is_active
-        BOOLEAN is_verified
-        ENUM registration_status
-        TIMESTAMP approved_at
-        TIMESTAMP created_at
-        TIMESTAMP updated_at
+        bigint user_id PK
+        varchar email UK
+        varchar password_hash
+        varchar full_name
+        varchar phone_number
+        date date_of_birth
+        enum gender
+        text address
+        varchar city
+        varchar state
+        varchar pincode
+        varchar aadhar_number UK
+        varchar voter_id_number UK
+        varchar pan_card_number
+        varchar passport_number
+        varchar profile_image_url
+        boolean is_active
+        boolean is_verified
+        timestamp approved_at
+        timestamp created_at
+        timestamp updated_at
     }
     
     admins {
-        BIGINT admin_id PK
-        BIGINT user_id FK
-        TIMESTAMP assigned_at
+        bigint admin_id PK
+        varchar email UK
+        varchar password_hash
+        varchar full_name
+        varchar phone_number
+        boolean is_active
+        timestamp created_at
+        timestamp updated_at
     }
     
     elections {
-        BIGINT election_id PK
-        VARCHAR election_name
-        ENUM election_type
-        DATETIME start_date
-        DATETIME end_date
-        ENUM status
-        BOOLEAN result_published
-        TIMESTAMP result_published_at
-        BIGINT result_published_by FK
-        BIGINT created_by FK
-        TIMESTAMP created_at
+        bigint election_id PK
+        varchar election_name
+        enum election_type
+        datetime start_date
+        datetime end_date
+        enum status
+        boolean result_published
+        timestamp result_published_at
+        bigint result_published_by FK
+        bigint created_by FK
+        timestamp created_at
     }
     
     candidates {
-        BIGINT candidate_id PK
-        BIGINT user_id FK
-        BIGINT election_id FK
-        VARCHAR party_name
-        VARCHAR candidate_symbol
-        VARCHAR candidate_photo_url
+        bigint candidate_id PK
+        bigint user_id FK
+        bigint election_id FK
+        varchar party_name
+        varchar party_symbol
+        longblob candidate_photo
+        text manifesto
+        timestamp created_at
     }
     
     votes {
-        BIGINT vote_id PK
-        BIGINT election_id FK
-        BIGINT user_id FK
-        BIGINT candidate_id FK
-        VARCHAR vote_hash UK
-        TIMESTAMP voted_at
+        bigint vote_id PK
+        bigint election_id FK
+        bigint user_id FK
+        bigint candidate_id FK
+        varchar vote_hash UK
+        timestamp voted_at
     }
     
     voter_election_status {
-        BIGINT status_id PK
-        BIGINT election_id FK
-        BIGINT user_id FK
-        BOOLEAN has_voted
-        TIMESTAMP voted_at
+        bigint status_id PK
+        bigint election_id FK
+        bigint user_id FK
+        boolean has_voted
+        timestamp voted_at
     }
     
     election_results {
-        BIGINT result_id PK
-        BIGINT election_id FK
-        BIGINT candidate_id FK
-        BIGINT vote_count
-        DECIMAL vote_percentage
-        INT rank_position
-        TIMESTAMP last_updated
+        bigint result_id PK
+        bigint election_id FK
+        bigint candidate_id FK
+        bigint vote_count
+        decimal vote_percentage
+        int rank_position
+        timestamp last_updated
     }
     
     election_reports {
-        BIGINT report_id PK
-        BIGINT election_id FK
-        BIGINT total_registered_voters
-        BIGINT total_votes_cast
-        DECIMAL voter_turnout_percentage
-        INT total_candidates
-        BIGINT winning_candidate_id FK
-        BIGINT winning_margin
-        BIGINT report_generated_by FK
-        TIMESTAMP report_generated_at
-    }
-    
-    dummy_aadhar_records {
-        BIGINT aadhar_id PK
-        VARCHAR aadhar_number UK
-        VARCHAR full_name
-        DATE date_of_birth
-        TEXT address
-        BOOLEAN is_valid
-        TIMESTAMP created_at
-    }
-    
-    dummy_pan_records {
-        BIGINT pan_id PK
-        VARCHAR pan_number UK
-        VARCHAR full_name
-        DATE date_of_birth
-        BOOLEAN is_valid
-        TIMESTAMP created_at
-    }
-    
-    dummy_voter_id_records {
-        BIGINT voter_record_id PK
-        VARCHAR voter_id_number UK
-        VARCHAR full_name
-        DATE date_of_birth
-        BOOLEAN is_valid
-        TIMESTAMP created_at
-    }
-    
-    dummy_passport_records {
-        BIGINT passport_record_id PK
-        VARCHAR passport_number UK
-        VARCHAR full_name
-        DATE date_of_birth
-        BOOLEAN is_valid
-        TIMESTAMP created_at
+        bigint report_id PK
+        bigint election_id FK
+        bigint total_registered_voters
+        bigint total_votes_cast
+        decimal voter_turnout_percentage
+        int total_candidates
+        bigint winning_candidate_id FK
+        bigint winning_margin
+        bigint report_generated_by FK
+        timestamp report_generated_at
     }
 
 ```
+
+![Database ER Diagram]({{ "/assets/images/erdiagram.png" | relative_url }})
+*Visual representation of the database schema*
