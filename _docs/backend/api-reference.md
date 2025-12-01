@@ -2,97 +2,76 @@
 title: "API Reference"
 permalink: /docs/backend/api-reference/
 excerpt: "Complete API documentation"
-last_modified_at: 2025-11-15
+last_modified_at: 2025-12-01
 toc: true
 ---
 
-# API Reference
+This document provides a reference for the RESTful API endpoints available in the Online Voting System. The API is divided into public (Authentication, Verification) and protected (Admin, User) sections.
 
-## Base URL
-```
-http://localhost:8080/api
-```
+## Authentication & Verification
+Base URL: `/api/auth`
 
-## Authentication
+| Method | Endpoint | Description | Request Body |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/login` | Authenticate a user or admin. | `LoginRequest` (email, password) |
+| `POST` | `/register` | Register a new user (requires identity verification). | `RegisterRequest` (details + Aadhar/VoterID) |
 
-All API requests require authentication using JWT tokens.
+**Note**: Identity verification is handled internally during registration via `VerificationService`.
 
-### Login
-```http
-POST /api/auth/login
-Content-Type: application/json
+## Admin Endpoints
+Base URL: `/api/admin`
+**Requires Role**: `ADMIN`
 
-{
-  "username": "user@example.com",
-  "password": "password123"
-}
-```
+### Election Management (`/elections`)
 
-**Response:**
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": 1,
-    "username": "user@example.com",
-    "role": "voter"
-  }
-}
-```
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/` | Get a list of all elections. |
+| `POST` | `/` | Create a new election. |
+| `PUT` | `/{id}/status` | Update the status of an election (e.g., ACTIVE, COMPLETED). |
+| `POST` | `/{id}/candidates` | Add a candidate to a DRAFT election. |
+| `POST` | `/{id}/calculate-results` | Trigger result calculation for an election. |
+| `GET` | `/{id}/results` | Get results for a specific election. |
+| `POST` | `/{id}/candidates/{candidateId}/photo` | Upload a photo for a candidate. |
 
-## Elections API
+### User Management (`/users`)
 
-### Get All Elections
-```http
-GET /api/elections
-Authorization: Bearer {token}
-```
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/users` | Search for users (optional `query` param). |
+| `PUT` | `/users/{userId}` | Update a user's details as an admin. |
+| `PUT` | `/candidates/{candidateId}/image` | Update a candidate's image (alternative endpoint). |
 
-### Create Election
-```http
-POST /api/elections
-Authorization: Bearer {token}
-Content-Type: application/json
+## User Endpoints
+Base URL: `/api/user`
+**Requires Role**: `USER`
 
-{
-  "title": "Student Council Election 2025",
-  "description": "Annual student council election",
-  "startDate": "2025-12-01T09:00:00",
-  "endDate": "2025-12-01T17:00:00"
-}
-```
+### Profile Management (`/profile`)
 
-### Get Election Details
-```http
-GET /api/elections/{id}
-Authorization: Bearer {token}
-```
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/profile` | Get the authenticated user's profile. |
+| `PUT` | `/profile` | Update the user's profile information. |
+| `POST` | `/profile/photo` | Upload a profile photo. |
+| `GET` | `/profile/photo/{filename}` | Serve a profile photo (Public access allowed for resources). |
 
-## Voting API
+### Election & Voting (`/elections`)
 
-### Cast Vote
-```http
-POST /api/votes
-Authorization: Bearer {token}
-Content-Type: application/json
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/active` | Get a list of active elections. |
+| `GET` | `/completed` | Get a list of completed elections (past elections). |
+| `GET` | `/{id}/candidates` | Get the list of candidates for a specific election. |
+| `POST` | `/{id}/vote` | Cast a vote for a candidate. |
+| `GET` | `/{id}/has-voted` | Check if the current user has voted in a specific election. |
+| `GET` | `/{id}/results` | Get results for a completed election. |
+| `GET` | `/candidates/{candidateId}/photo` | Get a candidate's photo. |
 
-{
-  "electionId": 1,
-  "candidateId": 5
-}
-```
+## Error Handling
 
-### Get Vote Results
-```http
-GET /api/elections/{id}/results
-Authorization: Bearer {token}
-```
-
-## Error Responses
-```json
-{
-  "error": "Unauthorized",
-  "message": "Invalid or expired token",
-  "status": 401
-}
-```
+The API generally returns standard HTTP status codes:
+-   `200 OK`: Success.
+-   `400 Bad Request`: Invalid input or validation failure.
+-   `403 Forbidden`: Insufficient permissions or accessing restricted resources (e.g., results of an active election).
+-   `404 Not Found`: Resource not found.
+-   `500 Internal Server Error`: Server-side issues.
