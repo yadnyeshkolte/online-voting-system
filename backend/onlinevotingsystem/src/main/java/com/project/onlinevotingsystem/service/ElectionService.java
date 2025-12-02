@@ -110,7 +110,8 @@ public class ElectionService {
         Election election = electionRepository.findById(electionId)
                 .orElseThrow(() -> new RuntimeException("Election not found"));
 
-        List<Candidate> candidates = candidateRepository.findByElection_ElectionId(electionId);
+        // Use ordered list to avoid deadlocks when updating multiple results in transaction
+        List<Candidate> candidates = candidateRepository.findByElection_ElectionIdOrderByCandidateIdAsc(electionId);
         long totalVotes = voteRepository.countByElection_ElectionId(electionId);
 
         for (Candidate candidate : candidates) {

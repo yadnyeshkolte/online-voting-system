@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -21,6 +22,17 @@ const Register = () => {
     });
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { user } = useAuth();
+
+    useEffect(() => {
+        if (user) {
+            if (user.role === 'ADMIN') {
+                navigate('/admin');
+            } else {
+                navigate('/user');
+            }
+        }
+    }, [user, navigate]);
 
     const handleChange = (e) => {
         setFormData({

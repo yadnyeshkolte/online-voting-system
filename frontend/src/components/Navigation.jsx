@@ -12,9 +12,9 @@ const Navigation = () => {
     };
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar bg="dark" variant="dark" expand="lg" className="shadow-sm">
             <Container>
-                <Navbar.Brand as={Link} to="/">Online Voting System</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/" className="fw-bold">Online Voting System</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
@@ -28,14 +28,14 @@ const Navigation = () => {
                             </>
                         )}
                     </Nav>
-                    <Nav>
+                    <Nav className="align-items-center gap-2">
                         {!user ? (
                             <>
-                                <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                                <Nav.Link as={Link} to="/register">Register</Nav.Link>
+                                <Button as={Link} to="/login" variant="outline-light" size="sm" className="px-3">Login</Button>
+                                <Button as={Link} to="/register" variant="primary" size="sm" className="px-3">Register</Button>
                             </>
                         ) : (
-                            <Button variant="outline-light" onClick={handleLogout}>Logout</Button>
+                            <Button variant="outline-danger" size="sm" onClick={handleLogout}>Logout</Button>
                         )}
                     </Nav>
                 </Navbar.Collapse>

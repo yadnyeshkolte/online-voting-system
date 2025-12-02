@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface CandidateRepository extends JpaRepository<Candidate, Long> {
     List<Candidate> findByElection_ElectionId(Long electionId);
+    List<Candidate> findByElection_ElectionIdOrderByCandidateIdAsc(Long electionId);
 }
