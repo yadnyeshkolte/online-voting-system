@@ -2,7 +2,6 @@ package com.project.onlinevotingsystem.service;
 
 import com.project.onlinevotingsystem.entity.*;
 import com.project.onlinevotingsystem.repository.*;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +10,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class VoteService {
 
     private final VoteRepository voteRepository;
@@ -20,6 +18,15 @@ public class VoteService {
     private final UserRepository userRepository;
     private final CandidateRepository candidateRepository;
     private final ElectionService electionService;
+
+    public VoteService(VoteRepository voteRepository, VoterElectionStatusRepository voterElectionStatusRepository, ElectionRepository electionRepository, UserRepository userRepository, CandidateRepository candidateRepository, ElectionService electionService) {
+        this.voteRepository = voteRepository;
+        this.voterElectionStatusRepository = voterElectionStatusRepository;
+        this.electionRepository = electionRepository;
+        this.userRepository = userRepository;
+        this.candidateRepository = candidateRepository;
+        this.electionService = electionService;
+    }
 
     @Transactional
     public Vote castVote(Long electionId, Long userId, Long candidateId) {

@@ -6,19 +6,23 @@ import com.project.onlinevotingsystem.entity.Candidate;
 import com.project.onlinevotingsystem.entity.User;
 import com.project.onlinevotingsystem.repository.CandidateRepository;
 import com.project.onlinevotingsystem.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final CandidateRepository candidateRepository;
     private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, CandidateRepository candidateRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.candidateRepository = candidateRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public User getUserProfile(Long userId) {
         return userRepository.findById(userId)

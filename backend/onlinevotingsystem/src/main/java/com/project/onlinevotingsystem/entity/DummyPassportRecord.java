@@ -1,11 +1,9 @@
 package com.project.onlinevotingsystem.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Data
 @Entity
 @Table(name = "dummy_passport_records")
 public class DummyPassportRecord {
@@ -33,4 +31,22 @@ public class DummyPassportRecord {
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }
+
+    public Long getPassportRecordId() { return passportRecordId; }
+    public void setPassportRecordId(Long passportRecordId) { this.passportRecordId = passportRecordId; }
+
+    public String getPassportNumber() { return passportNumber; }
+    public void setPassportNumber(String passportNumber) { this.passportNumber = passportNumber; }
+
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
+
+    public LocalDate getDateOfBirth() { return dateOfBirth; }
+    public void setDateOfBirth(LocalDate dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+
+    public Boolean getIsValid() { return isValid; }
+    public void setIsValid(Boolean isValid) { this.isValid = isValid; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

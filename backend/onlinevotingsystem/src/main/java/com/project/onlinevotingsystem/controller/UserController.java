@@ -3,7 +3,6 @@ package com.project.onlinevotingsystem.controller;
 import com.project.onlinevotingsystem.dto.UserUpdateDTO;
 import com.project.onlinevotingsystem.entity.User;
 import com.project.onlinevotingsystem.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,10 +23,13 @@ import org.springframework.util.StringUtils;
 
 @RestController
 @RequestMapping("/api/user")
-@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     private Long getCurrentUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

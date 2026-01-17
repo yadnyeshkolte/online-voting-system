@@ -2,10 +2,8 @@ package com.project.onlinevotingsystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Data;
 import java.time.LocalDateTime;
 
-@Data
 @Entity
 @Table(name = "candidates", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"user_id", "election_id"})
@@ -46,4 +44,28 @@ public class Candidate {
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }
+
+    public Long getCandidateId() { return candidateId; }
+    public void setCandidateId(Long candidateId) { this.candidateId = candidateId; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+
+    public Election getElection() { return election; }
+    public void setElection(Election election) { this.election = election; }
+
+    public String getPartyName() { return partyName; }
+    public void setPartyName(String partyName) { this.partyName = partyName; }
+
+    public String getPartySymbol() { return partySymbol; }
+    public void setPartySymbol(String partySymbol) { this.partySymbol = partySymbol; }
+
+    public byte[] getCandidatePhoto() { return candidatePhoto; }
+    public void setCandidatePhoto(byte[] candidatePhoto) { this.candidatePhoto = candidatePhoto; }
+
+    public String getManifesto() { return manifesto; }
+    public void setManifesto(String manifesto) { this.manifesto = manifesto; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

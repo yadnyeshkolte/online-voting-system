@@ -8,7 +8,6 @@ import com.project.onlinevotingsystem.entity.Admin;
 import com.project.onlinevotingsystem.entity.User;
 import com.project.onlinevotingsystem.repository.AdminRepository;
 import com.project.onlinevotingsystem.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class AuthService {
 
     private final AuthenticationManager authenticationManager;
@@ -29,6 +27,16 @@ public class AuthService {
     private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
     private final VerificationService verificationService;
+
+    public AuthService(AuthenticationManager authenticationManager, UserDetailsService userDetailsService, JwtUtils jwtUtils, UserRepository userRepository, AdminRepository adminRepository, PasswordEncoder passwordEncoder, VerificationService verificationService) {
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+        this.jwtUtils = jwtUtils;
+        this.userRepository = userRepository;
+        this.adminRepository = adminRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.verificationService = verificationService;
+    }
 
     public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(

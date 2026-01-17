@@ -1,11 +1,9 @@
 package com.project.onlinevotingsystem.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
 
-@Data
 @Entity
 @Table(name = "election_reports")
 public class ElectionReport {
@@ -47,4 +45,34 @@ public class ElectionReport {
     protected void onCreate() {
         reportGeneratedAt = LocalDateTime.now();
     }
+
+    public Long getReportId() { return reportId; }
+    public void setReportId(Long reportId) { this.reportId = reportId; }
+
+    public Election getElection() { return election; }
+    public void setElection(Election election) { this.election = election; }
+
+    public Long getTotalRegisteredVoters() { return totalRegisteredVoters; }
+    public void setTotalRegisteredVoters(Long totalRegisteredVoters) { this.totalRegisteredVoters = totalRegisteredVoters; }
+
+    public Long getTotalVotesCast() { return totalVotesCast; }
+    public void setTotalVotesCast(Long totalVotesCast) { this.totalVotesCast = totalVotesCast; }
+
+    public BigDecimal getVoterTurnoutPercentage() { return voterTurnoutPercentage; }
+    public void setVoterTurnoutPercentage(BigDecimal voterTurnoutPercentage) { this.voterTurnoutPercentage = voterTurnoutPercentage; }
+
+    public Integer getTotalCandidates() { return totalCandidates; }
+    public void setTotalCandidates(Integer totalCandidates) { this.totalCandidates = totalCandidates; }
+
+    public Candidate getWinningCandidate() { return winningCandidate; }
+    public void setWinningCandidate(Candidate winningCandidate) { this.winningCandidate = winningCandidate; }
+
+    public Long getWinningMargin() { return winningMargin; }
+    public void setWinningMargin(Long winningMargin) { this.winningMargin = winningMargin; }
+
+    public Long getReportGeneratedBy() { return reportGeneratedBy; }
+    public void setReportGeneratedBy(Long reportGeneratedBy) { this.reportGeneratedBy = reportGeneratedBy; }
+
+    public LocalDateTime getReportGeneratedAt() { return reportGeneratedAt; }
+    public void setReportGeneratedAt(LocalDateTime reportGeneratedAt) { this.reportGeneratedAt = reportGeneratedAt; }
 }

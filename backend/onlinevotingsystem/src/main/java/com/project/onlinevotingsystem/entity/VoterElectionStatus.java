@@ -1,10 +1,8 @@
 package com.project.onlinevotingsystem.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import java.time.LocalDateTime;
 
-@Data
 @Entity
 @Table(name = "voter_election_status", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"election_id", "user_id"})
@@ -28,4 +26,19 @@ public class VoterElectionStatus {
 
     @Column(name = "voted_at")
     private LocalDateTime votedAt;
+
+    public Long getStatusId() { return statusId; }
+    public void setStatusId(Long statusId) { this.statusId = statusId; }
+
+    public Election getElection() { return election; }
+    public void setElection(Election election) { this.election = election; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+
+    public Boolean getHasVoted() { return hasVoted; }
+    public void setHasVoted(Boolean hasVoted) { this.hasVoted = hasVoted; }
+
+    public LocalDateTime getVotedAt() { return votedAt; }
+    public void setVotedAt(LocalDateTime votedAt) { this.votedAt = votedAt; }
 }

@@ -4,7 +4,6 @@ import com.project.onlinevotingsystem.dto.CandidateDto;
 import com.project.onlinevotingsystem.dto.ElectionCreationRequest;
 import com.project.onlinevotingsystem.entity.*;
 import com.project.onlinevotingsystem.repository.*;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class ElectionService {
 
     private final ElectionRepository electionRepository;
@@ -27,6 +25,16 @@ public class ElectionService {
     private final VoteRepository voteRepository;
     private final UserRepository userRepository;
     private final AdminRepository adminRepository;
+
+    public ElectionService(ElectionRepository electionRepository, CandidateRepository candidateRepository, ElectionResultRepository electionResultRepository, ElectionReportRepository electionReportRepository, VoteRepository voteRepository, UserRepository userRepository, AdminRepository adminRepository) {
+        this.electionRepository = electionRepository;
+        this.candidateRepository = candidateRepository;
+        this.electionResultRepository = electionResultRepository;
+        this.electionReportRepository = electionReportRepository;
+        this.voteRepository = voteRepository;
+        this.userRepository = userRepository;
+        this.adminRepository = adminRepository;
+    }
 
     public List<Election> getAllElections() {
         return electionRepository.findAll();

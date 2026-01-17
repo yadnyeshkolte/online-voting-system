@@ -4,18 +4,21 @@ import com.project.onlinevotingsystem.entity.DummyAadharRecord;
 import com.project.onlinevotingsystem.entity.DummyVoterIdRecord;
 import com.project.onlinevotingsystem.repository.DummyAadharRecordRepository;
 import com.project.onlinevotingsystem.repository.DummyVoterIdRecordRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class VerificationService {
 
     private final DummyAadharRecordRepository aadharRepository;
     private final DummyVoterIdRecordRepository voterIdRepository;
+
+    public VerificationService(DummyAadharRecordRepository aadharRepository, DummyVoterIdRecordRepository voterIdRepository) {
+        this.aadharRepository = aadharRepository;
+        this.voterIdRepository = voterIdRepository;
+    }
 
     public boolean verifyUserIdentity(String aadharNumber, String voterIdNumber, String fullName, LocalDate dob) {
         // Verify Aadhar

@@ -3,7 +3,6 @@ package com.project.onlinevotingsystem.controller;
 import com.project.onlinevotingsystem.dto.AdminUserUpdateDTO;
 import com.project.onlinevotingsystem.entity.User;
 import com.project.onlinevotingsystem.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,10 +11,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
-@RequiredArgsConstructor
 public class AdminUserController {
 
     private final UserService userService;
+
+    public AdminUserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> searchUsers(@RequestParam(required = false) String query) {

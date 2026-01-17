@@ -4,7 +4,6 @@ import com.project.onlinevotingsystem.entity.Admin;
 import com.project.onlinevotingsystem.entity.User;
 import com.project.onlinevotingsystem.repository.AdminRepository;
 import com.project.onlinevotingsystem.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,11 +14,15 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final AdminRepository adminRepository;
+
+    public CustomUserDetailsService(UserRepository userRepository, AdminRepository adminRepository) {
+        this.userRepository = userRepository;
+        this.adminRepository = adminRepository;
+    }
 
     public static class CustomUserDetails implements UserDetails {
         private final User user;

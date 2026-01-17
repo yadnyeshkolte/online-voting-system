@@ -6,7 +6,6 @@ import com.project.onlinevotingsystem.entity.Election;
 import com.project.onlinevotingsystem.entity.ElectionResult;
 import com.project.onlinevotingsystem.entity.ElectionStatus;
 import com.project.onlinevotingsystem.service.ElectionService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,10 +14,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/elections")
-@RequiredArgsConstructor
 public class AdminElectionController {
 
     private final ElectionService electionService;
+
+    public AdminElectionController(ElectionService electionService) {
+        this.electionService = electionService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Election>> getAllElections() {

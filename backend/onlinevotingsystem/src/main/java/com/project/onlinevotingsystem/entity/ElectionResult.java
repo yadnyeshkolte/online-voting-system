@@ -1,11 +1,9 @@
 package com.project.onlinevotingsystem.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
 
-@Data
 @Entity
 @Table(name = "election_results")
 public class ElectionResult {
@@ -38,4 +36,25 @@ public class ElectionResult {
     protected void onUpdate() {
         lastUpdated = LocalDateTime.now();
     }
+
+    public Long getResultId() { return resultId; }
+    public void setResultId(Long resultId) { this.resultId = resultId; }
+
+    public Election getElection() { return election; }
+    public void setElection(Election election) { this.election = election; }
+
+    public Candidate getCandidate() { return candidate; }
+    public void setCandidate(Candidate candidate) { this.candidate = candidate; }
+
+    public Long getVoteCount() { return voteCount; }
+    public void setVoteCount(Long voteCount) { this.voteCount = voteCount; }
+
+    public BigDecimal getVotePercentage() { return votePercentage; }
+    public void setVotePercentage(BigDecimal votePercentage) { this.votePercentage = votePercentage; }
+
+    public Integer getRankPosition() { return rankPosition; }
+    public void setRankPosition(Integer rankPosition) { this.rankPosition = rankPosition; }
+
+    public LocalDateTime getLastUpdated() { return lastUpdated; }
+    public void setLastUpdated(LocalDateTime lastUpdated) { this.lastUpdated = lastUpdated; }
 }

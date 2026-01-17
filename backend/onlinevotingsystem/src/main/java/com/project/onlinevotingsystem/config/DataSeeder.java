@@ -6,7 +6,6 @@ import com.project.onlinevotingsystem.entity.DummyVoterIdRecord;
 import com.project.onlinevotingsystem.repository.AdminRepository;
 import com.project.onlinevotingsystem.repository.DummyAadharRecordRepository;
 import com.project.onlinevotingsystem.repository.DummyVoterIdRecordRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,13 +14,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 
 @Configuration
-@RequiredArgsConstructor
 public class DataSeeder {
 
     private final AdminRepository adminRepository;
     private final DummyAadharRecordRepository aadharRepository;
     private final DummyVoterIdRecordRepository voterIdRepository;
     private final PasswordEncoder passwordEncoder;
+
+    public DataSeeder(AdminRepository adminRepository, DummyAadharRecordRepository aadharRepository, DummyVoterIdRecordRepository voterIdRepository, PasswordEncoder passwordEncoder) {
+        this.adminRepository = adminRepository;
+        this.aadharRepository = aadharRepository;
+        this.voterIdRepository = voterIdRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Bean
     public CommandLineRunner initData() {
