@@ -1,0 +1,99 @@
+# Automated PR labeling configuration
+# Labels are applied based on which files are changed in the PR
+
+# Frontend changes
+frontend:
+  - changed-files:
+    - any-glob-to-any-file: 'frontend/**/*'
+
+# Backend changes
+backend:
+  - changed-files:
+    - any-glob-to-any-file: 'backend/**/*'
+
+# JavaScript changes
+javascript:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'frontend/**/*.js'
+      - 'frontend/**/*.jsx'
+
+# Java changes
+java:
+  - changed-files:
+    - any-glob-to-any-file: 'backend/**/*.java'
+
+# Documentation changes
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.md'
+      - 'docs/**/*'
+
+# Configuration changes
+configuration:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.yml'
+      - '**/*.yaml'
+      - '**/*.json'
+      - '**/pom.xml'
+      - '**/package.json'
+      - '**/.eslintrc*'
+      - '**/vite.config.js'
+
+# GitHub Actions / CI
+ci/cd:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/workflows/**/*'
+      - '.github/actions/**/*'
+
+# Dependencies
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/package-lock.json'
+      - '**/pom.xml'
+
+# Database changes
+database:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.sql'
+      - 'docs/schema.sql'
+      - 'docs/*database*.md'
+
+# Security-related changes
+security:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/security/**/*'
+      - '**/auth/**/*'
+      - '**/authentication/**/*'
+      - '**/authorization/**/*'
+
+# Tests
+tests:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.test.js'
+      - '**/*.spec.js'
+      - '**/*Test.java'
+      - '**/test/**/*'
+
+# Styling
+styling:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.css'
+      - '**/*.scss'
+      - '**/*.sass'
+
+# Build/tooling
+build:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/vite.config.js'
+      - '**/pom.xml'
+      - '**/.gitignore'

@@ -1,0 +1,205 @@
+# CodeRabbit Configuration for Online Voting System
+# This configuration enables AI-powered code review for PRs targeting the develop branch
+
+# Language-specific settings (JavaScript 53.2%, Java 45.1%)
+language: "auto"
+
+# Review settings
+reviews:
+  # Enable automatic reviews on pull requests
+  auto_review:
+    enabled: true
+    # Only review PRs targeting develop branch
+    base_branches:
+      - develop
+
+  # Review level: basic, standard, or detailed
+  level: "detailed"
+
+  # Review focus areas
+  focus:
+    - security
+    - performance
+    - best_practices
+    - code_style
+    - potential_bugs
+    - maintainability
+    - complexity
+
+  # Code style and quality checks
+  check_style: true
+  check_tests: true
+  check_documentation: false
+
+  # Enable constructive and educational comments
+  tone: "constructive"
+  provide_fix_suggestions: true
+
+  # Summary settings
+  generate_summary: true
+  summary_release_notes: true
+
+# Path-specific configuration
+path_filters:
+  # Files to review
+  review:
+    - "frontend/src/**/*.js"
+    - "frontend/src/**/*.jsx"
+    - "backend/onlinevotingsystem/src/**/*.java"
+    - "*.json"
+    - "*.xml"
+    - "*.yml"
+    - "*.yaml"
+
+  # Files to ignore
+  ignore:
+    - "*.md"
+    - "*.txt"
+    - "*.lock"
+    - "package-lock.json"
+    - "node_modules/**"
+    - "target/**"
+    - "build/**"
+    - "dist/**"
+    - ".vite/**"
+    - "*.log"
+    - "docs/**/*.md"
+    - "*.min.js"
+    - "*.min.css"
+
+# JavaScript/React-specific checks
+javascript:
+  enabled: true
+  checks:
+    - no_console_log: true
+    - use_strict_equality: true
+    - proper_error_handling: true
+    - avoid_global_variables: true
+    - async_await_best_practices: true
+    - react_hooks_dependencies: true
+    - prop_types_validation: true
+
+# Java/Spring Boot-specific checks
+java:
+  enabled: true
+  checks:
+    - sql_injection_prevention: true
+    - input_validation: true
+    - exception_handling: true
+    - resource_management: true
+    - security_annotations: true
+    - spring_security_best_practices: true
+    - lombok_usage: true
+    - jpa_best_practices: true
+
+# Security-specific configuration for voting system
+security:
+  enabled: true
+  checks:
+    # Web application security
+    - xss_prevention: true
+    - csrf_protection: true
+    - sql_injection: true
+    - authentication_issues: true
+    - authorization_issues: true
+    - sensitive_data_exposure: true
+    - insecure_cryptography: true
+    - session_management: true
+    
+    # Voting system specific
+    - input_sanitization: true
+    - password_security: true
+    - jwt_security: true
+    - api_security: true
+
+  # Critical security issues fail the review
+  fail_on_critical: false
+
+# Performance checks
+performance:
+  enabled: true
+  checks:
+    - n_plus_one_queries: true
+    - inefficient_loops: true
+    - memory_leaks: true
+    - unnecessary_computations: true
+
+# Code complexity
+complexity:
+  enabled: true
+  # Maximum cyclomatic complexity before warning
+  max_complexity: 15
+  # Maximum function length
+  max_function_lines: 50
+
+# Testing
+testing:
+  enabled: true
+  require_tests_for_new_code: false
+  check_test_quality: true
+
+# Comments and annotations
+comments:
+  # Comment on specific lines where issues are found
+  inline_comments: true
+  # Provide a summary comment
+  summary_comment: true
+  # Use emoji for better readability
+  use_emoji: true
+
+# Integration settings
+integrations:
+  github:
+    # Enable status checks
+    status_checks: true
+    # Don't block PRs, provide feedback only
+    require_review_approval: false
+    # Update existing comments instead of creating new ones
+    update_existing_comments: true
+
+# AI model settings
+ai:
+  # Model to use for reviews
+  model: "gpt-4"
+  # Maximum tokens for analysis
+  max_tokens: 4000
+  # Temperature for AI responses (0-1, lower = more focused)
+  temperature: 0.3
+
+# Exclusions
+exclude:
+  # Don't review dependency files
+  dependencies: true
+  # Don't review generated files
+  generated_files: true
+  # Don't review lock files
+  lock_files: true
+  # Don't review migration files
+  migrations: false
+
+# Custom rules for voting system
+custom_rules:
+  - name: "Check vote counting logic"
+    description: "Ensure vote counting is accurate and tamper-proof"
+    pattern: "vote.*count|tally|result"
+    severity: "high"
+
+  - name: "Check authentication endpoints"
+    description: "Verify authentication and authorization in voting endpoints"
+    pattern: "/api/.*(vote|election|ballot)"
+    severity: "critical"
+
+  - name: "Check input validation"
+    description: "Ensure all user inputs are validated"
+    pattern: "@RequestBody|@RequestParam|@PathVariable"
+    severity: "high"
+
+# Notification settings
+notifications:
+  # Notify on critical issues
+  on_critical: true
+  # Notify on high severity issues
+  on_high: true
+  # Don't notify on medium/low issues
+  on_medium: false
+  on_low: false

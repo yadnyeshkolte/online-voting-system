@@ -1,0 +1,286 @@
+# Lynx Configuration for Online Voting System
+# Automated code analysis and security scanning
+
+# General settings
+version: 1
+
+# Project information
+project:
+  name: "online-voting-system"
+  description: "Secure online voting platform"
+  languages:
+    - javascript
+    - java
+
+# Analysis settings
+analysis:
+  enabled: true
+  # Target branches for analysis
+  branches:
+    - develop
+  
+  # Analysis depth
+  depth: "deep"
+  
+  # File patterns to analyze
+  include:
+    - "frontend/src/**/*.js"
+    - "frontend/src/**/*.jsx"
+    - "backend/onlinevotingsystem/src/**/*.java"
+    - "*.json"
+    - "pom.xml"
+    - "package.json"
+  
+  # File patterns to exclude
+  exclude:
+    - "node_modules/**"
+    - "target/**"
+    - "build/**"
+    - "dist/**"
+    - "*.min.js"
+    - "*.min.css"
+    - "**/*.test.js"
+    - "**/*.spec.js"
+    - "*.lock"
+
+# Security scanning
+security:
+  enabled: true
+  
+  # Vulnerability detection
+  vulnerabilities:
+    enabled: true
+    severity_threshold: "medium"
+    
+    # Specific checks for web applications
+    checks:
+      - sql_injection
+      - xss
+      - csrf
+      - authentication_bypass
+      - authorization_issues
+      - sensitive_data_exposure
+      - insecure_deserialization
+      - xxe
+      - security_misconfiguration
+      - broken_access_control
+  
+  # Dependency scanning
+  dependencies:
+    enabled: true
+    check_npm: true
+    check_maven: true
+    fail_on_critical: false
+  
+  # Secrets detection
+  secrets:
+    enabled: true
+    patterns:
+      - api_keys
+      - passwords
+      - tokens
+      - private_keys
+      - connection_strings
+
+# Code quality
+quality:
+  enabled: true
+  
+  # Code complexity analysis
+  complexity:
+    enabled: true
+    max_cyclomatic_complexity: 15
+    max_cognitive_complexity: 20
+    max_function_length: 50
+    max_file_length: 500
+  
+  # Code duplication
+  duplication:
+    enabled: true
+    threshold: 5
+  
+  # Code style
+  style:
+    enabled: true
+    enforce_standards: true
+  
+  # Best practices
+  best_practices:
+    enabled: true
+    javascript:
+      - use_strict_mode
+      - error_handling
+      - async_patterns
+      - no_console_logs
+      - proper_promises
+      - react_best_practices
+    java:
+      - exception_handling
+      - resource_management
+      - null_checks
+      - proper_logging
+      - spring_best_practices
+      - jpa_best_practices
+
+# Performance analysis
+performance:
+  enabled: true
+  checks:
+    - database_queries
+    - memory_usage
+    - algorithm_efficiency
+    - api_response_time
+
+# Architecture analysis
+architecture:
+  enabled: true
+  checks:
+    - layering_violations
+    - circular_dependencies
+    - package_dependencies
+    - coupling_metrics
+
+# Testing
+testing:
+  enabled: true
+  coverage_threshold: 70
+  check_test_quality: true
+
+# JavaScript-specific settings
+javascript:
+  enabled: true
+  framework: "react"
+  version: "es6+"
+  
+  linting:
+    enabled: true
+    rules:
+      - strict_equality
+      - no_var
+      - prefer_const
+      - arrow_functions
+      - template_literals
+  
+  react:
+    enabled: true
+    checks:
+      - hooks_rules
+      - prop_validation
+      - key_in_lists
+      - avoid_dangerous_html
+
+# Java-specific settings
+java:
+  enabled: true
+  version: "21"
+  framework: "spring-boot"
+  
+  spring:
+    enabled: true
+    checks:
+      - security_config
+      - transaction_management
+      - dependency_injection
+      - rest_controller_practices
+  
+  jpa:
+    enabled: true
+    checks:
+      - entity_mappings
+      - query_optimization
+      - transaction_boundaries
+      - lazy_loading
+
+# Reporting
+reporting:
+  enabled: true
+  format:
+    - json
+    - markdown
+  
+  # Report content
+  include:
+    - security_issues
+    - code_quality
+    - complexity_metrics
+    - performance_issues
+    - best_practice_violations
+  
+  # Severity levels to report
+  severity:
+    - critical
+    - high
+    - medium
+  
+  # Group by category
+  group_by: "severity"
+
+# Integration with GitHub
+github:
+  enabled: true
+  # Post results as PR comments
+  pr_comments: true
+  # Create check runs
+  check_runs: true
+  # Update status checks
+  status_checks: true
+  # Don't block PRs
+  block_on_failure: false
+
+# Thresholds
+thresholds:
+  # Security
+  security_score: 80
+  
+  # Quality
+  quality_score: 75
+  maintainability_index: 70
+  
+  # Complexity
+  complexity_score: 75
+  
+  # Coverage
+  test_coverage: 70
+
+# Custom rules for voting system
+custom_rules:
+  - id: "vote-integrity"
+    name: "Vote Integrity Check"
+    description: "Ensure vote counting and storage is secure"
+    pattern: "vote|ballot|election|count|tally"
+    severity: "critical"
+    language: "all"
+  
+  - id: "auth-check"
+    name: "Authentication Check"
+    description: "Verify proper authentication on sensitive endpoints"
+    pattern: "@PreAuthorize|@Secured|authenticate"
+    severity: "high"
+    language: "java"
+  
+  - id: "sql-safety"
+    name: "SQL Safety"
+    description: "Check for potential SQL injection vulnerabilities"
+    pattern: "createQuery|createNativeQuery|@Query"
+    severity: "high"
+    language: "java"
+  
+  - id: "xss-protection"
+    name: "XSS Protection"
+    description: "Check for potential XSS vulnerabilities"
+    pattern: "dangerouslySetInnerHTML|innerHTML|eval"
+    severity: "high"
+    language: "javascript"
+
+# Notifications
+notifications:
+  enabled: true
+  on_critical: true
+  on_high: true
+  on_medium: false
+
+# Performance
+performance_settings:
+  parallel_analysis: true
+  max_threads: 4
+  timeout: 600
