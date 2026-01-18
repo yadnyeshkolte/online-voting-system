@@ -170,8 +170,9 @@ git push origin feature/add-voter-validation
 
 ### Step 1: Install CodeRabbit GitHub App
 
-1. Go to [CodeRabbit on GitHub Marketplace](https://github.com/apps/coderabbitai)
-2. Click "Install"
+1. Go to [CodeRabbit on GitHub Marketplace](https://github.com/apps/coderabbitai) or search for "CodeRabbit" in GitHub Marketplace
+   - **Note**: The exact URL may change. Search for "CodeRabbit" if the link is outdated.
+2. Click "Install" or "Set up a plan"
 3. Select the `yadnyeshkolte/online-voting-system` repository
 4. Grant required permissions:
    - Read access to code

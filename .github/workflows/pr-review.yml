@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: CodeRabbit Review
+        # Note: Using @latest for CodeRabbit as the AI service updates frequently
+        # and benefits from the latest model improvements
         uses: coderabbitai/ai-pr-reviewer@latest
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -149,6 +151,8 @@ jobs:
           distribution: 'temurin'
 
       - name: OWASP Dependency Check
+        # Note: Using @main for OWASP Dependency Check as it's actively maintained
+        # and benefits from latest vulnerability database updates
         uses: dependency-check/Dependency-Check_Action@main
         with:
           project: 'online-voting-system'
