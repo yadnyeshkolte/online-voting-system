@@ -30,10 +30,12 @@ jobs:
           base_branch: develop
         continue-on-error: true
 
-  # Lynx Code Analysis
+  # Lynx Code Analysis (Optional - requires Lynx setup)
   lynx-analysis:
     name: Lynx Code Analysis
     runs-on: ubuntu-latest
+    # Only run if LYNX_API_KEY secret is configured
+    if: ${{ secrets.LYNX_API_KEY != '' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -41,9 +43,15 @@ jobs:
           fetch-depth: 0
 
       - name: Run Lynx Analysis
-        uses: Lynx-Security/lynx-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        # Note: Replace with actual Lynx action when available
+        # The lynx-security/lynx-action repository is not publicly available
+        # Alternative: Use Lynx CLI or API directly
+        run: |
+          echo "Lynx analysis requires manual setup"
+          echo "Options:"
+          echo "1. Install Lynx CLI and run: lynx scan ."
+          echo "2. Use Lynx API with API key"
+          echo "3. Use alternative tools: SonarQube, Snyk, etc."
         continue-on-error: true
 
   # JavaScript/Frontend Quality Checks

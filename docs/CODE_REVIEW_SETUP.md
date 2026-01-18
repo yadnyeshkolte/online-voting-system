@@ -40,7 +40,23 @@ CodeRabbit provides intelligent, context-aware code reviews using AI:
 
 Lynx performs deep code analysis and security scanning:
 
-**What it checks:**
+**Important Note:** The Lynx GitHub Action (`lynx-security/lynx-action`) is not publicly available. Lynx may be:
+- A commercial tool requiring separate licensing and setup
+- Available through a different integration method (CLI, API)
+- An alternative tool name
+
+**If you want to use Lynx:**
+1. Contact Lynx (if it's a commercial product) for setup instructions
+2. Configure the `LYNX_API_KEY` secret in your repository
+3. Update the workflow with the correct Lynx integration method
+
+**Alternative tools for similar functionality:**
+- **SonarQube/SonarCloud**: Code quality and security analysis
+- **Snyk**: Security vulnerability scanning
+- **CodeQL**: GitHub's native security analysis (already included in workflow via Trivy)
+- **Semgrep**: Static analysis for security patterns
+
+**What Lynx would check (if configured):**
 - Security vulnerabilities across OWASP Top 10
 - Code complexity metrics
 - Duplication detection
@@ -48,13 +64,9 @@ Lynx performs deep code analysis and security scanning:
 - Performance bottlenecks
 - Testing coverage
 
-**Configuration:** `.lynx.yml` in the repository root
+**Configuration:** `.lynx.yml` in the repository root (ready for when Lynx is available)
 
-**Key features:**
-- Detailed security reports
-- Quality metrics and scores
-- Custom rules for voting system security
-- Integration with GitHub status checks
+**Current Status:** The Lynx job is configured to skip if the `LYNX_API_KEY` secret is not set, so it won't cause workflow failures.
 
 ### 3. Automated Quality Checks
 
@@ -191,15 +203,46 @@ git push origin feature/add-voter-validation
 - Focus on security, performance, and best practices
 - JavaScript and Java language support
 
-### Step 3: Install Lynx (If Available)
+### Step 3: Configure Lynx or Alternative Tools (Optional)
 
-**Note**: Lynx may be a commercial tool or may require specific setup. If not available, the workflow will skip this step gracefully.
+**Important:** The Lynx GitHub Action is not publicly available. The workflow is currently configured to skip the Lynx job unless you set up the integration manually.
 
-1. Go to Lynx website or GitHub Marketplace
-2. Install the Lynx GitHub App or generate API key
-3. Add secrets to repository if required:
+**Option 1: If Lynx is Available to You**
+1. Contact your Lynx provider for integration instructions
+2. Obtain API key or access credentials
+3. Add secrets to repository:
    - Go to repository Settings → Secrets → Actions
-   - Add `LYNX_API_KEY` if required
+   - Add `LYNX_API_KEY` with your Lynx API key
+4. Update the workflow `.github/workflows/pr-review.yml` with the correct Lynx integration method (CLI, API, or Action)
+
+**Option 2: Use Alternative Security/Quality Tools (Recommended)**
+
+Since Lynx may not be accessible, consider these alternatives:
+
+**SonarQube/SonarCloud** (Recommended Alternative):
+```yaml
+- name: SonarCloud Scan
+  uses: SonarSource/sonarcloud-github-action@master
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+```
+
+**Snyk** (Security Vulnerability Scanning):
+```yaml
+- name: Run Snyk Security Scan
+  uses: snyk/actions/node@master
+  env:
+    SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+```
+
+**Semgrep** (Static Analysis):
+```yaml
+- name: Semgrep Scan
+  uses: returntocorp/semgrep-action@v1
+```
+
+**Current Status:** The Lynx job will be skipped automatically since the `LYNX_API_KEY` is not configured, and the workflow will continue without errors.
 
 ### Step 4: Configure GitHub Actions
 
