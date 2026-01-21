@@ -15,8 +15,9 @@ Base URL: `/api/auth`
 | :--- | :--- | :--- | :--- |
 | `POST` | `/login` | Authenticate a user or admin. | `LoginRequest` (email, password) |
 | `POST` | `/register` | Register a new user (requires identity verification). | `RegisterRequest` (details + Aadhar/VoterID) |
+| `POST` | `/verify-id` | **(New)** Upload ID card image for OCR/verification. | `MultipartFile` (image) |
 
-**Note**: Identity verification is handled internally during registration via `VerificationService`.
+**Note**: Identity verification is handled internally during registration via `VerificationService`, but `/verify-id` can be used for pre-validation.
 
 ## Admin Endpoints
 Base URL: `/api/admin`

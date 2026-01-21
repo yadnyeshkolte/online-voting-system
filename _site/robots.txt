@@ -1,1 +1,1 @@
-Sitemap: https://yadnyeshkolte.github.io/online-voting-system/sitemap.xml
+Sitemap: http://localhost:4000/online-voting-system/sitemap.xml

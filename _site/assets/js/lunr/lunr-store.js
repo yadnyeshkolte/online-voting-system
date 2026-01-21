@@ -23,6 +23,12 @@ var store = [{
         "url": "/online-voting-system/docs/backend/backend-structure/",
         "teaser": null
       },{
+        "title": "Logins & Authentication",
+        "excerpt":"Authentication &amp; Login The Online Voting System uses a secure JWT (JSON Web Token) based authentication mechanism. Login Flow User Submission: Client sends POST /api/auth/login with email and password. Verification: System looks up user by email. Compares submitted password with stored BCrypt hash. Token Generation: If valid, server generates a...","categories": [],
+        "tags": [],
+        "url": "/online-voting-system/docs/backend/logins/",
+        "teaser": null
+      },{
         "title": "Security Authentication",
         "excerpt":"The Online Voting System employs a robust security model to ensure the integrity of elections and the privacy of user data. The system uses Spring Security combined with JWT (JSON Web Tokens) for stateless authentication. Authentication Mechanism JWT (JSON Web Token) The system uses JWTs to secure API endpoints. Login:...","categories": [],
         "tags": [],
@@ -41,28 +47,22 @@ var store = [{
         "url": "/online-voting-system/docs/database/databaseer/",
         "teaser": null
       },{
-        "title": "Database Insertion Queries",
-        "excerpt":"-- ============================================ -- TEST DATA INSERTION -- ============================================ -- 1. INSERT 20 USERS WITH BCRYPT HASHED PASSWORDS -- Updated to include both AADHAR and VOTER_ID for each user INSERT INTO users (email, password_hash, full_name, phone_number, date_of_birth, gender, address, city, state, pincode, aadhar_number, voter_id_number, profile_image_url, is_active, is_verified, approved_at) VALUES ('rajesh.kumar@email.com', '$2a$12$h2bW9dGj8X89JMBBHjvffe2jKCerIAzPFK.LsQiy0yV3fOk/NwiV6',...","categories": [],
+        "title": "Database Schema",
+        "excerpt":"Complete Schema Reference SET SQL_SAFE_UPDATES = 0; CREATE DATABASE IF NOT EXISTS devovs; USE devovs; -- ============================================ -- ONLINE VOTING SYSTEM - FINAL SCHEMA -- PG-DAC Project - Group 06 -- ============================================ -- 1. Create users table first (no dependencies) -- Users can be both VOTERS and CANDIDATES -- Modified...","categories": [],
         "tags": [],
-        "url": "/online-voting-system/docs/database/databaseinsertion/",
+        "url": "/online-voting-system/docs/database/databaseschema/",
         "teaser": null
       },{
-        "title": "Database Insertion Queries 2",
-        "excerpt":"-- ============================================ -- MISSING DATA FOR KARNATAKA AND DELHI ELECTIONS -- ============================================ -- 4. INSERT CANDIDATES FOR ELECTION 3 (Karnataka) AND ELECTION 4 (Delhi) -- Candidates for Election 3 (Karnataka State Assembly Election 2024) -- IDs will be 11, 12, 13, 14, 15 INSERT INTO candidates (user_id, election_id, party_name, party_symbol,...","categories": [],
+        "title": "Election Insertion Queries",
+        "excerpt":"Election Data Insertion -- 3. INSERT 2 ACTIVE ELECTIONS AND 2 PAST ELECTIONS INSERT INTO elections (election_name, election_type, start_date, end_date, status, result_published, result_published_at, result_published_by, created_by) VALUES -- Active Elections ('Maharashtra State Assembly Election 2025', 'STATE', '2025-11-20 08:00:00', '2025-11-25 18:00:00', 'ACTIVE', FALSE, NULL, NULL, 1), ('Mumbai Municipal Corporation Election 2025', 'LOCAL',...","categories": [],
         "tags": [],
-        "url": "/online-voting-system/docs/database/databaseinsertion2/",
+        "url": "/online-voting-system/docs/database/electioninsertion/",
         "teaser": null
       },{
-        "title": "Database Structure",
-        "excerpt":"Complete Schema Reference CREATE DATABASE IF NOT EXISTS devovs; USE devovs; -- ============================================ -- ONLINE VOTING SYSTEM - FINAL SCHEMA -- PG-DAC Project - Group 06 -- ============================================ -- 1. Create users table first (no dependencies) -- Users can be both VOTERS and CANDIDATES -- Modified to include specific Aadhar...","categories": [],
+        "title": "User Insertion Queries",
+        "excerpt":"User Data Insertion -- 2. INSERT 2 ADMINS (Passwords set to 'admin123', email updated to match login) INSERT INTO admins (email, password_hash, full_name, phone_number) VALUES ('admin@voting.com', '$2a$12$8HNsrESl9ubVI9MRaCFWY.vZZ1i6OkpmzaTnz.5nsdTGdeWEzzhym', 'Sanjay Malhotra', '9999888877'), ('admin.secondary@voting.com', '$2a$12$8HNsrESl9ubVI9MRaCFWY.vZZ1i6OkpmzaTnz.5nsdTGdeWEzzhym', 'Priyanka Chopra', '9999888878'); -- 7. UPDATE dummy verification tables with the 20 inserted users -- Insert verification records...","categories": [],
         "tags": [],
-        "url": "/online-voting-system/docs/database/databasestructure/",
-        "teaser": null
-      },{
-        "title": "OVS Database",
-        "excerpt":"This document outlines the database schema for this application. TABLE 1: ADMINS FIELD ID FIELD NAME DATA TYPE CONSTRAINTS 1 admin_id bigint PRIMARY KEY, AUTO_INCREMENT 2 user_id bigint FOREIGN KEY, UNIQUE 3 assigned_at timestamp NOT NULL TABLE 2: ELECTION_RESULT FIELD ID FIELD NAME DATA TYPE CONSTRAINTS 1 result_id bigint PRIMARY...","categories": [],
-        "tags": [],
-        "url": "/online-voting-system/docs/database/ovs-database/",
+        "url": "/online-voting-system/docs/database/userinsertion/",
         "teaser": null
       },{
         "title": "Diagrams",
@@ -71,20 +71,26 @@ var store = [{
         "url": "/online-voting-system/docs/diagrams/",
         "teaser": null
       },{
-        "title": "Feedback System",
-        "excerpt":"Feedback System Overview The feedback system allows users to provide feedback about their voting experience and report issues. Feedback Types General Feedback: Overall experience Technical Issues: Bugs or errors Feature Requests: Suggestions for improvement Usability: UI/UX feedback Feedback Component import React, { useState } from 'react'; function FeedbackForm() { const...","categories": [],
+        "title": "Admin Dashboard",
+        "excerpt":"Admin Dashboard The Admin Dashboard is a protected area restricted to users with the ADMIN role. It provides comprehensive control over elections and users. Manage Elections The Manage Elections tab is the primary workspace for election lifecycle management. Election Lifecycle Admins control the state of an election through the following...","categories": [],
         "tags": [],
-        "url": "/online-voting-system/docs/frontend/feedback/",
+        "url": "/online-voting-system/docs/frontend/admin-dashboard/",
+        "teaser": null
+      },{
+        "title": "Authentication",
+        "excerpt":"Authentication Flows The application supports distinct login flows for Users and Administrators, along with a comprehensive registration process. Login Pages User Login (/login): Standard email/password login for voters. Admin Login (/admin-login): Dedicated login portal for system administrators. Both forms use the AuthContext to store the received JWT and user details...","categories": [],
+        "tags": [],
+        "url": "/online-voting-system/docs/frontend/authentication/",
         "teaser": null
       },{
         "title": "UI Components",
-        "excerpt":"UI Components Component Library OVS uses a custom component library built with React. Core Components Button &lt;Button variant=\"primary\" size=\"large\" onClick={handleClick} &gt; Cast Vote &lt;/Button&gt; Card &lt;Card&gt; &lt;CardHeader&gt; &lt;h3&gt;Election Title&lt;/h3&gt; &lt;/CardHeader&gt; &lt;CardBody&gt; &lt;p&gt;Election description...&lt;/p&gt; &lt;/CardBody&gt; &lt;CardFooter&gt; &lt;Button&gt;View Details&lt;/Button&gt; &lt;/CardFooter&gt; &lt;/Card&gt; Modal &lt;Modal isOpen={isOpen} onClose={handleClose}&gt; &lt;ModalHeader&gt;Confirm Vote&lt;/ModalHeader&gt; &lt;ModalBody&gt; Are you sure you...","categories": [],
+        "excerpt":"UI Components &amp; Architecture The frontend is built using React and Vite, utilizing React-Bootstrap for responsive styling and pre-built components. Core Libraries React Bootstrap: Grid system (Container, Row, Col), Modals, Buttons, and Cards. React Router DOM: Client-side routing. React Webcam: Handling camera inputs for voter verification. Axios: HTTP client for...","categories": [],
         "tags": [],
         "url": "/online-voting-system/docs/frontend/ui-components/",
         "teaser": null
       },{
-        "title": "User Effect Voting",
-        "excerpt":"User Effect Voting Overview The voting interface provides an intuitive and secure way for users to cast their votes. Voting Flow User logs in to the system Views available elections Selects an election Reviews candidates Casts vote Receives confirmation UI Components Election List import React, { useEffect, useState } from...","categories": [],
+        "title": "User Dashboard & Voting",
+        "excerpt":"User Dashboard &amp; Voting The User Dashboard is the central hub for voters. It allows users to view active elections, cast their votes securely using face verification, and view results of past elections. Dashboard Overview The dashboard is divided into two main sections: Active Elections: Elections currently open for voting....","categories": [],
         "tags": [],
         "url": "/online-voting-system/docs/frontend/usereffectvoting/",
         "teaser": null

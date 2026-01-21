@@ -1,93 +1,53 @@
 ---
 title: "UI Components"
 permalink: /docs/frontend/ui-components/
-excerpt: "Reusable UI components documentation"
-last_modified_at: 2025-11-15
+excerpt: "Frontend UI Architecture"
+last_modified_at: 2026-01-21
 toc: true
 ---
 
-# UI Components
+# UI Components & Architecture
 
-## Component Library
+The frontend is built using **React** and **Vite**, utilizing **React-Bootstrap** for responsive styling and pre-built components.
 
-OVS uses a custom component library built with React.
+## Core Libraries
 
-## Core Components
+*   **React Bootstrap**: Grid system (Container, Row, Col), Modals, Buttons, and Cards.
+*   **React Router DOM**: Client-side routing.
+*   **React Webcam**: Handling camera inputs for voter verification.
+*   **Axios**: HTTP client for API communication.
 
-### Button
+## Custom Components
+
+### `EditUserModal`
+
+A specialized modal component used by Administrators to update user details.
+
+*   **Props**: `show`, `onHide`, `user`, `onUpdate`
+*   **Features**:
+    *   Pre-fills form with user data.
+    *   ReadOnly fields for immutable identity data (Aadhar, Voter ID).
+    *   Conditional editing for fields like PAN/Passport (allows addition if missing).
+
+### `PrivateRoute`
+
+A Higher-Order Component (HOC) that protects routes based on authentication status and user roles (`ADMIN` vs `USER`).
+
 ```jsx
-<Button 
-  variant="primary" 
-  size="large"
-  onClick={handleClick}
->
-  Cast Vote
-</Button>
+<Route
+  path="/admin"
+  element={
+    <PrivateRoute role="ADMIN">
+      <AdminDashboard />
+    </PrivateRoute>
+  }
+/>
 ```
 
-### Card
-```jsx
-<Card>
-  <CardHeader>
-    <h3>Election Title</h3>
-  </CardHeader>
-  <CardBody>
-    <p>Election description...</p>
-  </CardBody>
-  <CardFooter>
-    <Button>View Details</Button>
-  </CardFooter>
-</Card>
-```
+### `Navigation`
 
-### Modal
-```jsx
-<Modal isOpen={isOpen} onClose={handleClose}>
-  <ModalHeader>Confirm Vote</ModalHeader>
-  <ModalBody>
-    Are you sure you want to vote for this candidate?
-  </ModalBody>
-  <ModalFooter>
-    <Button onClick={handleConfirm}>Confirm</Button>
-    <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-  </ModalFooter>
-</Modal>
-```
+The main app navbar that conditionally renders links based on the logged-in user's role (e.g., hiding "Admin Dashboard" link from standard users).
 
-## Form Components
+## Styling Strategy
 
-- Input
-- Select
-- Checkbox
-- Radio
-- TextArea
-
-## Layout Components
-
-- Container
-- Grid
-- Flex
-- Spacer
-
-## Styling
-
-Components use CSS modules for styling:
-```css
-/* Button.module.css */
-.button {
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.button-primary {
-  background-color: #007bff;
-  color: white;
-}
-
-.button-primary:hover {
-  background-color: #0056b3;
-}
-```
+The application uses standard CSS imports (`App.css`, `index.css`) alongside Bootstrap utility classes (e.g., `mt-4`, `text-center`, `text-muted`) for rapid UI development.

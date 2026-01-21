@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Database Structure - Online Voting System</title>
-<meta name="description" content="Complete database Structure">
+<!-- begin _includes/seo.html --><title>Database Schema - Online Voting System</title>
+<meta name="description" content="Complete Database Schema (SQL)">
 
 
   <meta name="author" content="yadnyeshkolte">
@@ -22,28 +22,28 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Online Voting System">
-<meta property="og:title" content="Database Structure">
-<meta property="og:url" content="https://yadnyeshkolte.github.io/online-voting-system/docs/database/databasestructure/">
+<meta property="og:title" content="Database Schema">
+<meta property="og:url" content="http://localhost:4000/online-voting-system/docs/database/databaseschema/">
 
 
-  <meta property="og:description" content="Complete database Structure">
-
-
-
+  <meta property="og:description" content="Complete Database Schema (SQL)">
 
 
 
 
-  <meta property="article:published_time" content="2026-01-21T18:29:05+05:30">
 
 
 
-  <meta property="article:modified_time" content="2025-11-24T00:00:00+05:30">
+  <meta property="article:published_time" content="2026-01-21T19:04:44+05:30">
+
+
+
+  <meta property="article:modified_time" content="2026-01-21T00:00:00+05:30">
 
 
 
 
-<link rel="canonical" href="https://yadnyeshkolte.github.io/online-voting-system/docs/database/databasestructure/">
+<link rel="canonical" href="http://localhost:4000/online-voting-system/docs/database/databaseschema/">
 
 
 
@@ -54,7 +54,7 @@
     
       "@type": "Person",
       "name": "yadnyeshkolte",
-      "url": "https://yadnyeshkolte.github.io/online-voting-system/"
+      "url": "http://localhost:4000/online-voting-system/"
     
   }
 </script>
@@ -191,6 +191,8 @@
           
             <li><a href="/online-voting-system/docs/backend/api-reference/">API Reference</a></li>
           
+            <li><a href="/online-voting-system/docs/backend/logins/">Logins & Auth</a></li>
+          
             <li><a href="/online-voting-system/docs/backend/backend-overview/">Backend Overview</a></li>
           
             <li><a href="/online-voting-system/docs/backend/backend-structure/">Backend Structure</a></li>
@@ -213,13 +215,11 @@
         
         <ul>
           
-            <li><a href="/online-voting-system/docs/database/ovs-database/">OVS Database</a></li>
+            <li><a href="/online-voting-system/docs/database/databaseschema/" class="active">Database Schema</a></li>
           
-            <li><a href="/online-voting-system/docs/database/databasestructure/" class="active">Database Structure</a></li>
+            <li><a href="/online-voting-system/docs/database/userinsertion/">User Insertions</a></li>
           
-            <li><a href="/online-voting-system/docs/database/databaseinsertion/">Database Insertion Queries 1 </a></li>
-          
-            <li><a href="/online-voting-system/docs/database/databaseinsertion2/">Database Insertion Queries 2</a></li>
+            <li><a href="/online-voting-system/docs/database/electioninsertion/">Election Insertions</a></li>
           
             <li><a href="/online-voting-system/docs/database/databaseer/">Database ER Diagram</a></li>
           
@@ -235,9 +235,11 @@
         
         <ul>
           
-            <li><a href="/online-voting-system/docs/frontend/usereffectvoting/">User Effect Voting</a></li>
+            <li><a href="/online-voting-system/docs/frontend/authentication/">Authentication</a></li>
           
-            <li><a href="/online-voting-system/docs/frontend/feedback/">Feedback System</a></li>
+            <li><a href="/online-voting-system/docs/frontend/usereffectvoting/">User Dashboard & Voting</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/admin-dashboard/">Admin Dashboard</a></li>
           
             <li><a href="/online-voting-system/docs/frontend/ui-components/">UI Components</a></li>
           
@@ -255,15 +257,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Database Structure">
-    <meta itemprop="description" content="Complete database Structure">
+    <meta itemprop="headline" content="Database Schema">
+    <meta itemprop="description" content="Complete Database Schema (SQL)">
     
-    <meta itemprop="dateModified" content="2025-11-24T00:00:00+05:30">
+    <meta itemprop="dateModified" content="2026-01-21T00:00:00+05:30">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Database Structure
+          <h1 id="page-title" class="page__title" itemprop="headline">Database Schema
 </h1>
           
 
@@ -283,7 +285,8 @@
         
         <h2 id="complete-schema-reference">Complete Schema Reference</h2>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SET</span> <span class="n">SQL_SAFE_UPDATES</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
 <span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">devovs</span><span class="p">;</span>
 
 <span class="n">USE</span> <span class="n">devovs</span><span class="p">;</span>
@@ -344,6 +347,8 @@
     <span class="n">election_type</span> <span class="nb">ENUM</span><span class="p">(</span><span class="s1">'GENERAL'</span><span class="p">,</span> <span class="s1">'STATE'</span><span class="p">,</span> <span class="s1">'LOCAL'</span><span class="p">,</span> <span class="s1">'SPECIAL'</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="n">start_date</span> <span class="nb">DATETIME</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="n">end_date</span> <span class="nb">DATETIME</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">city</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+    <span class="k">state</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
     <span class="n">status</span> <span class="nb">ENUM</span><span class="p">(</span><span class="s1">'DRAFT'</span><span class="p">,</span> <span class="s1">'SCHEDULED'</span><span class="p">,</span> <span class="s1">'ACTIVE'</span><span class="p">,</span> <span class="s1">'COMPLETED'</span><span class="p">,</span> <span class="s1">'CANCELLED'</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="s1">'DRAFT'</span><span class="p">,</span>
     <span class="n">result_published</span> <span class="nb">BOOLEAN</span> <span class="k">DEFAULT</span> <span class="k">FALSE</span><span class="p">,</span>
     <span class="n">result_published_at</span> <span class="nb">TIMESTAMP</span> <span class="k">NULL</span><span class="p">,</span>
@@ -478,146 +483,6 @@
     <span class="k">INDEX</span> <span class="n">idx_passport</span> <span class="p">(</span><span class="n">passport_number</span><span class="p">)</span>
 <span class="p">);</span>
 
-<span class="c1">-- 7. UPDATE dummy verification tables with the 20 inserted users</span>
-
-<span class="c1">-- Insert verification records for 20 existing users</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">dummy_aadhar_records</span> <span class="p">(</span><span class="n">aadhar_number</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">date_of_birth</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span> <span class="k">VALUES</span>
-<span class="p">(</span><span class="s1">'123456789012'</span><span class="p">,</span> <span class="s1">'Rajesh Kumar'</span><span class="p">,</span> <span class="s1">'1995-01-15'</span><span class="p">,</span> <span class="s1">'123 MG Road, Mumbai, Maharashtra'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'990000000002'</span><span class="p">,</span> <span class="s1">'Priya Sharma'</span><span class="p">,</span> <span class="s1">'1990-05-20'</span><span class="p">,</span> <span class="s1">'456 CP Avenue, Delhi, Delhi'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'345678901234'</span><span class="p">,</span> <span class="s1">'Amit Patel'</span><span class="p">,</span> <span class="s1">'1988-08-10'</span><span class="p">,</span> <span class="s1">'789 Brigade Road, Bangalore, Karnataka'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'990000000004'</span><span class="p">,</span> <span class="s1">'Sneha Desai'</span><span class="p">,</span> <span class="s1">'1992-03-25'</span><span class="p">,</span> <span class="s1">'321 Park Street, Pune, Maharashtra'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'567890123456'</span><span class="p">,</span> <span class="s1">'Vikram Singh'</span><span class="p">,</span> <span class="s1">'1985-11-30'</span><span class="p">,</span> <span class="s1">'654 Mall Road, Jaipur, Rajasthan'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'990000000006'</span><span class="p">,</span> <span class="s1">'Anita Verma'</span><span class="p">,</span> <span class="s1">'1993-07-18'</span><span class="p">,</span> <span class="s1">'234 Lake Road, Kolkata, West Bengal'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'678901234567'</span><span class="p">,</span> <span class="s1">'Rahul Mehta'</span><span class="p">,</span> <span class="s1">'1991-12-05'</span><span class="p">,</span> <span class="s1">'567 Station Road, Ahmedabad, Gujarat'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'990000000008'</span><span class="p">,</span> <span class="s1">'Kavita Nair'</span><span class="p">,</span> <span class="s1">'1989-04-22'</span><span class="p">,</span> <span class="s1">'890 Beach Road, Chennai, Tamil Nadu'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'789012345678'</span><span class="p">,</span> <span class="s1">'Suresh Reddy'</span><span class="p">,</span> <span class="s1">'1987-09-14'</span><span class="p">,</span> <span class="s1">'123 Tech Park, Hyderabad, Telangana'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'990000000010'</span><span class="p">,</span> <span class="s1">'Meena Iyer'</span><span class="p">,</span> <span class="s1">'1994-06-08'</span><span class="p">,</span> <span class="s1">'456 Garden View, Kochi, Kerala'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'890123456789'</span><span class="p">,</span> <span class="s1">'Anil Gupta'</span><span class="p">,</span> <span class="s1">'1986-02-28'</span><span class="p">,</span> <span class="s1">'789 Civil Lines, Lucknow, Uttar Pradesh'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'990000000012'</span><span class="p">,</span> <span class="s1">'Pooja Joshi'</span><span class="p">,</span> <span class="s1">'1996-10-12'</span><span class="p">,</span> <span class="s1">'234 University Road, Indore, Madhya Pradesh'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'901234567890'</span><span class="p">,</span> <span class="s1">'Deepak Saxena'</span><span class="p">,</span> <span class="s1">'1990-08-19'</span><span class="p">,</span> <span class="s1">'567 Market Square, Bhopal, Madhya Pradesh'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'990000000014'</span><span class="p">,</span> <span class="s1">'Neha Kapoor'</span><span class="p">,</span> <span class="s1">'1992-11-03'</span><span class="p">,</span> <span class="s1">'890 Hill View, Shimla, Himachal Pradesh'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'012345678901'</span><span class="p">,</span> <span class="s1">'Ravi Krishnan'</span><span class="p">,</span> <span class="s1">'1988-03-17'</span><span class="p">,</span> <span class="s1">'123 Temple Street, Madurai, Tamil Nadu'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'990000000016'</span><span class="p">,</span> <span class="s1">'Shalini Das'</span><span class="p">,</span> <span class="s1">'1995-05-29'</span><span class="p">,</span> <span class="s1">'456 Fort Road, Guwahati, Assam'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'123456789013'</span><span class="p">,</span> <span class="s1">'Manish Yadav'</span><span class="p">,</span> <span class="s1">'1991-07-21'</span><span class="p">,</span> <span class="s1">'789 Railway Colony, Patna, Bihar'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'990000000018'</span><span class="p">,</span> <span class="s1">'Divya Menon'</span><span class="p">,</span> <span class="s1">'1993-09-09'</span><span class="p">,</span> <span class="s1">'234 Beach Front, Thiruvananthapuram, Kerala'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'234567890124'</span><span class="p">,</span> <span class="s1">'Arjun Pandey'</span><span class="p">,</span> <span class="s1">'1989-12-24'</span><span class="p">,</span> <span class="s1">'567 Ring Road, Nagpur, Maharashtra'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'990000000020'</span><span class="p">,</span> <span class="s1">'Ritika Singh'</span><span class="p">,</span> <span class="s1">'1994-01-31'</span><span class="p">,</span> <span class="s1">'890 Cantonment, Dehradun, Uttarakhand'</span><span class="p">);</span>
-
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">dummy_voter_id_records</span> <span class="p">(</span><span class="n">voter_id_number</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">date_of_birth</span><span class="p">)</span> <span class="k">VALUES</span>
-<span class="p">(</span><span class="s1">'VOT9900000001'</span><span class="p">,</span> <span class="s1">'Rajesh Kumar'</span><span class="p">,</span> <span class="s1">'1995-01-15'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT2345678901'</span><span class="p">,</span> <span class="s1">'Priya Sharma'</span><span class="p">,</span> <span class="s1">'1990-05-20'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT9900000003'</span><span class="p">,</span> <span class="s1">'Amit Patel'</span><span class="p">,</span> <span class="s1">'1988-08-10'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT4567890123'</span><span class="p">,</span> <span class="s1">'Sneha Desai'</span><span class="p">,</span> <span class="s1">'1992-03-25'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT9900000005'</span><span class="p">,</span> <span class="s1">'Vikram Singh'</span><span class="p">,</span> <span class="s1">'1985-11-30'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT6789012345'</span><span class="p">,</span> <span class="s1">'Anita Verma'</span><span class="p">,</span> <span class="s1">'1993-07-18'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT9900000007'</span><span class="p">,</span> <span class="s1">'Rahul Mehta'</span><span class="p">,</span> <span class="s1">'1991-12-05'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT7890123456'</span><span class="p">,</span> <span class="s1">'Kavita Nair'</span><span class="p">,</span> <span class="s1">'1989-04-22'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT9900000009'</span><span class="p">,</span> <span class="s1">'Suresh Reddy'</span><span class="p">,</span> <span class="s1">'1987-09-14'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT8901234567'</span><span class="p">,</span> <span class="s1">'Meena Iyer'</span><span class="p">,</span> <span class="s1">'1994-06-08'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT9900000011'</span><span class="p">,</span> <span class="s1">'Anil Gupta'</span><span class="p">,</span> <span class="s1">'1986-02-28'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT9012345678'</span><span class="p">,</span> <span class="s1">'Pooja Joshi'</span><span class="p">,</span> <span class="s1">'1996-10-12'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT9900000013'</span><span class="p">,</span> <span class="s1">'Deepak Saxena'</span><span class="p">,</span> <span class="s1">'1990-08-19'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT0123456789'</span><span class="p">,</span> <span class="s1">'Neha Kapoor'</span><span class="p">,</span> <span class="s1">'1992-11-03'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT9900000015'</span><span class="p">,</span> <span class="s1">'Ravi Krishnan'</span><span class="p">,</span> <span class="s1">'1988-03-17'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT1234567891'</span><span class="p">,</span> <span class="s1">'Shalini Das'</span><span class="p">,</span> <span class="s1">'1995-05-29'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT9900000017'</span><span class="p">,</span> <span class="s1">'Manish Yadav'</span><span class="p">,</span> <span class="s1">'1991-07-21'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT2345678902'</span><span class="p">,</span> <span class="s1">'Divya Menon'</span><span class="p">,</span> <span class="s1">'1993-09-09'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT9900000019'</span><span class="p">,</span> <span class="s1">'Arjun Pandey'</span><span class="p">,</span> <span class="s1">'1989-12-24'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT3456789013'</span><span class="p">,</span> <span class="s1">'Ritika Singh'</span><span class="p">,</span> <span class="s1">'1994-01-31'</span><span class="p">);</span>
-
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">dummy_pan_records</span> <span class="p">(</span><span class="n">pan_number</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">date_of_birth</span><span class="p">)</span> <span class="k">VALUES</span>
-<span class="p">(</span><span class="s1">'ABCDE1001Z'</span><span class="p">,</span> <span class="s1">'Rajesh Kumar'</span><span class="p">,</span> <span class="s1">'1995-01-15'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1002Z'</span><span class="p">,</span> <span class="s1">'Priya Sharma'</span><span class="p">,</span> <span class="s1">'1990-05-20'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1003Z'</span><span class="p">,</span> <span class="s1">'Amit Patel'</span><span class="p">,</span> <span class="s1">'1988-08-10'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1004Z'</span><span class="p">,</span> <span class="s1">'Sneha Desai'</span><span class="p">,</span> <span class="s1">'1992-03-25'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1005Z'</span><span class="p">,</span> <span class="s1">'Vikram Singh'</span><span class="p">,</span> <span class="s1">'1985-11-30'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1006Z'</span><span class="p">,</span> <span class="s1">'Anita Verma'</span><span class="p">,</span> <span class="s1">'1993-07-18'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1007Z'</span><span class="p">,</span> <span class="s1">'Rahul Mehta'</span><span class="p">,</span> <span class="s1">'1991-12-05'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1008Z'</span><span class="p">,</span> <span class="s1">'Kavita Nair'</span><span class="p">,</span> <span class="s1">'1989-04-22'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1009Z'</span><span class="p">,</span> <span class="s1">'Suresh Reddy'</span><span class="p">,</span> <span class="s1">'1987-09-14'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1010Z'</span><span class="p">,</span> <span class="s1">'Meena Iyer'</span><span class="p">,</span> <span class="s1">'1994-06-08'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1011Z'</span><span class="p">,</span> <span class="s1">'Anil Gupta'</span><span class="p">,</span> <span class="s1">'1986-02-28'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1012Z'</span><span class="p">,</span> <span class="s1">'Pooja Joshi'</span><span class="p">,</span> <span class="s1">'1996-10-12'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1013Z'</span><span class="p">,</span> <span class="s1">'Deepak Saxena'</span><span class="p">,</span> <span class="s1">'1990-08-19'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1014Z'</span><span class="p">,</span> <span class="s1">'Neha Kapoor'</span><span class="p">,</span> <span class="s1">'1992-11-03'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1015Z'</span><span class="p">,</span> <span class="s1">'Ravi Krishnan'</span><span class="p">,</span> <span class="s1">'1988-03-17'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1016Z'</span><span class="p">,</span> <span class="s1">'Shalini Das'</span><span class="p">,</span> <span class="s1">'1995-05-29'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1017Z'</span><span class="p">,</span> <span class="s1">'Manish Yadav'</span><span class="p">,</span> <span class="s1">'1991-07-21'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1018Z'</span><span class="p">,</span> <span class="s1">'Divya Menon'</span><span class="p">,</span> <span class="s1">'1993-09-09'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1019Z'</span><span class="p">,</span> <span class="s1">'Arjun Pandey'</span><span class="p">,</span> <span class="s1">'1989-12-24'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'ABCDE1020Z'</span><span class="p">,</span> <span class="s1">'Ritika Singh'</span><span class="p">,</span> <span class="s1">'1994-01-31'</span><span class="p">);</span>
-
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">dummy_passport_records</span> <span class="p">(</span><span class="n">passport_number</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">date_of_birth</span><span class="p">)</span> <span class="k">VALUES</span>
-<span class="p">(</span><span class="s1">'P9900001'</span><span class="p">,</span> <span class="s1">'Rajesh Kumar'</span><span class="p">,</span> <span class="s1">'1995-01-15'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900002'</span><span class="p">,</span> <span class="s1">'Priya Sharma'</span><span class="p">,</span> <span class="s1">'1990-05-20'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900003'</span><span class="p">,</span> <span class="s1">'Amit Patel'</span><span class="p">,</span> <span class="s1">'1988-08-10'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900004'</span><span class="p">,</span> <span class="s1">'Sneha Desai'</span><span class="p">,</span> <span class="s1">'1992-03-25'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900005'</span><span class="p">,</span> <span class="s1">'Vikram Singh'</span><span class="p">,</span> <span class="s1">'1985-11-30'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900006'</span><span class="p">,</span> <span class="s1">'Anita Verma'</span><span class="p">,</span> <span class="s1">'1993-07-18'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900007'</span><span class="p">,</span> <span class="s1">'Rahul Mehta'</span><span class="p">,</span> <span class="s1">'1991-12-05'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900008'</span><span class="p">,</span> <span class="s1">'Kavita Nair'</span><span class="p">,</span> <span class="s1">'1989-04-22'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900009'</span><span class="p">,</span> <span class="s1">'Suresh Reddy'</span><span class="p">,</span> <span class="s1">'1987-09-14'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900010'</span><span class="p">,</span> <span class="s1">'Meena Iyer'</span><span class="p">,</span> <span class="s1">'1994-06-08'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900011'</span><span class="p">,</span> <span class="s1">'Anil Gupta'</span><span class="p">,</span> <span class="s1">'1986-02-28'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900012'</span><span class="p">,</span> <span class="s1">'Pooja Joshi'</span><span class="p">,</span> <span class="s1">'1996-10-12'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900013'</span><span class="p">,</span> <span class="s1">'Deepak Saxena'</span><span class="p">,</span> <span class="s1">'1990-08-19'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900014'</span><span class="p">,</span> <span class="s1">'Neha Kapoor'</span><span class="p">,</span> <span class="s1">'1992-11-03'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900015'</span><span class="p">,</span> <span class="s1">'Ravi Krishnan'</span><span class="p">,</span> <span class="s1">'1988-03-17'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900016'</span><span class="p">,</span> <span class="s1">'Shalini Das'</span><span class="p">,</span> <span class="s1">'1995-05-29'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900017'</span><span class="p">,</span> <span class="s1">'Manish Yadav'</span><span class="p">,</span> <span class="s1">'1991-07-21'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900018'</span><span class="p">,</span> <span class="s1">'Divya Menon'</span><span class="p">,</span> <span class="s1">'1993-09-09'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900019'</span><span class="p">,</span> <span class="s1">'Arjun Pandey'</span><span class="p">,</span> <span class="s1">'1989-12-24'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P9900020'</span><span class="p">,</span> <span class="s1">'Ritika Singh'</span><span class="p">,</span> <span class="s1">'1994-01-31'</span><span class="p">);</span>
-
-<span class="c1">-- Insert 10 new unassigned verification records</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">dummy_aadhar_records</span> <span class="p">(</span><span class="n">aadhar_number</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">date_of_birth</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span> <span class="k">VALUES</span>
-<span class="p">(</span><span class="s1">'880000000000'</span><span class="p">,</span> <span class="s1">'Yadnyesh'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">,</span> <span class="s1">'123 Test Lane, Test City, Test State'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'880000000001'</span><span class="p">,</span> <span class="s1">'Rushikesh'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">,</span> <span class="s1">'123 Test Lane, Test City, Test State'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'880000000002'</span><span class="p">,</span> <span class="s1">'Aavdut'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">,</span> <span class="s1">'123 Test Lane, Test City, Test State'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'880000000003'</span><span class="p">,</span> <span class="s1">'Aaman'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">,</span> <span class="s1">'123 Test Lane, Test City, Test State'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'880000000004'</span><span class="p">,</span> <span class="s1">'Deepak'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">,</span> <span class="s1">'123 Test Lane, Test City, Test State'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'880000000005'</span><span class="p">,</span> <span class="s1">'Yadnyesh Kolte'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">,</span> <span class="s1">'123 Test Lane, Test City, Test State'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'880000000006'</span><span class="p">,</span> <span class="s1">'Rushikesh More'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">,</span> <span class="s1">'123 Test Lane, Test City, Test State'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'880000000007'</span><span class="p">,</span> <span class="s1">'Aavdut Joshi'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">,</span> <span class="s1">'123 Test Lane, Test City, Test State'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'880000000008'</span><span class="p">,</span> <span class="s1">'Aaman Sayyad'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">,</span> <span class="s1">'123 Test Lane, Test City, Test State'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'880000000009'</span><span class="p">,</span> <span class="s1">'Deepak Revgade'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">,</span> <span class="s1">'123 Test Lane, Test City, Test State'</span><span class="p">);</span>
-
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">dummy_voter_id_records</span> <span class="p">(</span><span class="n">voter_id_number</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">date_of_birth</span><span class="p">)</span> <span class="k">VALUES</span>
-<span class="p">(</span><span class="s1">'VOT8800000000'</span><span class="p">,</span> <span class="s1">'Yadnyesh'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT8800000001'</span><span class="p">,</span> <span class="s1">'Rushikesh'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT8800000002'</span><span class="p">,</span> <span class="s1">'Aavdut'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT8800000003'</span><span class="p">,</span> <span class="s1">'Aaman'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT8800000004'</span><span class="p">,</span> <span class="s1">'Deepak'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT8800000005'</span><span class="p">,</span> <span class="s1">'Yadnyesh Kolte'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT8800000006'</span><span class="p">,</span> <span class="s1">'Rushikesh More'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT8800000007'</span><span class="p">,</span> <span class="s1">'Aavdut Joshi'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT8800000008'</span><span class="p">,</span> <span class="s1">'Aaman Sayyad'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'VOT8800000009'</span><span class="p">,</span> <span class="s1">'Deepak Revgade'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">);</span>
-
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">dummy_pan_records</span> <span class="p">(</span><span class="n">pan_number</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">date_of_birth</span><span class="p">)</span> <span class="k">VALUES</span>
-<span class="p">(</span><span class="s1">'FGHIJ2000K'</span><span class="p">,</span> <span class="s1">'Yadnyesh'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'FGHIJ2001K'</span><span class="p">,</span> <span class="s1">'Rushikesh'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'FGHIJ2002K'</span><span class="p">,</span> <span class="s1">'Aavdut'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'FGHIJ2003K'</span><span class="p">,</span> <span class="s1">'Aaman'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'FGHIJ2004K'</span><span class="p">,</span> <span class="s1">'Deepak'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'FGHIJ2005K'</span><span class="p">,</span> <span class="s1">'Yadnyesh Kolte'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'FGHIJ2006K'</span><span class="p">,</span> <span class="s1">'Rushikesh More'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'FGHIJ2007K'</span><span class="p">,</span> <span class="s1">'Aavdut Joshi'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'FGHIJ2008K'</span><span class="p">,</span> <span class="s1">'Aaman Sayyad'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'FGHIJ2009K'</span><span class="p">,</span> <span class="s1">'Deepak Revgade'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">);</span>
-
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">dummy_passport_records</span> <span class="p">(</span><span class="n">passport_number</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">date_of_birth</span><span class="p">)</span> <span class="k">VALUES</span>
-<span class="p">(</span><span class="s1">'P8800000'</span><span class="p">,</span> <span class="s1">'Yadnyesh'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P8800001'</span><span class="p">,</span> <span class="s1">'Rushikesh'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P8800002'</span><span class="p">,</span> <span class="s1">'Aavdut'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P8800003'</span><span class="p">,</span> <span class="s1">'Aaman'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P8800004'</span><span class="p">,</span> <span class="s1">'Deepak'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P8800005'</span><span class="p">,</span> <span class="s1">'Yadnyesh Kolte'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P8800006'</span><span class="p">,</span> <span class="s1">'Rushikesh More'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P8800007'</span><span class="p">,</span> <span class="s1">'Aavdut Joshi'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P8800008'</span><span class="p">,</span> <span class="s1">'Aaman Sayyad'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">'P8800009'</span><span class="p">,</span> <span class="s1">'Deepak Revgade'</span><span class="p">,</span> <span class="s1">'2000-01-01'</span><span class="p">);</span>
-
 
 </code></pre></div></div>
 
@@ -631,7 +496,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-24">November 24, 2025</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-01-21">January 21, 2026</time></p>
 
 
       </footer>
@@ -641,11 +506,11 @@
       
   <nav class="pagination">
     
-      <a href="/online-voting-system/docs/database/databaseinsertion2/" class="pagination--pager" title="Database Insertion Queries 2
+      <a href="/online-voting-system/docs/database/databaseer/" class="pagination--pager" title="Database ER Diagram
 ">Previous</a>
     
     
-      <a href="/online-voting-system/docs/database/ovs-database/" class="pagination--pager" title="OVS Database
+      <a href="/online-voting-system/docs/database/electioninsertion/" class="pagination--pager" title="Election Insertion Queries
 ">Next</a>
     
   </nav>

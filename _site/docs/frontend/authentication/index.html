@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Quick Start - Online Voting System</title>
-<meta name="description" content="Get up and running quickly">
+<!-- begin _includes/seo.html --><title>Authentication - Online Voting System</title>
+<meta name="description" content="Frontend Authentication Flows">
 
 
   <meta name="author" content="yadnyeshkolte">
@@ -22,11 +22,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Online Voting System">
-<meta property="og:title" content="Quick Start">
-<meta property="og:url" content="http://localhost:4000/online-voting-system/docs/quick-start/">
+<meta property="og:title" content="Authentication">
+<meta property="og:url" content="http://localhost:4000/online-voting-system/docs/frontend/authentication/">
 
 
-  <meta property="og:description" content="Get up and running quickly">
+  <meta property="og:description" content="Frontend Authentication Flows">
 
 
 
@@ -38,12 +38,12 @@
 
 
 
-  <meta property="article:modified_time" content="2025-11-15T00:00:00+05:30">
+  <meta property="article:modified_time" content="2026-01-21T00:00:00+05:30">
 
 
 
 
-<link rel="canonical" href="http://localhost:4000/online-voting-system/docs/quick-start/">
+<link rel="canonical" href="http://localhost:4000/online-voting-system/docs/frontend/authentication/">
 
 
 
@@ -173,7 +173,7 @@
           
             <li><a href="/online-voting-system/docs/installation/">Installation</a></li>
           
-            <li><a href="/online-voting-system/docs/quick-start/" class="active">Quick Start</a></li>
+            <li><a href="/online-voting-system/docs/quick-start/">Quick Start</a></li>
           
             <li><a href="/online-voting-system/docs/diagrams/">Diagrams</a></li>
           
@@ -235,7 +235,7 @@
         
         <ul>
           
-            <li><a href="/online-voting-system/docs/frontend/authentication/">Authentication</a></li>
+            <li><a href="/online-voting-system/docs/frontend/authentication/" class="active">Authentication</a></li>
           
             <li><a href="/online-voting-system/docs/frontend/usereffectvoting/">User Dashboard & Voting</a></li>
           
@@ -257,15 +257,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Quick Start">
-    <meta itemprop="description" content="Get up and running quickly">
+    <meta itemprop="headline" content="Authentication">
+    <meta itemprop="description" content="Frontend Authentication Flows">
     
-    <meta itemprop="dateModified" content="2025-11-15T00:00:00+05:30">
+    <meta itemprop="dateModified" content="2026-01-21T00:00:00+05:30">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Quick Start
+          <h1 id="page-title" class="page__title" itemprop="headline">Authentication
 </h1>
           
 
@@ -278,98 +278,48 @@
           <aside class="sidebar__right ">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#quick-start-guide">Quick Start Guide</a><ul><li><a href="#prerequisites">Prerequisites</a></li><li><a href="#walkthrough">Walkthrough</a><ul><li><a href="#1-admin-create-an-election">1. Admin: Create an Election</a></li><li><a href="#2-user-register--verify">2. User: Register &amp; Verify</a></li><li><a href="#3-user-vote">3. User: Vote</a></li><li><a href="#4-admin-view-results">4. Admin: View Results</a></li></ul></li><li><a href="#default-accounts">Default Accounts</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#authentication-flows">Authentication Flows</a><ul><li><a href="#login-pages">Login Pages</a></li><li><a href="#registration">Registration</a></li><li><a href="#route-protection">Route Protection</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h1 id="quick-start-guide">Quick Start Guide</h1>
+        <h1 id="authentication-flows">Authentication Flows</h1>
 
-<p>This guide will help you verify the application flow by simulating a real-world voting scenario.</p>
+<p>The application supports distinct login flows for Users and Administrators, along with a comprehensive registration process.</p>
 
-<h2 id="prerequisites">Prerequisites</h2>
-<p>Ensure you have completed the <a href="INSTALLATION.md">Installation Guide</a> and both the Backend and Frontend servers are running.</p>
+<h2 id="login-pages">Login Pages</h2>
 
 <ul>
-  <li><strong>Frontend</strong>: http://localhost:5173</li>
-  <li><strong>Backend</strong>: http://localhost:8080</li>
+  <li><strong>User Login</strong> (<code class="language-plaintext highlighter-rouge">/login</code>): Standard email/password login for voters.</li>
+  <li><strong>Admin Login</strong> (<code class="language-plaintext highlighter-rouge">/admin-login</code>): Dedicated login portal for system administrators.</li>
 </ul>
 
-<h2 id="walkthrough">Walkthrough</h2>
+<p>Both forms use the <code class="language-plaintext highlighter-rouge">AuthContext</code> to store the received JWT and user details upon successful authentication.</p>
 
-<h3 id="1-admin-create-an-election">1. Admin: Create an Election</h3>
+<h2 id="registration">Registration</h2>
 
+<p>The Registration page (<code class="language-plaintext highlighter-rouge">/register</code>) is a multi-step form that captures:</p>
 <ol>
-  <li>Navigate to <strong><a href="http://localhost:5173/login">http://localhost:5173/login</a></strong>.</li>
-  <li>Login with the default Admin credentials:
+  <li><strong>Personal Details</strong>: Name, Email, Phone, DOB, Gender.</li>
+  <li><strong>Address</strong>: Full address details.</li>
+  <li><strong>Identity Verification</strong>:
     <ul>
-      <li><strong>Email</strong>: <code class="language-plaintext highlighter-rouge">admin@voting.com</code></li>
-      <li><strong>Password</strong>: <code class="language-plaintext highlighter-rouge">admin123</code></li>
-    </ul>
-  </li>
-  <li>On the <strong>Admin Dashboard</strong>:
-    <ul>
-      <li>Click “Create Election”.</li>
-      <li>Enter details (e.g., “General Election 2024”).</li>
-      <li>Change the election status to <code class="language-plaintext highlighter-rouge">SCHEDULED</code>, then <code class="language-plaintext highlighter-rouge">ACTIVE</code> to allow voting.</li>
-      <li><em>Note: To add candidates, you must first register other users and use their User IDs.</em></li>
+      <li><strong>Aadhar Number</strong></li>
+      <li><strong>Voter ID Number</strong></li>
+      <li><strong>Profile Photo</strong>: Users must provide a photo for future face verification.</li>
     </ul>
   </li>
 </ol>
 
-<h3 id="2-user-register--verify">2. User: Register &amp; Verify</h3>
+<h2 id="route-protection">Route Protection</h2>
 
+<p>The <code class="language-plaintext highlighter-rouge">PrivateRoute</code> component ensures security by checking:</p>
 <ol>
-  <li>Log out or open an Incognito window.</li>
-  <li>Navigate to <strong><a href="http://localhost:5173/register">http://localhost:5173/register</a></strong>.</li>
-  <li>Fill in the registration form using the <strong>Seeded Dummy Data</strong> for verification.</li>
-  <li>Click <strong>Register</strong>. If the details match the dummy data, registration will succeed.</li>
+  <li><strong>Is Authenticated</strong>: Is there a valid JWT?</li>
+  <li><strong>Role Authorization</strong>: Does the user have the required role (<code class="language-plaintext highlighter-rouge">USER</code> or <code class="language-plaintext highlighter-rouge">ADMIN</code>) for the requested route?</li>
 </ol>
 
-<h3 id="3-user-vote">3. User: Vote</h3>
-
-<ol>
-  <li>Login with your newly created user credentials.</li>
-  <li>On the <strong>User Dashboard</strong>, locate the Active Election you created earlier.</li>
-  <li>Click <strong>Vote Now</strong>.</li>
-  <li>Select a candidate and confirm your vote.</li>
-  <li>The button will update to “You Voted”.</li>
-</ol>
-
-<h3 id="4-admin-view-results">4. Admin: View Results</h3>
-
-<ol>
-  <li>Log back in as Admin.</li>
-  <li>Navigate to the election card on the dashboard.</li>
-  <li>Click <strong>Calc Results</strong> (if required) then <strong>View Results</strong>.</li>
-  <li>You will see the updated vote counts.</li>
-</ol>
-
-<hr />
-
-<h2 id="default-accounts">Default Accounts</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Role</th>
-      <th style="text-align: left">Email</th>
-      <th style="text-align: left">Password</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><strong>Admin</strong></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">admin@voting.com</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">admin123</code></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><strong>Admin (Backup)</strong></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">admin.secondary@voting.com</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">admin123</code></td>
-    </tr>
-  </tbody>
-</table>
+<p>If checks fail, the user is redirected to the appropriate login page.</p>
 
         
       </section>
@@ -381,7 +331,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-15">November 15, 2025</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-01-21">January 21, 2026</time></p>
 
 
       </footer>
@@ -391,11 +341,12 @@
       
   <nav class="pagination">
     
-      <a href="/online-voting-system/docs/introduction/" class="pagination--pager" title="Introduction
+      <a href="/online-voting-system/docs/frontend/admin-dashboard/" class="pagination--pager" title="Admin Dashboard
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/online-voting-system/docs/frontend/ui-components/" class="pagination--pager" title="UI Components
+">Next</a>
     
   </nav>
 

@@ -1,90 +1,63 @@
 ---
-title: "User Effect Voting"
+title: "User Dashboard & Voting"
 permalink: /docs/frontend/usereffectvoting/
-excerpt: "User voting experience and effects"
-last_modified_at: 2025-11-15
+excerpt: "Voter dashboard and secure voting process"
+last_modified_at: 2026-01-21
 toc: true
 ---
 
-# User Effect Voting
+# User Dashboard & Voting
 
-## Overview
+The User Dashboard is the central hub for voters. It allows users to view active elections, cast their votes securely using face verification, and view results of past elections.
 
-The voting interface provides an intuitive and secure way for users to cast their votes.
+## Dashboard Overview
 
-## Voting Flow
+The dashboard is divided into two main sections:
 
-1. User logs in to the system
-2. Views available elections
-3. Selects an election
-4. Reviews candidates
-5. Casts vote
-6. Receives confirmation
+1.  **Active Elections**: Elections currently open for voting.
+2.  **Past Election Results**: Completed elections where results have been published.
 
-## UI Components
+## Voting Process
 
-### Election List
+The voting process is designed to be secure and verifiable.
+
+1.  **Selection**: User clicks "Vote Now" on an active election card.
+2.  **Candidate Review**: A modal appears displaying the list of candidates, their party symbols, photos, and manifestos.
+3.  **Face Verification**: The system activates the user's webcam. A live feed is displayed to ensure the user is present.
+4.  **Submission**: When the user clicks "Vote" for a specific candidate:
+    *   The webcam captures a snapshot.
+    *   The image is converted to a Blob.
+    *   The vote and the image are sent to the backend for verification.
+
+### Code Snippet: Voting Logic
+
 ```jsx
-import React, { useEffect, useState } from 'react';
-import { getElections } from '../api/elections';
+const handleVote = async (candidateId) => {
+    if (window.confirm('Are you sure? This will capture your image for verification.')) {
+        try {
+            setIsVerifying(true);
+            // 1. Capture Image
+            const imageSrc = webcamRef.current.getScreenshot();
+            
+            // 2. Convert to Blob
+            const blob = dataURItoBlob(imageSrc);
 
-function ElectionList() {
-  const [elections, setElections] = useState([]);
-
-  useEffect(() => {
-    async function fetchElections() {
-      const data = await getElections();
-      setElections(data);
+            // 3. Send Vote + Image
+            await castVote(selectedElection.electionId, candidateId, blob);
+            
+            alert('Vote cast successfully!');
+            loadElections(); // Refresh status
+        } catch (e) {
+            alert('Voting failed: ' + e.message);
+        }
     }
-    fetchElections();
-  }, []);
-
-  return (
-    <div className="election-list">
-      {elections.map(election => (
-        <ElectionCard key={election.id} election={election} />
-      ))}
-    </div>
-  );
-}
+};
 ```
 
-### Voting Interface
+## Viewing Results
 
-The voting interface includes:
+For completed elections, users can click "View Results". This opens a modal displaying a ranked table of candidates, vote counts, and percentages.
 
-- **Candidate Cards**: Display candidate information
-- **Vote Button**: Allows user to cast vote
-- **Confirmation Dialog**: Confirms vote before submission
-- **Success Message**: Shows confirmation after voting
+## Verification Status
 
-## Visual Effects
-
-### Vote Animation
-
-When a user casts a vote, the system displays:
-
-1. Loading spinner during submission
-2. Success checkmark animation
-3. Confetti effect (optional)
-4. Confirmation message
-
-### Real-time Updates
-
-- Vote count updates in real-time (for admin view)
-- Election status changes are reflected immediately
-- Candidate rankings update dynamically
-
-## Accessibility
-
-- Keyboard navigation support
-- Screen reader compatible
-- High contrast mode
-- Large touch targets for mobile
-
-## Security Features
-
-- One vote per user per election
-- Vote cannot be changed once cast
-- Encrypted vote transmission
-- Anonymous vote storage
+The dashboard tracks the user's voting status locally using a `hasVotedMap`. If a user has already voted in an election, the "Vote Now" button is replaced with a disabled "You Voted" button.

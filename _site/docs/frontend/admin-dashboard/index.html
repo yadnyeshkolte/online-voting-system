@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Quick Start - Online Voting System</title>
-<meta name="description" content="Get up and running quickly">
+<!-- begin _includes/seo.html --><title>Admin Dashboard - Online Voting System</title>
+<meta name="description" content="Administrative controls and election management">
 
 
   <meta name="author" content="yadnyeshkolte">
@@ -22,11 +22,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Online Voting System">
-<meta property="og:title" content="Quick Start">
-<meta property="og:url" content="http://localhost:4000/online-voting-system/docs/quick-start/">
+<meta property="og:title" content="Admin Dashboard">
+<meta property="og:url" content="http://localhost:4000/online-voting-system/docs/frontend/admin-dashboard/">
 
 
-  <meta property="og:description" content="Get up and running quickly">
+  <meta property="og:description" content="Administrative controls and election management">
 
 
 
@@ -38,12 +38,12 @@
 
 
 
-  <meta property="article:modified_time" content="2025-11-15T00:00:00+05:30">
+  <meta property="article:modified_time" content="2026-01-21T00:00:00+05:30">
 
 
 
 
-<link rel="canonical" href="http://localhost:4000/online-voting-system/docs/quick-start/">
+<link rel="canonical" href="http://localhost:4000/online-voting-system/docs/frontend/admin-dashboard/">
 
 
 
@@ -173,7 +173,7 @@
           
             <li><a href="/online-voting-system/docs/installation/">Installation</a></li>
           
-            <li><a href="/online-voting-system/docs/quick-start/" class="active">Quick Start</a></li>
+            <li><a href="/online-voting-system/docs/quick-start/">Quick Start</a></li>
           
             <li><a href="/online-voting-system/docs/diagrams/">Diagrams</a></li>
           
@@ -239,7 +239,7 @@
           
             <li><a href="/online-voting-system/docs/frontend/usereffectvoting/">User Dashboard & Voting</a></li>
           
-            <li><a href="/online-voting-system/docs/frontend/admin-dashboard/">Admin Dashboard</a></li>
+            <li><a href="/online-voting-system/docs/frontend/admin-dashboard/" class="active">Admin Dashboard</a></li>
           
             <li><a href="/online-voting-system/docs/frontend/ui-components/">UI Components</a></li>
           
@@ -257,15 +257,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Quick Start">
-    <meta itemprop="description" content="Get up and running quickly">
+    <meta itemprop="headline" content="Admin Dashboard">
+    <meta itemprop="description" content="Administrative controls and election management">
     
-    <meta itemprop="dateModified" content="2025-11-15T00:00:00+05:30">
+    <meta itemprop="dateModified" content="2026-01-21T00:00:00+05:30">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Quick Start
+          <h1 id="page-title" class="page__title" itemprop="headline">Admin Dashboard
 </h1>
           
 
@@ -278,98 +278,62 @@
           <aside class="sidebar__right ">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#quick-start-guide">Quick Start Guide</a><ul><li><a href="#prerequisites">Prerequisites</a></li><li><a href="#walkthrough">Walkthrough</a><ul><li><a href="#1-admin-create-an-election">1. Admin: Create an Election</a></li><li><a href="#2-user-register--verify">2. User: Register &amp; Verify</a></li><li><a href="#3-user-vote">3. User: Vote</a></li><li><a href="#4-admin-view-results">4. Admin: View Results</a></li></ul></li><li><a href="#default-accounts">Default Accounts</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#admin-dashboard">Admin Dashboard</a><ul><li><a href="#manage-elections">Manage Elections</a><ul><li><a href="#election-lifecycle">Election Lifecycle</a></li><li><a href="#creating-an-election">Creating an Election</a></li><li><a href="#results-management">Results Management</a></li></ul></li><li><a href="#manage-users">Manage Users</a></li><li><a href="#code-structure">Code Structure</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h1 id="quick-start-guide">Quick Start Guide</h1>
+        <h1 id="admin-dashboard">Admin Dashboard</h1>
 
-<p>This guide will help you verify the application flow by simulating a real-world voting scenario.</p>
+<p>The Admin Dashboard is a protected area restricted to users with the <code class="language-plaintext highlighter-rouge">ADMIN</code> role. It provides comprehensive control over elections and users.</p>
 
-<h2 id="prerequisites">Prerequisites</h2>
-<p>Ensure you have completed the <a href="INSTALLATION.md">Installation Guide</a> and both the Backend and Frontend servers are running.</p>
+<h2 id="manage-elections">Manage Elections</h2>
 
+<p>The <strong>Manage Elections</strong> tab is the primary workspace for election lifecycle management.</p>
+
+<h3 id="election-lifecycle">Election Lifecycle</h3>
+<p>Admins control the state of an election through the following buttons:</p>
+<ol>
+  <li><strong>Schedule</strong>: Transitions <code class="language-plaintext highlighter-rouge">DRAFT</code> -&gt; <code class="language-plaintext highlighter-rouge">SCHEDULED</code>.</li>
+  <li><strong>Start</strong>: Transitions <code class="language-plaintext highlighter-rouge">SCHEDULED</code> -&gt; <code class="language-plaintext highlighter-rouge">ACTIVE</code>.</li>
+  <li><strong>End</strong>: Transitions <code class="language-plaintext highlighter-rouge">ACTIVE</code> -&gt; <code class="language-plaintext highlighter-rouge">COMPLETED</code>.</li>
+</ol>
+
+<h3 id="creating-an-election">Creating an Election</h3>
+<p>The “Create New Election” modal allows admins to:</p>
 <ul>
-  <li><strong>Frontend</strong>: http://localhost:5173</li>
-  <li><strong>Backend</strong>: http://localhost:8080</li>
+  <li>Define election metadata (Name, Type, Dates, Location).</li>
+  <li><strong>Add Candidates</strong>:
+    <ul>
+      <li>Candidates are added to a temporary list before election creation.</li>
+      <li><strong>Image Upload</strong>: Admins upload candidate photos directly during this phase.</li>
+      <li>The system handles the complex flow of creating the election entity first, then uploading images for each candidate.</li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="walkthrough">Walkthrough</h2>
+<h3 id="results-management">Results Management</h3>
+<ul>
+  <li><strong>Calculate Results</strong>: Triggers the backend calculation engine.</li>
+  <li><strong>View Results</strong>: Displays the current vote tallies.</li>
+  <li><strong>Publish/Unpublish</strong>: Controls whether results are visible to voters on their dashboard.</li>
+</ul>
 
-<h3 id="1-admin-create-an-election">1. Admin: Create an Election</h3>
+<h2 id="manage-users">Manage Users</h2>
 
-<ol>
-  <li>Navigate to <strong><a href="http://localhost:5173/login">http://localhost:5173/login</a></strong>.</li>
-  <li>Login with the default Admin credentials:
-    <ul>
-      <li><strong>Email</strong>: <code class="language-plaintext highlighter-rouge">admin@voting.com</code></li>
-      <li><strong>Password</strong>: <code class="language-plaintext highlighter-rouge">admin123</code></li>
-    </ul>
-  </li>
-  <li>On the <strong>Admin Dashboard</strong>:
-    <ul>
-      <li>Click “Create Election”.</li>
-      <li>Enter details (e.g., “General Election 2024”).</li>
-      <li>Change the election status to <code class="language-plaintext highlighter-rouge">SCHEDULED</code>, then <code class="language-plaintext highlighter-rouge">ACTIVE</code> to allow voting.</li>
-      <li><em>Note: To add candidates, you must first register other users and use their User IDs.</em></li>
-    </ul>
-  </li>
-</ol>
+<p>The <strong>Manage Users</strong> tab provides a searchable interface for the user database.</p>
 
-<h3 id="2-user-register--verify">2. User: Register &amp; Verify</h3>
+<ul>
+  <li><strong>Search</strong>: Admins can search by Name, ID, Email, Phone, Aadhar, Voter ID, PAN, or Passport.</li>
+  <li><strong>Edit</strong>: Opens the <code class="language-plaintext highlighter-rouge">EditUserModal</code> to modify user details. Critical identity fields (Aadhar, Voter ID) are locked to prevent tampering.</li>
+</ul>
 
-<ol>
-  <li>Log out or open an Incognito window.</li>
-  <li>Navigate to <strong><a href="http://localhost:5173/register">http://localhost:5173/register</a></strong>.</li>
-  <li>Fill in the registration form using the <strong>Seeded Dummy Data</strong> for verification.</li>
-  <li>Click <strong>Register</strong>. If the details match the dummy data, registration will succeed.</li>
-</ol>
+<h2 id="code-structure">Code Structure</h2>
 
-<h3 id="3-user-vote">3. User: Vote</h3>
-
-<ol>
-  <li>Login with your newly created user credentials.</li>
-  <li>On the <strong>User Dashboard</strong>, locate the Active Election you created earlier.</li>
-  <li>Click <strong>Vote Now</strong>.</li>
-  <li>Select a candidate and confirm your vote.</li>
-  <li>The button will update to “You Voted”.</li>
-</ol>
-
-<h3 id="4-admin-view-results">4. Admin: View Results</h3>
-
-<ol>
-  <li>Log back in as Admin.</li>
-  <li>Navigate to the election card on the dashboard.</li>
-  <li>Click <strong>Calc Results</strong> (if required) then <strong>View Results</strong>.</li>
-  <li>You will see the updated vote counts.</li>
-</ol>
-
-<hr />
-
-<h2 id="default-accounts">Default Accounts</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Role</th>
-      <th style="text-align: left">Email</th>
-      <th style="text-align: left">Password</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><strong>Admin</strong></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">admin@voting.com</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">admin123</code></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><strong>Admin (Backup)</strong></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">admin.secondary@voting.com</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">admin123</code></td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">AdminDashboard.jsx</code>: Main container, handles Election state and tab switching.</li>
+  <li><code class="language-plaintext highlighter-rouge">ManageUsers.jsx</code>: Sub-component specifically for the User search and edit table.</li>
+</ul>
 
         
       </section>
@@ -381,7 +345,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-15">November 15, 2025</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-01-21">January 21, 2026</time></p>
 
 
       </footer>
@@ -391,11 +355,12 @@
       
   <nav class="pagination">
     
-      <a href="/online-voting-system/docs/introduction/" class="pagination--pager" title="Introduction
+      <a href="/online-voting-system/docs/diagrams/" class="pagination--pager" title="Diagrams
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/online-voting-system/docs/frontend/authentication/" class="pagination--pager" title="Authentication
+">Next</a>
     
   </nav>
 

@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>User Effect Voting - Online Voting System</title>
-<meta name="description" content="User voting experience and effects">
+<!-- begin _includes/seo.html --><title>User Dashboard &amp; Voting - Online Voting System</title>
+<meta name="description" content="Voter dashboard and secure voting process">
 
 
   <meta name="author" content="yadnyeshkolte">
@@ -22,28 +22,28 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Online Voting System">
-<meta property="og:title" content="User Effect Voting">
-<meta property="og:url" content="https://yadnyeshkolte.github.io/online-voting-system/docs/frontend/usereffectvoting/">
+<meta property="og:title" content="User Dashboard &amp; Voting">
+<meta property="og:url" content="http://localhost:4000/online-voting-system/docs/frontend/usereffectvoting/">
 
 
-  <meta property="og:description" content="User voting experience and effects">
-
-
-
+  <meta property="og:description" content="Voter dashboard and secure voting process">
 
 
 
 
-  <meta property="article:published_time" content="2026-01-21T18:29:05+05:30">
 
 
 
-  <meta property="article:modified_time" content="2025-11-15T00:00:00+05:30">
+  <meta property="article:published_time" content="2026-01-21T19:04:44+05:30">
+
+
+
+  <meta property="article:modified_time" content="2026-01-21T00:00:00+05:30">
 
 
 
 
-<link rel="canonical" href="https://yadnyeshkolte.github.io/online-voting-system/docs/frontend/usereffectvoting/">
+<link rel="canonical" href="http://localhost:4000/online-voting-system/docs/frontend/usereffectvoting/">
 
 
 
@@ -54,7 +54,7 @@
     
       "@type": "Person",
       "name": "yadnyeshkolte",
-      "url": "https://yadnyeshkolte.github.io/online-voting-system/"
+      "url": "http://localhost:4000/online-voting-system/"
     
   }
 </script>
@@ -191,6 +191,8 @@
           
             <li><a href="/online-voting-system/docs/backend/api-reference/">API Reference</a></li>
           
+            <li><a href="/online-voting-system/docs/backend/logins/">Logins & Auth</a></li>
+          
             <li><a href="/online-voting-system/docs/backend/backend-overview/">Backend Overview</a></li>
           
             <li><a href="/online-voting-system/docs/backend/backend-structure/">Backend Structure</a></li>
@@ -213,13 +215,11 @@
         
         <ul>
           
-            <li><a href="/online-voting-system/docs/database/ovs-database/">OVS Database</a></li>
+            <li><a href="/online-voting-system/docs/database/databaseschema/">Database Schema</a></li>
           
-            <li><a href="/online-voting-system/docs/database/databasestructure/">Database Structure</a></li>
+            <li><a href="/online-voting-system/docs/database/userinsertion/">User Insertions</a></li>
           
-            <li><a href="/online-voting-system/docs/database/databaseinsertion/">Database Insertion Queries 1 </a></li>
-          
-            <li><a href="/online-voting-system/docs/database/databaseinsertion2/">Database Insertion Queries 2</a></li>
+            <li><a href="/online-voting-system/docs/database/electioninsertion/">Election Insertions</a></li>
           
             <li><a href="/online-voting-system/docs/database/databaseer/">Database ER Diagram</a></li>
           
@@ -235,9 +235,11 @@
         
         <ul>
           
-            <li><a href="/online-voting-system/docs/frontend/usereffectvoting/" class="active">User Effect Voting</a></li>
+            <li><a href="/online-voting-system/docs/frontend/authentication/">Authentication</a></li>
           
-            <li><a href="/online-voting-system/docs/frontend/feedback/">Feedback System</a></li>
+            <li><a href="/online-voting-system/docs/frontend/usereffectvoting/" class="active">User Dashboard & Voting</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/admin-dashboard/">Admin Dashboard</a></li>
           
             <li><a href="/online-voting-system/docs/frontend/ui-components/">UI Components</a></li>
           
@@ -255,15 +257,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="User Effect Voting">
-    <meta itemprop="description" content="User voting experience and effects">
+    <meta itemprop="headline" content="User Dashboard &amp; Voting">
+    <meta itemprop="description" content="Voter dashboard and secure voting process">
     
-    <meta itemprop="dateModified" content="2025-11-15T00:00:00+05:30">
+    <meta itemprop="dateModified" content="2026-01-21T00:00:00+05:30">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">User Effect Voting
+          <h1 id="page-title" class="page__title" itemprop="headline">User Dashboard &amp; Voting
 </h1>
           
 
@@ -276,104 +278,72 @@
           <aside class="sidebar__right ">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#user-effect-voting">User Effect Voting</a><ul><li><a href="#overview">Overview</a></li><li><a href="#voting-flow">Voting Flow</a></li><li><a href="#ui-components">UI Components</a><ul><li><a href="#election-list">Election List</a></li><li><a href="#voting-interface">Voting Interface</a></li></ul></li><li><a href="#visual-effects">Visual Effects</a><ul><li><a href="#vote-animation">Vote Animation</a></li><li><a href="#real-time-updates">Real-time Updates</a></li></ul></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#security-features">Security Features</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#user-dashboard--voting">User Dashboard &amp; Voting</a><ul><li><a href="#dashboard-overview">Dashboard Overview</a></li><li><a href="#voting-process">Voting Process</a><ul><li><a href="#code-snippet-voting-logic">Code Snippet: Voting Logic</a></li></ul></li><li><a href="#viewing-results">Viewing Results</a></li><li><a href="#verification-status">Verification Status</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h1 id="user-effect-voting">User Effect Voting</h1>
+        <h1 id="user-dashboard--voting">User Dashboard &amp; Voting</h1>
 
-<h2 id="overview">Overview</h2>
+<p>The User Dashboard is the central hub for voters. It allows users to view active elections, cast their votes securely using face verification, and view results of past elections.</p>
 
-<p>The voting interface provides an intuitive and secure way for users to cast their votes.</p>
+<h2 id="dashboard-overview">Dashboard Overview</h2>
 
-<h2 id="voting-flow">Voting Flow</h2>
+<p>The dashboard is divided into two main sections:</p>
 
 <ol>
-  <li>User logs in to the system</li>
-  <li>Views available elections</li>
-  <li>Selects an election</li>
-  <li>Reviews candidates</li>
-  <li>Casts vote</li>
-  <li>Receives confirmation</li>
+  <li><strong>Active Elections</strong>: Elections currently open for voting.</li>
+  <li><strong>Past Election Results</strong>: Completed elections where results have been published.</li>
 </ol>
 
-<h2 id="ui-components">UI Components</h2>
+<h2 id="voting-process">Voting Process</h2>
 
-<h3 id="election-list">Election List</h3>
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">getElections</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../api/elections</span><span class="dl">'</span><span class="p">;</span>
+<p>The voting process is designed to be secure and verifiable.</p>
 
-<span class="kd">function</span> <span class="nx">ElectionList</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="p">[</span><span class="nx">elections</span><span class="p">,</span> <span class="nx">setElections</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+<ol>
+  <li><strong>Selection</strong>: User clicks “Vote Now” on an active election card.</li>
+  <li><strong>Candidate Review</strong>: A modal appears displaying the list of candidates, their party symbols, photos, and manifestos.</li>
+  <li><strong>Face Verification</strong>: The system activates the user’s webcam. A live feed is displayed to ensure the user is present.</li>
+  <li><strong>Submission</strong>: When the user clicks “Vote” for a specific candidate:
+    <ul>
+      <li>The webcam captures a snapshot.</li>
+      <li>The image is converted to a Blob.</li>
+      <li>The vote and the image are sent to the backend for verification.</li>
+    </ul>
+  </li>
+</ol>
 
-  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">async</span> <span class="kd">function</span> <span class="nx">fetchElections</span><span class="p">()</span> <span class="p">{</span>
-      <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getElections</span><span class="p">();</span>
-      <span class="nx">setElections</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<h3 id="code-snippet-voting-logic">Code Snippet: Voting Logic</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">handleVote</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">candidateId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="dl">'</span><span class="s1">Are you sure? This will capture your image for verification.</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nx">setIsVerifying</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+            <span class="c1">// 1. Capture Image</span>
+            <span class="kd">const</span> <span class="nx">imageSrc</span> <span class="o">=</span> <span class="nx">webcamRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">getScreenshot</span><span class="p">();</span>
+            
+            <span class="c1">// 2. Convert to Blob</span>
+            <span class="kd">const</span> <span class="nx">blob</span> <span class="o">=</span> <span class="nx">dataURItoBlob</span><span class="p">(</span><span class="nx">imageSrc</span><span class="p">);</span>
+
+            <span class="c1">// 3. Send Vote + Image</span>
+            <span class="k">await</span> <span class="nx">castVote</span><span class="p">(</span><span class="nx">selectedElection</span><span class="p">.</span><span class="nx">electionId</span><span class="p">,</span> <span class="nx">candidateId</span><span class="p">,</span> <span class="nx">blob</span><span class="p">);</span>
+            
+            <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Vote cast successfully!</span><span class="dl">'</span><span class="p">);</span>
+            <span class="nx">loadElections</span><span class="p">();</span> <span class="c1">// Refresh status</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Voting failed: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="p">}</span>
     <span class="p">}</span>
-    <span class="nx">fetchElections</span><span class="p">();</span>
-  <span class="p">},</span> <span class="p">[]);</span>
-
-  <span class="k">return</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"election-list"</span><span class="p">&gt;</span>
-      <span class="si">{</span><span class="nx">elections</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">election</span> <span class="o">=&gt;</span> <span class="p">(</span>
-        <span class="p">&lt;</span><span class="nc">ElectionCard</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">election</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span> <span class="na">election</span><span class="p">=</span><span class="si">{</span><span class="nx">election</span><span class="si">}</span> <span class="p">/&gt;</span>
-      <span class="p">))</span><span class="si">}</span>
-    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">);</span>
-<span class="p">}</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
-<h3 id="voting-interface">Voting Interface</h3>
+<h2 id="viewing-results">Viewing Results</h2>
 
-<p>The voting interface includes:</p>
+<p>For completed elections, users can click “View Results”. This opens a modal displaying a ranked table of candidates, vote counts, and percentages.</p>
 
-<ul>
-  <li><strong>Candidate Cards</strong>: Display candidate information</li>
-  <li><strong>Vote Button</strong>: Allows user to cast vote</li>
-  <li><strong>Confirmation Dialog</strong>: Confirms vote before submission</li>
-  <li><strong>Success Message</strong>: Shows confirmation after voting</li>
-</ul>
+<h2 id="verification-status">Verification Status</h2>
 
-<h2 id="visual-effects">Visual Effects</h2>
-
-<h3 id="vote-animation">Vote Animation</h3>
-
-<p>When a user casts a vote, the system displays:</p>
-
-<ol>
-  <li>Loading spinner during submission</li>
-  <li>Success checkmark animation</li>
-  <li>Confetti effect (optional)</li>
-  <li>Confirmation message</li>
-</ol>
-
-<h3 id="real-time-updates">Real-time Updates</h3>
-
-<ul>
-  <li>Vote count updates in real-time (for admin view)</li>
-  <li>Election status changes are reflected immediately</li>
-  <li>Candidate rankings update dynamically</li>
-</ul>
-
-<h2 id="accessibility">Accessibility</h2>
-
-<ul>
-  <li>Keyboard navigation support</li>
-  <li>Screen reader compatible</li>
-  <li>High contrast mode</li>
-  <li>Large touch targets for mobile</li>
-</ul>
-
-<h2 id="security-features">Security Features</h2>
-
-<ul>
-  <li>One vote per user per election</li>
-  <li>Vote cannot be changed once cast</li>
-  <li>Encrypted vote transmission</li>
-  <li>Anonymous vote storage</li>
-</ul>
+<p>The dashboard tracks the user’s voting status locally using a <code class="language-plaintext highlighter-rouge">hasVotedMap</code>. If a user has already voted in an election, the “Vote Now” button is replaced with a disabled “You Voted” button.</p>
 
         
       </section>
@@ -385,7 +355,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-15">November 15, 2025</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-01-21">January 21, 2026</time></p>
 
 
       </footer>

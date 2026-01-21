@@ -24,6 +24,8 @@ docs:
     children:
       - title: "API Reference"
         url: /docs/backend/api-reference/
+      - title: "Logins & Auth"
+        url: /docs/backend/logins/
       - title: "Backend Overview"
         url: /docs/backend/backend-overview/
       - title: "Backend Structure"
@@ -37,22 +39,22 @@ docs:
         
   - title: Database
     children:
-      - title: "OVS Database"
-        url: /docs/database/ovs-database/
-      - title: "Database Structure"
-        url: /docs/database/databasestructure/
-      - title: "Database Insertion Queries 1 "
-        url: /docs/database/databaseinsertion/
-      - title: "Database Insertion Queries 2"
-        url: /docs/database/databaseinsertion2/
+      - title: "Database Schema"
+        url: /docs/database/databaseschema/
+      - title: "User Insertions"
+        url: /docs/database/userinsertion/
+      - title: "Election Insertions"
+        url: /docs/database/electioninsertion/
       - title: "Database ER Diagram"
         url: /docs/database/databaseer/
 
   - title: Frontend
     children:
-      - title: "User Effect Voting"
+      - title: "Authentication"
+        url: /docs/frontend/authentication/
+      - title: "User Dashboard & Voting"
         url: /docs/frontend/usereffectvoting/
-      - title: "Feedback System"
-        url: /docs/frontend/feedback/
+      - title: "Admin Dashboard"
+        url: /docs/frontend/admin-dashboard/
       - title: "UI Components"
         url: /docs/frontend/ui-components/
