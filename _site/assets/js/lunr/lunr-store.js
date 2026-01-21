@@ -59,6 +59,12 @@ var store = [{
         "url": "/online-voting-system/docs/database/electioninsertion/",
         "teaser": null
       },{
+        "title": "One-Shot Data Setup",
+        "excerpt":"SET SQL_SAFE_UPDATES = 0; CREATE DATABASE IF NOT EXISTS devovs; USE devovs; -- ============================================ -- ONLINE VOTING SYSTEM - FINAL SCHEMA -- PG-DAC Project - Group 06 -- ============================================ -- 1. Create users table first (no dependencies) -- Users can be both VOTERS and CANDIDATES -- Modified to include specific...","categories": [],
+        "tags": [],
+        "url": "/online-voting-system/docs/database/oneshotreadydata/",
+        "teaser": null
+      },{
         "title": "User Insertion Queries",
         "excerpt":"User Data Insertion -- 2. INSERT 2 ADMINS (Passwords set to 'admin123', email updated to match login) INSERT INTO admins (email, password_hash, full_name, phone_number) VALUES ('admin@voting.com', '$2a$12$8HNsrESl9ubVI9MRaCFWY.vZZ1i6OkpmzaTnz.5nsdTGdeWEzzhym', 'Sanjay Malhotra', '9999888877'), ('admin.secondary@voting.com', '$2a$12$8HNsrESl9ubVI9MRaCFWY.vZZ1i6OkpmzaTnz.5nsdTGdeWEzzhym', 'Priyanka Chopra', '9999888878'); -- 7. UPDATE dummy verification tables with the 20 inserted users -- Insert verification records...","categories": [],
         "tags": [],

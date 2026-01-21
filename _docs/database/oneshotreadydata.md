@@ -1,3 +1,11 @@
+---
+title: "One-Shot Data Setup"
+permalink: /docs/database/oneshotreadydata/
+excerpt: "Complete SQL script for setting up the database and inserting test data"
+last_modified_at: 2026-01-21
+toc: true
+---
+
 ```sql
 
 SET SQL_SAFE_UPDATES = 0;

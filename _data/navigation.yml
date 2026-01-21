@@ -41,6 +41,8 @@ docs:
     children:
       - title: "Database Schema"
         url: /docs/database/databaseschema/
+      - title: "One-Shot Data Setup"
+        url: /docs/database/oneshotreadydata/
       - title: "User Insertions"
         url: /docs/database/userinsertion/
       - title: "Election Insertions"
