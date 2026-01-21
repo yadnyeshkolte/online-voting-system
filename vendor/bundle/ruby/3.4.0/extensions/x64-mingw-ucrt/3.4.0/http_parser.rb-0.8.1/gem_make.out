@@ -1,0 +1,20 @@
+current directory: C:/Users/Yadnyesh Kolte/online-voting-system/vendor/bundle/ruby/3.4.0/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+C:/Ruby34-x64/bin/ruby.exe extconf.rb
+creating Makefile
+
+current directory: C:/Users/Yadnyesh Kolte/online-voting-system/vendor/bundle/ruby/3.4.0/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+make DESTDIR\= sitearchdir\=./.gem.20260121-27400-ggt79l sitelibdir\=./.gem.20260121-27400-ggt79l clean
+
+current directory: C:/Users/Yadnyesh Kolte/online-voting-system/vendor/bundle/ruby/3.4.0/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+make DESTDIR\= sitearchdir\=./.gem.20260121-27400-ggt79l sitelibdir\=./.gem.20260121-27400-ggt79l
+generating ruby_http_parser-x64-mingw-ucrt.def
+compiling ruby_http_parser.c
+compiling ryah_http_parser.c
+linking shared-object ruby_http_parser.so
+
+current directory: C:/Users/Yadnyesh Kolte/online-voting-system/vendor/bundle/ruby/3.4.0/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+make DESTDIR\= sitearchdir\=./.gem.20260121-27400-ggt79l sitelibdir\=./.gem.20260121-27400-ggt79l install
+/usr/bin/install -c -m 0755 ruby_http_parser.so ./.gem.20260121-27400-ggt79l
+
+current directory: C:/Users/Yadnyesh Kolte/online-voting-system/vendor/bundle/ruby/3.4.0/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+make DESTDIR\= sitearchdir\=./.gem.20260121-27400-ggt79l sitelibdir\=./.gem.20260121-27400-ggt79l clean

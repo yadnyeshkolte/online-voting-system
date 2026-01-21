@@ -1,0 +1,459 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Feedback System - Online Voting System</title>
+<meta name="description" content="User feedback and rating system">
+
+
+  <meta name="author" content="yadnyeshkolte">
+  
+  <meta property="article:author" content="yadnyeshkolte">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Online Voting System">
+<meta property="og:title" content="Feedback System">
+<meta property="og:url" content="https://yadnyeshkolte.github.io/online-voting-system/docs/frontend/feedback/">
+
+
+  <meta property="og:description" content="User feedback and rating system">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-01-21T18:29:05+05:30">
+
+
+
+  <meta property="article:modified_time" content="2025-11-15T00:00:00+05:30">
+
+
+
+
+<link rel="canonical" href="https://yadnyeshkolte.github.io/online-voting-system/docs/frontend/feedback/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "yadnyeshkolte",
+      "url": "https://yadnyeshkolte.github.io/online-voting-system/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/online-voting-system/feed.xml" type="application/atom+xml" rel="alternate" title="Online Voting System Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/online-voting-system/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <link rel="icon" href="/online-voting-system/assets/images/favicon.svg" type="image/svg+xml">
+
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/online-voting-system/"><img src="/online-voting-system/assets/images/favicon.ico" alt="Online Voting System"></a>
+        
+        <a class="site-title" href="/online-voting-system/">
+          Online Voting System
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/introduction/">Documentation</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/quick-start/">Getting Started</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/about/">About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Getting Started</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/introduction/">Introduction</a></li>
+          
+            <li><a href="/online-voting-system/docs/installation/">Installation</a></li>
+          
+            <li><a href="/online-voting-system/docs/quick-start/">Quick Start</a></li>
+          
+            <li><a href="/online-voting-system/docs/diagrams/">Diagrams</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Backend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/backend/api-reference/">API Reference</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-overview/">Backend Overview</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-structure/">Backend Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/security-auth/">Security Authentication</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/springcontainer/">Spring Container</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/authentication/">Authentication</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Database</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/database/ovs-database/">OVS Database</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databasestructure/">Database Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion/">Database Insertion Queries 1 </a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion2/">Database Insertion Queries 2</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseer/">Database ER Diagram</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Frontend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/frontend/usereffectvoting/">User Effect Voting</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/feedback/" class="active">Feedback System</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/ui-components/">UI Components</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Feedback System">
+    <meta itemprop="description" content="User feedback and rating system">
+    
+    <meta itemprop="dateModified" content="2025-11-15T00:00:00+05:30">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Feedback System
+</h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#feedback-system">Feedback System</a><ul><li><a href="#overview">Overview</a></li><li><a href="#feedback-types">Feedback Types</a></li><li><a href="#feedback-component">Feedback Component</a></li><li><a href="#rating-system">Rating System</a></li><li><a href="#admin-dashboard">Admin Dashboard</a></li><li><a href="#notifications">Notifications</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="feedback-system">Feedback System</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>The feedback system allows users to provide feedback about their voting experience and report issues.</p>
+
+<h2 id="feedback-types">Feedback Types</h2>
+
+<ol>
+  <li><strong>General Feedback</strong>: Overall experience</li>
+  <li><strong>Technical Issues</strong>: Bugs or errors</li>
+  <li><strong>Feature Requests</strong>: Suggestions for improvement</li>
+  <li><strong>Usability</strong>: UI/UX feedback</li>
+</ol>
+
+<h2 id="feedback-component">Feedback Component</h2>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">FeedbackForm</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">feedback</span><span class="p">,</span> <span class="nx">setFeedback</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">general</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">rating</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">message</span><span class="p">:</span> <span class="dl">''</span>
+  <span class="p">});</span>
+
+  <span class="kd">const</span> <span class="nx">handleSubmit</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="c1">// Submit feedback to API</span>
+    <span class="k">await</span> <span class="nx">submitFeedback</span><span class="p">(</span><span class="nx">feedback</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">onSubmit</span><span class="p">=</span><span class="si">{</span><span class="nx">handleSubmit</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">select</span> 
+        <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">feedback</span><span class="p">.</span><span class="nx">type</span><span class="si">}</span> 
+        <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setFeedback</span><span class="p">({...</span><span class="nx">feedback</span><span class="p">,</span> <span class="na">type</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="p">=</span><span class="s">"general"</span><span class="p">&gt;</span>General Feedback<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="p">=</span><span class="s">"bug"</span><span class="p">&gt;</span>Report Bug<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="p">=</span><span class="s">"feature"</span><span class="p">&gt;</span>Feature Request<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+      
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"rating"</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nx">star</span> <span class="o">=&gt;</span> <span class="p">(</span>
+          <span class="p">&lt;</span><span class="nc">Star</span> 
+            <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">star</span><span class="si">}</span>
+            <span class="na">filled</span><span class="p">=</span><span class="si">{</span><span class="nx">star</span> <span class="o">&lt;=</span> <span class="nx">feedback</span><span class="p">.</span><span class="nx">rating</span><span class="si">}</span>
+            <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setFeedback</span><span class="p">({...</span><span class="nx">feedback</span><span class="p">,</span> <span class="na">rating</span><span class="p">:</span> <span class="nx">star</span><span class="p">})</span><span class="si">}</span>
+          <span class="p">/&gt;</span>
+        <span class="p">))</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      
+      <span class="p">&lt;</span><span class="nt">textarea</span>
+        <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">feedback</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span>
+        <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setFeedback</span><span class="p">({...</span><span class="nx">feedback</span><span class="p">,</span> <span class="na">message</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">})</span><span class="si">}</span>
+        <span class="na">placeholder</span><span class="p">=</span><span class="s">"Tell us about your experience..."</span>
+      <span class="p">/&gt;</span>
+      
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="p">=</span><span class="s">"submit"</span><span class="p">&gt;</span>Submit Feedback<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="rating-system">Rating System</h2>
+
+<p>Users can rate their experience on a scale of 1-5 stars:</p>
+
+<ul>
+  <li>⭐ 1 star: Very poor</li>
+  <li>⭐⭐ 2 stars: Poor</li>
+  <li>⭐⭐⭐ 3 stars: Average</li>
+  <li>⭐⭐⭐⭐ 4 stars: Good</li>
+  <li>⭐⭐⭐⭐⭐ 5 stars: Excellent</li>
+</ul>
+
+<h2 id="admin-dashboard">Admin Dashboard</h2>
+
+<p>Admins can view:</p>
+
+<ul>
+  <li>All feedback submissions</li>
+  <li>Average ratings</li>
+  <li>Common issues</li>
+  <li>Trend analysis</li>
+</ul>
+
+<h2 id="notifications">Notifications</h2>
+
+<p>Users receive notifications when:</p>
+
+<ul>
+  <li>Feedback is received</li>
+  <li>Issue is being investigated</li>
+  <li>Issue is resolved</li>
+  <li>Feature request is implemented</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-15">November 15, 2025</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/online-voting-system/docs/diagrams/" class="pagination--pager" title="Diagrams
+">Previous</a>
+    
+    
+      <a href="/online-voting-system/docs/frontend/ui-components/" class="pagination--pager" title="UI Components
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    
+      <li><a href="/online-voting-system/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 yadnyeshkolte. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/online-voting-system/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

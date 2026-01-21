@@ -1,0 +1,555 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Database Insertion Queries - Online Voting System</title>
+<meta name="description" content="Inserting Data into Database">
+
+
+  <meta name="author" content="yadnyeshkolte">
+  
+  <meta property="article:author" content="yadnyeshkolte">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Online Voting System">
+<meta property="og:title" content="Database Insertion Queries">
+<meta property="og:url" content="https://yadnyeshkolte.github.io/online-voting-system/docs/database/databaseinsertion/">
+
+
+  <meta property="og:description" content="Inserting Data into Database">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-01-21T18:29:05+05:30">
+
+
+
+  <meta property="article:modified_time" content="2025-11-24T00:00:00+05:30">
+
+
+
+
+<link rel="canonical" href="https://yadnyeshkolte.github.io/online-voting-system/docs/database/databaseinsertion/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "yadnyeshkolte",
+      "url": "https://yadnyeshkolte.github.io/online-voting-system/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/online-voting-system/feed.xml" type="application/atom+xml" rel="alternate" title="Online Voting System Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/online-voting-system/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <link rel="icon" href="/online-voting-system/assets/images/favicon.svg" type="image/svg+xml">
+
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/online-voting-system/"><img src="/online-voting-system/assets/images/favicon.ico" alt="Online Voting System"></a>
+        
+        <a class="site-title" href="/online-voting-system/">
+          Online Voting System
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/introduction/">Documentation</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/quick-start/">Getting Started</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/about/">About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Getting Started</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/introduction/">Introduction</a></li>
+          
+            <li><a href="/online-voting-system/docs/installation/">Installation</a></li>
+          
+            <li><a href="/online-voting-system/docs/quick-start/">Quick Start</a></li>
+          
+            <li><a href="/online-voting-system/docs/diagrams/">Diagrams</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Backend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/backend/api-reference/">API Reference</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-overview/">Backend Overview</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-structure/">Backend Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/security-auth/">Security Authentication</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/springcontainer/">Spring Container</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/authentication/">Authentication</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Database</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/database/ovs-database/">OVS Database</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databasestructure/">Database Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion/" class="active">Database Insertion Queries 1 </a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion2/">Database Insertion Queries 2</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseer/">Database ER Diagram</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Frontend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/frontend/usereffectvoting/">User Effect Voting</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/feedback/">Feedback System</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/ui-components/">UI Components</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Database Insertion Queries">
+    <meta itemprop="description" content="Inserting Data into Database">
+    
+    <meta itemprop="dateModified" content="2025-11-24T00:00:00+05:30">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Database Insertion Queries
+</h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              
+
+            </nav>
+          </aside>
+        
+        <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+<span class="c1">-- ============================================</span>
+<span class="c1">-- TEST DATA INSERTION</span>
+<span class="c1">-- ============================================</span>
+
+
+<span class="c1">-- 1. INSERT 20 USERS WITH BCRYPT HASHED PASSWORDS</span>
+<span class="c1">-- Updated to include both AADHAR and VOTER_ID for each user</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">users</span> <span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password_hash</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">phone_number</span><span class="p">,</span> <span class="n">date_of_birth</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="k">state</span><span class="p">,</span> <span class="n">pincode</span><span class="p">,</span> <span class="n">aadhar_number</span><span class="p">,</span> <span class="n">voter_id_number</span><span class="p">,</span> <span class="n">profile_image_url</span><span class="p">,</span> <span class="n">is_active</span><span class="p">,</span> <span class="n">is_verified</span><span class="p">,</span> <span class="n">approved_at</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="s1">'rajesh.kumar@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$h2bW9dGj8X89JMBBHjvffe2jKCerIAzPFK.LsQiy0yV3fOk/NwiV6'</span><span class="p">,</span> <span class="s1">'Rajesh Kumar'</span><span class="p">,</span> <span class="s1">'9876543210'</span><span class="p">,</span> <span class="s1">'1995-01-15'</span><span class="p">,</span> <span class="s1">'MALE'</span><span class="p">,</span> <span class="s1">'123 MG Road'</span><span class="p">,</span> <span class="s1">'Mumbai'</span><span class="p">,</span> <span class="s1">'Maharashtra'</span><span class="p">,</span> <span class="s1">'400001'</span><span class="p">,</span> <span class="s1">'123456789012'</span><span class="p">,</span> <span class="s1">'VOT9900000001'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/1.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-10 10:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'priya.sharma@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$vBI2Llf/b1f1z3xr3r2g5.NOnPl2oRNzBFY5E2HQg1MrH.hOv9v12'</span><span class="p">,</span> <span class="s1">'Priya Sharma'</span><span class="p">,</span> <span class="s1">'9876543211'</span><span class="p">,</span> <span class="s1">'1990-05-20'</span><span class="p">,</span> <span class="s1">'FEMALE'</span><span class="p">,</span> <span class="s1">'456 CP Avenue'</span><span class="p">,</span> <span class="s1">'Delhi'</span><span class="p">,</span> <span class="s1">'Delhi'</span><span class="p">,</span> <span class="s1">'110001'</span><span class="p">,</span> <span class="s1">'990000000002'</span><span class="p">,</span> <span class="s1">'VOT2345678901'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/2.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-10 10:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'amit.patel@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$0XWI2r/7LgSn6twF9XBZWegKk85neQGOQkjdZutCEsccmAjWwQ1OK'</span><span class="p">,</span> <span class="s1">'Amit Patel'</span><span class="p">,</span> <span class="s1">'9876543212'</span><span class="p">,</span> <span class="s1">'1988-08-10'</span><span class="p">,</span> <span class="s1">'MALE'</span><span class="p">,</span> <span class="s1">'789 Brigade Road'</span><span class="p">,</span> <span class="s1">'Bangalore'</span><span class="p">,</span> <span class="s1">'Karnataka'</span><span class="p">,</span> <span class="s1">'560001'</span><span class="p">,</span> <span class="s1">'345678901234'</span><span class="p">,</span> <span class="s1">'VOT9900000003'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/3.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-10 11:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'sneha.desai@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$GKbNrwaaUdIT0.3t.Qks8uI2KQvAvjT3WL8nK.rr9DbDEXglXm5Om'</span><span class="p">,</span> <span class="s1">'Sneha Desai'</span><span class="p">,</span> <span class="s1">'9876543213'</span><span class="p">,</span> <span class="s1">'1992-03-25'</span><span class="p">,</span> <span class="s1">'FEMALE'</span><span class="p">,</span> <span class="s1">'321 Park Street'</span><span class="p">,</span> <span class="s1">'Pune'</span><span class="p">,</span> <span class="s1">'Maharashtra'</span><span class="p">,</span> <span class="s1">'411001'</span><span class="p">,</span> <span class="s1">'990000000004'</span><span class="p">,</span> <span class="s1">'VOT4567890123'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/4.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-10 11:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'vikram.singh@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$.IG7McJt2tLTfIzPS3msluu0mqH7KxpwAkhoeGYKDV1Ig9q5dOzra'</span><span class="p">,</span> <span class="s1">'Vikram Singh'</span><span class="p">,</span> <span class="s1">'9876543214'</span><span class="p">,</span> <span class="s1">'1985-11-30'</span><span class="p">,</span> <span class="s1">'MALE'</span><span class="p">,</span> <span class="s1">'654 Mall Road'</span><span class="p">,</span> <span class="s1">'Jaipur'</span><span class="p">,</span> <span class="s1">'Rajasthan'</span><span class="p">,</span> <span class="s1">'302001'</span><span class="p">,</span> <span class="s1">'567890123456'</span><span class="p">,</span> <span class="s1">'VOT9900000005'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/5.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-10 12:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'anita.verma@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$rhrdrh19jqkEF5.8QcP9seYGIeC6nrZuiTicoOszmvgF64iZa21VS'</span><span class="p">,</span> <span class="s1">'Anita Verma'</span><span class="p">,</span> <span class="s1">'9876543215'</span><span class="p">,</span> <span class="s1">'1993-07-18'</span><span class="p">,</span> <span class="s1">'FEMALE'</span><span class="p">,</span> <span class="s1">'234 Lake Road'</span><span class="p">,</span> <span class="s1">'Kolkata'</span><span class="p">,</span> <span class="s1">'West Bengal'</span><span class="p">,</span> <span class="s1">'700001'</span><span class="p">,</span> <span class="s1">'990000000006'</span><span class="p">,</span> <span class="s1">'VOT6789012345'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/6.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-11 09:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'rahul.mehta@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$vyYQkoMHbyFqOIJ0F07HoezJ/kN/UOJUYuYw.eZAdeDSAabI6zBCm'</span><span class="p">,</span> <span class="s1">'Rahul Mehta'</span><span class="p">,</span> <span class="s1">'9876543216'</span><span class="p">,</span> <span class="s1">'1991-12-05'</span><span class="p">,</span> <span class="s1">'MALE'</span><span class="p">,</span> <span class="s1">'567 Station Road'</span><span class="p">,</span> <span class="s1">'Ahmedabad'</span><span class="p">,</span> <span class="s1">'Gujarat'</span><span class="p">,</span> <span class="s1">'380001'</span><span class="p">,</span> <span class="s1">'678901234567'</span><span class="p">,</span> <span class="s1">'VOT9900000007'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/7.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-11 09:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'kavita.nair@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$rTOeBs9Dz3IPFlPFQxyEaOrflZ3KqmKeOGA1cAbnWYb2BKt4XZPHm'</span><span class="p">,</span> <span class="s1">'Kavita Nair'</span><span class="p">,</span> <span class="s1">'9876543217'</span><span class="p">,</span> <span class="s1">'1989-04-22'</span><span class="p">,</span> <span class="s1">'FEMALE'</span><span class="p">,</span> <span class="s1">'890 Beach Road'</span><span class="p">,</span> <span class="s1">'Chennai'</span><span class="p">,</span> <span class="s1">'Tamil Nadu'</span><span class="p">,</span> <span class="s1">'600001'</span><span class="p">,</span> <span class="s1">'990000000008'</span><span class="p">,</span> <span class="s1">'VOT7890123456'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/8.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-11 10:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'suresh.reddy@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$F2U/XiDNCaNI4Z3mqc1ITe/E3VCbsJ/mmoJS3hx//XTluntMRnxee'</span><span class="p">,</span> <span class="s1">'Suresh Reddy'</span><span class="p">,</span> <span class="s1">'9876543218'</span><span class="p">,</span> <span class="s1">'1987-09-14'</span><span class="p">,</span> <span class="s1">'MALE'</span><span class="p">,</span> <span class="s1">'123 Tech Park'</span><span class="p">,</span> <span class="s1">'Hyderabad'</span><span class="p">,</span> <span class="s1">'Telangana'</span><span class="p">,</span> <span class="s1">'500001'</span><span class="p">,</span> <span class="s1">'789012345678'</span><span class="p">,</span> <span class="s1">'VOT9900000009'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/9.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-11 10:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'meena.iyer@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$/phBjZ5kbVnIQXFcqAyBO.JIMbtiRcWrIlF.zZauK3g.CoXcNzx2.'</span><span class="p">,</span> <span class="s1">'Meena Iyer'</span><span class="p">,</span> <span class="s1">'9876543219'</span><span class="p">,</span> <span class="s1">'1994-06-08'</span><span class="p">,</span> <span class="s1">'FEMALE'</span><span class="p">,</span> <span class="s1">'456 Garden View'</span><span class="p">,</span> <span class="s1">'Kochi'</span><span class="p">,</span> <span class="s1">'Kerala'</span><span class="p">,</span> <span class="s1">'682001'</span><span class="p">,</span> <span class="s1">'990000000010'</span><span class="p">,</span> <span class="s1">'VOT8901234567'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/10.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-11 11:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'anil.gupta@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$JoYqmT4zrOPbTB4I/6cOw.AsaMjYB7On3n69KZ3mXa0MB22yjidC2'</span><span class="p">,</span> <span class="s1">'Anil Gupta'</span><span class="p">,</span> <span class="s1">'9876543220'</span><span class="p">,</span> <span class="s1">'1986-02-28'</span><span class="p">,</span> <span class="s1">'MALE'</span><span class="p">,</span> <span class="s1">'789 Civil Lines'</span><span class="p">,</span> <span class="s1">'Lucknow'</span><span class="p">,</span> <span class="s1">'Uttar Pradesh'</span><span class="p">,</span> <span class="s1">'226001'</span><span class="p">,</span> <span class="s1">'890123456789'</span><span class="p">,</span> <span class="s1">'VOT9900000011'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/11.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-11 11:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'pooja.joshi@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$OlnTvuBoPFJv1jqpVmYL3OrYcdcHETymJHm8oMW.XSOmy6XQcGvje'</span><span class="p">,</span> <span class="s1">'Pooja Joshi'</span><span class="p">,</span> <span class="s1">'9876543221'</span><span class="p">,</span> <span class="s1">'1996-10-12'</span><span class="p">,</span> <span class="s1">'FEMALE'</span><span class="p">,</span> <span class="s1">'234 University Road'</span><span class="p">,</span> <span class="s1">'Indore'</span><span class="p">,</span> <span class="s1">'Madhya Pradesh'</span><span class="p">,</span> <span class="s1">'452001'</span><span class="p">,</span> <span class="s1">'990000000012'</span><span class="p">,</span> <span class="s1">'VOT9012345678'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/12.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-11 12:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'deepak.saxena@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$HxMpfjyUH33IjL58CcdVQupc8naVaz8I7egg6/i.oRFWuVQy.FglC'</span><span class="p">,</span> <span class="s1">'Deepak Saxena'</span><span class="p">,</span> <span class="s1">'9876543222'</span><span class="p">,</span> <span class="s1">'1990-08-19'</span><span class="p">,</span> <span class="s1">'MALE'</span><span class="p">,</span> <span class="s1">'567 Market Square'</span><span class="p">,</span> <span class="s1">'Bhopal'</span><span class="p">,</span> <span class="s1">'Madhya Pradesh'</span><span class="p">,</span> <span class="s1">'462001'</span><span class="p">,</span> <span class="s1">'901234567890'</span><span class="p">,</span> <span class="s1">'VOT9900000013'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/13.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-12 09:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'neha.kapoor@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$9gfo7Nkm/VYPpFuMrBh8neEaLEwu6cSb04y8aAu8V2ug2xtXVNvZ.'</span><span class="p">,</span> <span class="s1">'Neha Kapoor'</span><span class="p">,</span> <span class="s1">'9876543223'</span><span class="p">,</span> <span class="s1">'1992-11-03'</span><span class="p">,</span> <span class="s1">'FEMALE'</span><span class="p">,</span> <span class="s1">'890 Hill View'</span><span class="p">,</span> <span class="s1">'Shimla'</span><span class="p">,</span> <span class="s1">'Himachal Pradesh'</span><span class="p">,</span> <span class="s1">'171001'</span><span class="p">,</span> <span class="s1">'990000000014'</span><span class="p">,</span> <span class="s1">'VOT0123456789'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/14.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-12 09:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'ravi.krishnan@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$wDVZ6It2dq1JNKMFdi0YzuNHdgn.ZLWmO5e323XHDDyJyEW7Su6BG'</span><span class="p">,</span> <span class="s1">'Ravi Krishnan'</span><span class="p">,</span> <span class="s1">'9876543224'</span><span class="p">,</span> <span class="s1">'1988-03-17'</span><span class="p">,</span> <span class="s1">'MALE'</span><span class="p">,</span> <span class="s1">'123 Temple Street'</span><span class="p">,</span> <span class="s1">'Madurai'</span><span class="p">,</span> <span class="s1">'Tamil Nadu'</span><span class="p">,</span> <span class="s1">'625001'</span><span class="p">,</span> <span class="s1">'012345678901'</span><span class="p">,</span> <span class="s1">'VOT9900000015'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/15.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-12 10:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'shalini.das@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$AnYu/JR0ZIJltc1XegjntOimv7vCbznypzEehe8JZcN32NovvGfOG'</span><span class="p">,</span> <span class="s1">'Shalini Das'</span><span class="p">,</span> <span class="s1">'9876543225'</span><span class="p">,</span> <span class="s1">'1995-05-29'</span><span class="p">,</span> <span class="s1">'FEMALE'</span><span class="p">,</span> <span class="s1">'456 Fort Road'</span><span class="p">,</span> <span class="s1">'Guwahati'</span><span class="p">,</span> <span class="s1">'Assam'</span><span class="p">,</span> <span class="s1">'781001'</span><span class="p">,</span> <span class="s1">'990000000016'</span><span class="p">,</span> <span class="s1">'VOT1234567891'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/16.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-12 10:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'manish.yadav@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$cixu8lsqF57fOT9nhfvFNuqtcvslyP9GYDElxLiFfT5GTPSEUaSm.'</span><span class="p">,</span> <span class="s1">'Manish Yadav'</span><span class="p">,</span> <span class="s1">'9876543226'</span><span class="p">,</span> <span class="s1">'1991-07-21'</span><span class="p">,</span> <span class="s1">'MALE'</span><span class="p">,</span> <span class="s1">'789 Railway Colony'</span><span class="p">,</span> <span class="s1">'Patna'</span><span class="p">,</span> <span class="s1">'Bihar'</span><span class="p">,</span> <span class="s1">'800001'</span><span class="p">,</span> <span class="s1">'123456789013'</span><span class="p">,</span> <span class="s1">'VOT9900000017'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/17.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-12 11:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'divya.menon@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$7.1FJPUPpYv1CruCSoKZOOSfcE2/zDhO/ukUf/5zpSBGzAKZBSy1i'</span><span class="p">,</span> <span class="s1">'Divya Menon'</span><span class="p">,</span> <span class="s1">'9876543227'</span><span class="p">,</span> <span class="s1">'1993-09-09'</span><span class="p">,</span> <span class="s1">'FEMALE'</span><span class="p">,</span> <span class="s1">'234 Beach Front'</span><span class="p">,</span> <span class="s1">'Thiruvananthapuram'</span><span class="p">,</span> <span class="s1">'Kerala'</span><span class="p">,</span> <span class="s1">'695001'</span><span class="p">,</span> <span class="s1">'990000000018'</span><span class="p">,</span> <span class="s1">'VOT2345678902'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/18.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-12 11:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'arjun.pandey@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$L30Zr13diUPP9NvNqenasePzijLYWYXmVwES42gYmhX7WPcWbSK5q'</span><span class="p">,</span> <span class="s1">'Arjun Pandey'</span><span class="p">,</span> <span class="s1">'9876543228'</span><span class="p">,</span> <span class="s1">'1989-12-24'</span><span class="p">,</span> <span class="s1">'MALE'</span><span class="p">,</span> <span class="s1">'567 Ring Road'</span><span class="p">,</span> <span class="s1">'Nagpur'</span><span class="p">,</span> <span class="s1">'Maharashtra'</span><span class="p">,</span> <span class="s1">'440001'</span><span class="p">,</span> <span class="s1">'234567890124'</span><span class="p">,</span> <span class="s1">'VOT9900000019'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/19.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-12 12:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'ritika.singh@email.com'</span><span class="p">,</span> <span class="s1">'$2a$12$CJwSJuyIUvMaT5ApArqoR.kESXc1oiwv.mzn8GlDlguHhX8SV/aeS'</span><span class="p">,</span> <span class="s1">'Ritika Singh'</span><span class="p">,</span> <span class="s1">'9876543229'</span><span class="p">,</span> <span class="s1">'1994-01-31'</span><span class="p">,</span> <span class="s1">'FEMALE'</span><span class="p">,</span> <span class="s1">'890 Cantonment'</span><span class="p">,</span> <span class="s1">'Dehradun'</span><span class="p">,</span> <span class="s1">'Uttarakhand'</span><span class="p">,</span> <span class="s1">'248001'</span><span class="p">,</span> <span class="s1">'990000000020'</span><span class="p">,</span> <span class="s1">'VOT3456789013'</span><span class="p">,</span> <span class="s1">'/api/user/profile/photo/20.jpg'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-01-12 12:30:00'</span><span class="p">);</span>
+
+<span class="c1">-- 2. INSERT 2 ADMINS (Passwords set to 'admin123', email updated to match login)</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">admins</span> <span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password_hash</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">phone_number</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="s1">'admin@voting.com'</span><span class="p">,</span> <span class="s1">'$2a$12$8HNsrESl9ubVI9MRaCFWY.vZZ1i6OkpmzaTnz.5nsdTGdeWEzzhym'</span><span class="p">,</span> <span class="s1">'Sanjay Malhotra'</span><span class="p">,</span> <span class="s1">'9999888877'</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'admin.secondary@voting.com'</span><span class="p">,</span> <span class="s1">'$2a$12$8HNsrESl9ubVI9MRaCFWY.vZZ1i6OkpmzaTnz.5nsdTGdeWEzzhym'</span><span class="p">,</span> <span class="s1">'Priyanka Chopra'</span><span class="p">,</span> <span class="s1">'9999888878'</span><span class="p">);</span>
+
+<span class="c1">-- 3. INSERT 2 ACTIVE ELECTIONS AND 2 PAST ELECTIONS</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">elections</span> <span class="p">(</span><span class="n">election_name</span><span class="p">,</span> <span class="n">election_type</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">result_published</span><span class="p">,</span> <span class="n">result_published_at</span><span class="p">,</span> <span class="n">result_published_by</span><span class="p">,</span> <span class="n">created_by</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="c1">-- Active Elections</span>
+<span class="p">(</span><span class="s1">'Maharashtra State Assembly Election 2025'</span><span class="p">,</span> <span class="s1">'STATE'</span><span class="p">,</span> <span class="s1">'2025-11-20 08:00:00'</span><span class="p">,</span> <span class="s1">'2025-11-25 18:00:00'</span><span class="p">,</span> <span class="s1">'ACTIVE'</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'Mumbai Municipal Corporation Election 2025'</span><span class="p">,</span> <span class="s1">'LOCAL'</span><span class="p">,</span> <span class="s1">'2025-11-21 08:00:00'</span><span class="p">,</span> <span class="s1">'2025-11-24 18:00:00'</span><span class="p">,</span> <span class="s1">'ACTIVE'</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="c1">-- Past Elections (Completed)</span>
+<span class="p">(</span><span class="s1">'Karnataka State Assembly Election 2024'</span><span class="p">,</span> <span class="s1">'STATE'</span><span class="p">,</span> <span class="s1">'2024-05-10 08:00:00'</span><span class="p">,</span> <span class="s1">'2024-05-15 18:00:00'</span><span class="p">,</span> <span class="s1">'COMPLETED'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-05-16 10:00:00'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'Delhi Municipal Corporation Election 2024'</span><span class="p">,</span> <span class="s1">'LOCAL'</span><span class="p">,</span> <span class="s1">'2024-03-01 08:00:00'</span><span class="p">,</span> <span class="s1">'2024-03-05 18:00:00'</span><span class="p">,</span> <span class="s1">'COMPLETED'</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2024-03-06 10:00:00'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+<span class="c1">-- 4. INSERT 5 CANDIDATES FOR ELECTION 1 (Maharashtra State) AND 5 FOR ELECTION 2 (Mumbai Municipal)</span>
+<span class="c1">-- Candidates for Election 1 (Maharashtra State Assembly Election 2025)</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">candidates</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">election_id</span><span class="p">,</span> <span class="n">party_name</span><span class="p">,</span> <span class="n">party_symbol</span><span class="p">,</span> <span class="n">manifesto</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'Indian National Congress'</span><span class="p">,</span> <span class="s1">'Hand'</span><span class="p">,</span> <span class="s1">'Development for all sections of society, focus on education and healthcare reform'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'Bharatiya Janata Party'</span><span class="p">,</span> <span class="s1">'Lotus'</span><span class="p">,</span> <span class="s1">'Infrastructure development, digital transformation, and economic growth'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'Shiv Sena (UBT)'</span><span class="p">,</span> <span class="s1">'Flaming Torch'</span><span class="p">,</span> <span class="s1">'Protection of Marathi interests, industrial development, job creation'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'Nationalist Congress Party'</span><span class="p">,</span> <span class="s1">'Clock'</span><span class="p">,</span> <span class="s1">'Agricultural reforms, farmer welfare, rural development'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'Aam Aadmi Party'</span><span class="p">,</span> <span class="s1">'Broom'</span><span class="p">,</span> <span class="s1">'Anti-corruption measures, free utilities, quality education for all'</span><span class="p">);</span>
+
+<span class="c1">-- Candidates for Election 2 (Mumbai Municipal Corporation Election 2025)</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">candidates</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">election_id</span><span class="p">,</span> <span class="n">party_name</span><span class="p">,</span> <span class="n">party_symbol</span><span class="p">,</span> <span class="n">manifesto</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'Indian National Congress'</span><span class="p">,</span> <span class="s1">'Hand'</span><span class="p">,</span> <span class="s1">'Better civic amenities, improved public transport, waste management'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'Bharatiya Janata Party'</span><span class="p">,</span> <span class="s1">'Lotus'</span><span class="p">,</span> <span class="s1">'Smart city initiatives, improved infrastructure, efficient administration'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'Shiv Sena (UBT)'</span><span class="p">,</span> <span class="s1">'Flaming Torch'</span><span class="p">,</span> <span class="s1">'Local employment priority, better housing, Mumbai for Mumbaikars'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'Nationalist Congress Party'</span><span class="p">,</span> <span class="s1">'Clock'</span><span class="p">,</span> <span class="s1">'Water supply improvement, road maintenance, green Mumbai initiative'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'Maharashtra Navnirman Sena'</span><span class="p">,</span> <span class="s1">'Railway Engine'</span><span class="p">,</span> <span class="s1">'Focus on middle-class welfare, affordable housing, traffic solutions'</span><span class="p">);</span>
+
+
+<span class="c1">-- 5. INSERT VOTES (17 users voted in Election 1, 18 users voted in Election 2)</span>
+<span class="c1">-- Election 1 votes (Users 1-17 voted, Users 18-20 did NOT vote)</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">votes</span> <span class="p">(</span><span class="n">election_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">candidate_id</span><span class="p">,</span> <span class="n">vote_hash</span><span class="p">,</span> <span class="n">voted_at</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u1_c1_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-20 09:15:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u2_c2_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-20 10:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u3_c3_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'3'</span><span class="p">,</span> <span class="s1">'3'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-20 11:45:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u4_c1_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'4'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-20 13:20:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u5_c2_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'5'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-20 14:10:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u6_c4_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'6'</span><span class="p">,</span> <span class="s1">'4'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-20 15:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u7_c5_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'7'</span><span class="p">,</span> <span class="s1">'5'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-20 15:45:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u8_c1_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'8'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-20 16:20:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u9_c2_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'9'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 09:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u10_c3_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'10'</span><span class="p">,</span> <span class="s1">'3'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 10:15:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u11_c4_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'11'</span><span class="p">,</span> <span class="s1">'4'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 11:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u12_c1_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'12'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 12:45:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u13_c2_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'13'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 13:50:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u14_c5_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'14'</span><span class="p">,</span> <span class="s1">'5'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 14:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u15_c3_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'15'</span><span class="p">,</span> <span class="s1">'3'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 15:15:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u16_c1_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'16'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 16:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e1_u17_c2_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'17'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 16:45:00'</span><span class="p">);</span>
+
+<span class="c1">-- Election 2 votes (Users 1-18 voted, Users 19-20 did NOT vote)</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">votes</span> <span class="p">(</span><span class="n">election_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">candidate_id</span><span class="p">,</span> <span class="n">vote_hash</span><span class="p">,</span> <span class="n">voted_at</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u1_c6_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">,</span> <span class="s1">'6'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 09:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u2_c7_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="s1">'7'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 10:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u3_c8_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'3'</span><span class="p">,</span> <span class="s1">'8'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 11:15:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u4_c6_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'4'</span><span class="p">,</span> <span class="s1">'6'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 12:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u5_c7_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'5'</span><span class="p">,</span> <span class="s1">'7'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 13:10:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u6_c9_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'6'</span><span class="p">,</span> <span class="s1">'9'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 14:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u7_c10_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'7'</span><span class="p">,</span> <span class="s1">'10'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 14:45:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u8_c6_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'8'</span><span class="p">,</span> <span class="s1">'6'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 15:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u9_c7_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'9'</span><span class="p">,</span> <span class="s1">'7'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-21 16:15:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u10_c8_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'10'</span><span class="p">,</span> <span class="s1">'8'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-22 09:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u11_c9_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'11'</span><span class="p">,</span> <span class="s1">'9'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-22 10:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u12_c6_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'12'</span><span class="p">,</span> <span class="s1">'6'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-22 11:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u13_c7_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'13'</span><span class="p">,</span> <span class="s1">'7'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-22 12:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u14_c10_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'14'</span><span class="p">,</span> <span class="s1">'10'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-22 13:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u15_c8_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'15'</span><span class="p">,</span> <span class="s1">'8'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-22 14:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u16_c6_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'16'</span><span class="p">,</span> <span class="s1">'6'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-22 15:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u17_c7_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'17'</span><span class="p">,</span> <span class="s1">'7'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-22 16:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'hash_e2_u18_c8_'</span><span class="p">,</span> <span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'18'</span><span class="p">,</span> <span class="s1">'8'</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()))),</span> <span class="s1">'2025-11-22 16:30:00'</span><span class="p">);</span>
+
+
+<span class="c1">-- UPDATE voter_election_status for all users in both active elections</span>
+<span class="c1">-- Election 1: Users 1-17 voted, Users 18-20 did NOT vote</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">voter_election_status</span> <span class="p">(</span><span class="n">election_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">has_voted</span><span class="p">,</span> <span class="n">voted_at</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-20 09:15:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-20 10:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-20 11:45:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-20 13:20:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-20 14:10:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-20 15:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-20 15:45:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-20 16:20:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 09:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 10:15:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 11:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 12:45:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 13:50:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 14:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 15:15:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 16:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 16:45:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">,</span> <span class="k">NULL</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">,</span> <span class="k">NULL</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">,</span> <span class="k">NULL</span><span class="p">);</span>
+
+<span class="c1">-- Election 2: Users 1-18 voted, Users 19-20 did NOT vote</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">voter_election_status</span> <span class="p">(</span><span class="n">election_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">has_voted</span><span class="p">,</span> <span class="n">voted_at</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 09:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 10:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 11:15:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 12:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 13:10:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 14:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 14:45:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 15:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-21 16:15:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-22 09:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-22 10:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-22 11:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-22 12:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-22 13:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-22 14:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-22 15:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-22 16:00:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">'2025-11-22 16:30:00'</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">,</span> <span class="k">NULL</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">,</span> <span class="k">NULL</span><span class="p">);</span>
+
+<span class="c1">-- 6. UPDATE election_results table (for active elections - current vote counts)</span>
+<span class="c1">-- Election 1 Results (Maharashtra State - 17 votes cast)</span>
+<span class="c1">-- Candidate 1 (user_id 1): 5 votes</span>
+<span class="c1">-- Candidate 2 (user_id 3): 6 votes</span>
+<span class="c1">-- Candidate 3 (user_id 5): 3 votes</span>
+<span class="c1">-- Candidate 4 (user_id 7): 2 votes</span>
+<span class="c1">-- Candidate 5 (user_id 9): 1 vote</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">election_results</span> <span class="p">(</span><span class="n">election_id</span><span class="p">,</span> <span class="n">candidate_id</span><span class="p">,</span> <span class="n">vote_count</span><span class="p">,</span> <span class="n">vote_percentage</span><span class="p">,</span> <span class="n">rank_position</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">29</span><span class="p">.</span><span class="mi">41</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">35</span><span class="p">.</span><span class="mi">29</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">17</span><span class="p">.</span><span class="mi">65</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">.</span><span class="mi">76</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mi">88</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+<span class="c1">-- Election 2 Results (Mumbai Municipal - 18 votes cast)</span>
+<span class="c1">-- Candidate 6 (user_id 2): 6 votes</span>
+<span class="c1">-- Candidate 7 (user_id 4): 6 votes</span>
+<span class="c1">-- Candidate 8 (user_id 6): 4 votes</span>
+<span class="c1">-- Candidate 9 (user_id 8): 1 vote</span>
+<span class="c1">-- Candidate 10 (user_id 10): 1 vote</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">election_results</span> <span class="p">(</span><span class="n">election_id</span><span class="p">,</span> <span class="n">candidate_id</span><span class="p">,</span> <span class="n">vote_count</span><span class="p">,</span> <span class="n">vote_percentage</span><span class="p">,</span> <span class="n">rank_position</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">33</span><span class="p">.</span><span class="mi">33</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">33</span><span class="p">.</span><span class="mi">33</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">22</span><span class="p">.</span><span class="mi">22</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mi">56</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mi">56</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+
+<span class="c1">-- UPDATE election_reports table</span>
+<span class="c1">-- Report for Election 1 (Maharashtra State Assembly)</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">election_reports</span> <span class="p">(</span><span class="n">election_id</span><span class="p">,</span> <span class="n">total_registered_voters</span><span class="p">,</span> <span class="n">total_votes_cast</span><span class="p">,</span> <span class="n">voter_turnout_percentage</span><span class="p">,</span> <span class="n">total_candidates</span><span class="p">,</span> <span class="n">winning_candidate_id</span><span class="p">,</span> <span class="n">winning_margin</span><span class="p">,</span> <span class="n">report_generated_by</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">85</span><span class="p">.</span><span class="mi">00</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">-- Report for Election 2 (Mumbai Municipal Corporation)</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">election_reports</span> <span class="p">(</span><span class="n">election_id</span><span class="p">,</span> <span class="n">total_registered_voters</span><span class="p">,</span> <span class="n">total_votes_cast</span><span class="p">,</span> <span class="n">voter_turnout_percentage</span><span class="p">,</span> <span class="n">total_candidates</span><span class="p">,</span> <span class="n">winning_candidate_id</span><span class="p">,</span> <span class="n">winning_margin</span><span class="p">,</span> <span class="n">report_generated_by</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">90</span><span class="p">.</span><span class="mi">00</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+
+
+
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-24">November 24, 2025</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/online-voting-system/docs/database/databaseer/" class="pagination--pager" title="Database ER Diagram
+">Previous</a>
+    
+    
+      <a href="/online-voting-system/docs/database/databaseinsertion2/" class="pagination--pager" title="Database Insertion Queries 2
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    
+      <li><a href="/online-voting-system/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 yadnyeshkolte. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/online-voting-system/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

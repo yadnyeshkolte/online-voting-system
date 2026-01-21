@@ -1,0 +1,447 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>UI Components - Online Voting System</title>
+<meta name="description" content="Reusable UI components documentation">
+
+
+  <meta name="author" content="yadnyeshkolte">
+  
+  <meta property="article:author" content="yadnyeshkolte">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Online Voting System">
+<meta property="og:title" content="UI Components">
+<meta property="og:url" content="https://yadnyeshkolte.github.io/online-voting-system/docs/frontend/ui-components/">
+
+
+  <meta property="og:description" content="Reusable UI components documentation">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-01-21T18:29:05+05:30">
+
+
+
+  <meta property="article:modified_time" content="2025-11-15T00:00:00+05:30">
+
+
+
+
+<link rel="canonical" href="https://yadnyeshkolte.github.io/online-voting-system/docs/frontend/ui-components/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "yadnyeshkolte",
+      "url": "https://yadnyeshkolte.github.io/online-voting-system/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/online-voting-system/feed.xml" type="application/atom+xml" rel="alternate" title="Online Voting System Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/online-voting-system/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <link rel="icon" href="/online-voting-system/assets/images/favicon.svg" type="image/svg+xml">
+
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/online-voting-system/"><img src="/online-voting-system/assets/images/favicon.ico" alt="Online Voting System"></a>
+        
+        <a class="site-title" href="/online-voting-system/">
+          Online Voting System
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/introduction/">Documentation</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/quick-start/">Getting Started</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/about/">About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Getting Started</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/introduction/">Introduction</a></li>
+          
+            <li><a href="/online-voting-system/docs/installation/">Installation</a></li>
+          
+            <li><a href="/online-voting-system/docs/quick-start/">Quick Start</a></li>
+          
+            <li><a href="/online-voting-system/docs/diagrams/">Diagrams</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Backend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/backend/api-reference/">API Reference</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-overview/">Backend Overview</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-structure/">Backend Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/security-auth/">Security Authentication</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/springcontainer/">Spring Container</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/authentication/">Authentication</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Database</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/database/ovs-database/">OVS Database</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databasestructure/">Database Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion/">Database Insertion Queries 1 </a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion2/">Database Insertion Queries 2</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseer/">Database ER Diagram</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Frontend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/frontend/usereffectvoting/">User Effect Voting</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/feedback/">Feedback System</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/ui-components/" class="active">UI Components</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="UI Components">
+    <meta itemprop="description" content="Reusable UI components documentation">
+    
+    <meta itemprop="dateModified" content="2025-11-15T00:00:00+05:30">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">UI Components
+</h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#ui-components">UI Components</a><ul><li><a href="#component-library">Component Library</a></li><li><a href="#core-components">Core Components</a><ul><li><a href="#button">Button</a></li><li><a href="#card">Card</a></li><li><a href="#modal">Modal</a></li></ul></li><li><a href="#form-components">Form Components</a></li><li><a href="#layout-components">Layout Components</a></li><li><a href="#styling">Styling</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="ui-components">UI Components</h1>
+
+<h2 id="component-library">Component Library</h2>
+
+<p>OVS uses a custom component library built with React.</p>
+
+<h2 id="core-components">Core Components</h2>
+
+<h3 id="button">Button</h3>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Button</span> 
+  <span class="na">variant</span><span class="p">=</span><span class="s">"primary"</span> 
+  <span class="na">size</span><span class="p">=</span><span class="s">"large"</span>
+  <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">handleClick</span><span class="si">}</span>
+<span class="p">&gt;</span>
+  Cast Vote
+<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<h3 id="card">Card</h3>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Card</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">CardHeader</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Election Title<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">CardHeader</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">CardBody</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Election description...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">CardBody</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">CardFooter</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Button</span><span class="p">&gt;</span>View Details<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">CardFooter</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nc">Card</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<h3 id="modal">Modal</h3>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Modal</span> <span class="na">isOpen</span><span class="p">=</span><span class="si">{</span><span class="nx">isOpen</span><span class="si">}</span> <span class="na">onClose</span><span class="p">=</span><span class="si">{</span><span class="nx">handleClose</span><span class="si">}</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">ModalHeader</span><span class="p">&gt;</span>Confirm Vote<span class="p">&lt;/</span><span class="nc">ModalHeader</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">ModalBody</span><span class="p">&gt;</span>
+    Are you sure you want to vote for this candidate?
+  <span class="p">&lt;/</span><span class="nc">ModalBody</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">ModalFooter</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">handleConfirm</span><span class="si">}</span><span class="p">&gt;</span>Confirm<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">variant</span><span class="p">=</span><span class="s">"secondary"</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">handleClose</span><span class="si">}</span><span class="p">&gt;</span>Cancel<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">ModalFooter</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nc">Modal</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<h2 id="form-components">Form Components</h2>
+
+<ul>
+  <li>Input</li>
+  <li>Select</li>
+  <li>Checkbox</li>
+  <li>Radio</li>
+  <li>TextArea</li>
+</ul>
+
+<h2 id="layout-components">Layout Components</h2>
+
+<ul>
+  <li>Container</li>
+  <li>Grid</li>
+  <li>Flex</li>
+  <li>Spacer</li>
+</ul>
+
+<h2 id="styling">Styling</h2>
+
+<p>Components use CSS modules for styling:</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* Button.module.css */</span>
+<span class="nc">.button</span> <span class="p">{</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">12px</span> <span class="m">24px</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">8px</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="m">600</span><span class="p">;</span>
+  <span class="nl">cursor</span><span class="p">:</span> <span class="nb">pointer</span><span class="p">;</span>
+  <span class="nl">transition</span><span class="p">:</span> <span class="n">all</span> <span class="m">0.3s</span> <span class="n">ease</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.button-primary</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#007bff</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.button-primary</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#0056b3</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-15">November 15, 2025</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/online-voting-system/docs/frontend/feedback/" class="pagination--pager" title="Feedback System
+">Previous</a>
+    
+    
+      <a href="/online-voting-system/docs/frontend/usereffectvoting/" class="pagination--pager" title="User Effect Voting
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    
+      <li><a href="/online-voting-system/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 yadnyeshkolte. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/online-voting-system/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

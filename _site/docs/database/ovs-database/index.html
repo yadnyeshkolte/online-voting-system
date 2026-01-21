@@ -1,0 +1,955 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>OVS Database - Online Voting System</title>
+<meta name="description" content="Overview of the OVS database structure">
+
+
+  <meta name="author" content="yadnyeshkolte">
+  
+  <meta property="article:author" content="yadnyeshkolte">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Online Voting System">
+<meta property="og:title" content="OVS Database">
+<meta property="og:url" content="https://yadnyeshkolte.github.io/online-voting-system/docs/database/ovs-database/">
+
+
+  <meta property="og:description" content="Overview of the OVS database structure">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-01-21T18:29:05+05:30">
+
+
+
+  <meta property="article:modified_time" content="2025-11-15T00:00:00+05:30">
+
+
+
+
+<link rel="canonical" href="https://yadnyeshkolte.github.io/online-voting-system/docs/database/ovs-database/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "yadnyeshkolte",
+      "url": "https://yadnyeshkolte.github.io/online-voting-system/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/online-voting-system/feed.xml" type="application/atom+xml" rel="alternate" title="Online Voting System Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/online-voting-system/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <link rel="icon" href="/online-voting-system/assets/images/favicon.svg" type="image/svg+xml">
+
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/online-voting-system/"><img src="/online-voting-system/assets/images/favicon.ico" alt="Online Voting System"></a>
+        
+        <a class="site-title" href="/online-voting-system/">
+          Online Voting System
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/introduction/">Documentation</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/quick-start/">Getting Started</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/about/">About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Getting Started</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/introduction/">Introduction</a></li>
+          
+            <li><a href="/online-voting-system/docs/installation/">Installation</a></li>
+          
+            <li><a href="/online-voting-system/docs/quick-start/">Quick Start</a></li>
+          
+            <li><a href="/online-voting-system/docs/diagrams/">Diagrams</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Backend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/backend/api-reference/">API Reference</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-overview/">Backend Overview</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-structure/">Backend Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/security-auth/">Security Authentication</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/springcontainer/">Spring Container</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/authentication/">Authentication</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Database</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/database/ovs-database/" class="active">OVS Database</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databasestructure/">Database Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion/">Database Insertion Queries 1 </a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion2/">Database Insertion Queries 2</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseer/">Database ER Diagram</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Frontend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/frontend/usereffectvoting/">User Effect Voting</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/feedback/">Feedback System</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/ui-components/">UI Components</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="OVS Database">
+    <meta itemprop="description" content="Overview of the OVS database structure">
+    
+    <meta itemprop="dateModified" content="2025-11-15T00:00:00+05:30">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">OVS Database
+</h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#table-1-admins">TABLE 1: ADMINS</a></li><li><a href="#table-2-election_result">TABLE 2: ELECTION_RESULT</a></li><li><a href="#table-3-candidates">TABLE 3: CANDIDATES</a></li><li><a href="#table-4-election_reports">TABLE 4: ELECTION_REPORTS</a></li><li><a href="#table-5-elections">TABLE 5: ELECTIONS</a></li><li><a href="#table-6-users">TABLE 6: USERS</a></li><li><a href="#table-7-voter_election_status">TABLE 7: VOTER_ELECTION_STATUS</a></li><li><a href="#table-8-votes">TABLE 8: VOTES</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>This document outlines the database schema for this application.</p>
+
+<hr />
+
+<h2 id="table-1-admins">TABLE 1: ADMINS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>FIELD ID</th>
+      <th>FIELD NAME</th>
+      <th>DATA TYPE</th>
+      <th>CONSTRAINTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>admin_id</td>
+      <td>bigint</td>
+      <td>PRIMARY KEY, AUTO_INCREMENT</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>user_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY, UNIQUE</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>assigned_at</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="table-2-election_result">TABLE 2: ELECTION_RESULT</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>FIELD ID</th>
+      <th>FIELD NAME</th>
+      <th>DATA TYPE</th>
+      <th>CONSTRAINTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>result_id</td>
+      <td>bigint</td>
+      <td>PRIMARY KEY, AUTO_INCREMENT</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>election_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>candidate_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>vote_count</td>
+      <td>bigint</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>vote_percentage</td>
+      <td>decimal(5,2)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>rank_position</td>
+      <td>int</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>last_updated</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="table-3-candidates">TABLE 3: CANDIDATES</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>FIELD ID</th>
+      <th>FIELD NAME</th>
+      <th>DATA TYPE</th>
+      <th>CONSTRAINTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>candidate_id</td>
+      <td>bigint</td>
+      <td>PRIMARY KEY, AUTO_INCREMENT</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>user_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>election_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>candidate_name</td>
+      <td>varchar(255)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>party_name</td>
+      <td>varchar(255)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>candidate_symbol</td>
+      <td>varchar(255)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>candidate_photo_url</td>
+      <td>varchar(500)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>age</td>
+      <td>int</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>qualification</td>
+      <td>varchar(255)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>manifesto</td>
+      <td>text</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>registration_number</td>
+      <td>varchar(50)</td>
+      <td>UNIQUE</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>registration_status</td>
+      <td>enum(…)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>approved_at</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>registered_at</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="table-4-election_reports">TABLE 4: ELECTION_REPORTS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>FIELD ID</th>
+      <th>FIELD NAME</th>
+      <th>DATA TYPE</th>
+      <th>CONSTRAINTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>report_id</td>
+      <td>bigint</td>
+      <td>PRIMARY KEY, AUTO_INCREMENT</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>election_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>total_registered_voters</td>
+      <td>bigint</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>total_votes_cast</td>
+      <td>bigint</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>voter_turnout_percentage</td>
+      <td>decimal(5,2)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>total_candidates</td>
+      <td>int</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>winning_candidate_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>winning_margin</td>
+      <td>bigint</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>report_generated_by</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>report_generated_at</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="table-5-elections">TABLE 5: ELECTIONS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>FIELD ID</th>
+      <th>FIELD NAME</th>
+      <th>DATA TYPE</th>
+      <th>CONSTRAINTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>election_id</td>
+      <td>bigint</td>
+      <td>PRIMARY KEY, AUTO_INCREMENT</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>election_name</td>
+      <td>varchar(255)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>election_type</td>
+      <td>enum(…)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>start_date</td>
+      <td>datetime</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>end_date</td>
+      <td>datetime</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>status</td>
+      <td>enum(…)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>result_published</td>
+      <td>tinyint(1)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>result_published_at</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>result_published_by</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>created_by</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>created_at</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="table-6-users">TABLE 6: USERS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>FIELD ID</th>
+      <th>FIELD NAME</th>
+      <th>DATA TYPE</th>
+      <th>CONSTRAINTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>user_id</td>
+      <td>bigint</td>
+      <td>PRIMARY KEY, AUTO_INCREMENT</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>email</td>
+      <td>varchar(255)</td>
+      <td>UNIQUE</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>password_hash</td>
+      <td>varchar(255)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>full_name</td>
+      <td>varchar(255)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>phone_number</td>
+      <td>varchar(20)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>date_of_birth</td>
+      <td>date</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>gender</td>
+      <td>enum(…)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>address</td>
+      <td>text</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>city</td>
+      <td>varchar(100)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>state</td>
+      <td>varchar(100)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>pincode</td>
+      <td>varchar(10)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>id_proof_type</td>
+      <td>enum(…)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>profile_image_url</td>
+      <td>varchar(500)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>role</td>
+      <td>enum(…)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>is_active</td>
+      <td>tinyint(1)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>is_verified</td>
+      <td>tinyint(1)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>registration_status</td>
+      <td>enum(…)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>approved_at</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>created_at</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>updated_at</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="table-7-voter_election_status">TABLE 7: VOTER_ELECTION_STATUS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>FIELD ID</th>
+      <th>FIELD NAME</th>
+      <th>DATA TYPE</th>
+      <th>CONSTRAINTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>status_id</td>
+      <td>bigint</td>
+      <td>PRIMARY KEY, AUTO_INCREMENT</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>election_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>user_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>has_voted</td>
+      <td>tinyint(1)</td>
+      <td>NOT NULL</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>voted_at</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="table-8-votes">TABLE 8: VOTES</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>FIELD ID</th>
+      <th>FIELD NAME</th>
+      <th>DATA TYPE</th>
+      <th>CONSTRAINTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>vote_id</td>
+      <td>bigint</td>
+      <td>PRIMARY KEY, AUTO_INCREMENT</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>election_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>user_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>candidate_id</td>
+      <td>bigint</td>
+      <td>FOREIGN KEY</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>vote_hash</td>
+      <td>varchar(255)</td>
+      <td>UNIQUE</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>voted_at</td>
+      <td>timestamp</td>
+      <td>NOT NULL</td>
+    </tr>
+  </tbody>
+</table>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-15">November 15, 2025</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/online-voting-system/docs/database/databasestructure/" class="pagination--pager" title="Database Structure
+">Previous</a>
+    
+    
+      <a href="/online-voting-system/docs/diagrams/" class="pagination--pager" title="Diagrams
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    
+      <li><a href="/online-voting-system/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 yadnyeshkolte. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/online-voting-system/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

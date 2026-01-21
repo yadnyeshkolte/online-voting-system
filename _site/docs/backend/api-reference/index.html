@@ -1,0 +1,572 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>API Reference - Online Voting System</title>
+<meta name="description" content="Complete API documentation">
+
+
+  <meta name="author" content="yadnyeshkolte">
+  
+  <meta property="article:author" content="yadnyeshkolte">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Online Voting System">
+<meta property="og:title" content="API Reference">
+<meta property="og:url" content="https://yadnyeshkolte.github.io/online-voting-system/docs/backend/api-reference/">
+
+
+  <meta property="og:description" content="Complete API documentation">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-01-21T18:29:05+05:30">
+
+
+
+  <meta property="article:modified_time" content="2025-12-01T00:00:00+05:30">
+
+
+
+
+<link rel="canonical" href="https://yadnyeshkolte.github.io/online-voting-system/docs/backend/api-reference/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "yadnyeshkolte",
+      "url": "https://yadnyeshkolte.github.io/online-voting-system/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/online-voting-system/feed.xml" type="application/atom+xml" rel="alternate" title="Online Voting System Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/online-voting-system/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <link rel="icon" href="/online-voting-system/assets/images/favicon.svg" type="image/svg+xml">
+
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/online-voting-system/"><img src="/online-voting-system/assets/images/favicon.ico" alt="Online Voting System"></a>
+        
+        <a class="site-title" href="/online-voting-system/">
+          Online Voting System
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/introduction/">Documentation</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/quick-start/">Getting Started</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/about/">About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Getting Started</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/introduction/">Introduction</a></li>
+          
+            <li><a href="/online-voting-system/docs/installation/">Installation</a></li>
+          
+            <li><a href="/online-voting-system/docs/quick-start/">Quick Start</a></li>
+          
+            <li><a href="/online-voting-system/docs/diagrams/">Diagrams</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Backend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/backend/api-reference/" class="active">API Reference</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-overview/">Backend Overview</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-structure/">Backend Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/security-auth/">Security Authentication</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/springcontainer/">Spring Container</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/authentication/">Authentication</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Database</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/database/ovs-database/">OVS Database</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databasestructure/">Database Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion/">Database Insertion Queries 1 </a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion2/">Database Insertion Queries 2</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseer/">Database ER Diagram</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Frontend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/frontend/usereffectvoting/">User Effect Voting</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/feedback/">Feedback System</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/ui-components/">UI Components</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="API Reference">
+    <meta itemprop="description" content="Complete API documentation">
+    
+    <meta itemprop="dateModified" content="2025-12-01T00:00:00+05:30">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">API Reference
+</h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#authentication--verification">Authentication &amp; Verification</a></li><li><a href="#admin-endpoints">Admin Endpoints</a><ul><li><a href="#election-management-elections">Election Management (/elections)</a></li><li><a href="#user-management-users">User Management (/users)</a></li></ul></li><li><a href="#user-endpoints">User Endpoints</a><ul><li><a href="#profile-management-profile">Profile Management (/profile)</a></li><li><a href="#election--voting-elections">Election &amp; Voting (/elections)</a></li></ul></li><li><a href="#error-handling">Error Handling</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>This document provides a reference for the RESTful API endpoints available in the Online Voting System. The API is divided into public (Authentication, Verification) and protected (Admin, User) sections.</p>
+
+<h2 id="authentication--verification">Authentication &amp; Verification</h2>
+<p>Base URL: <code class="language-plaintext highlighter-rouge">/api/auth</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Endpoint</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Request Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">POST</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/login</code></td>
+      <td style="text-align: left">Authenticate a user or admin.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">LoginRequest</code> (email, password)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">POST</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/register</code></td>
+      <td style="text-align: left">Register a new user (requires identity verification).</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">RegisterRequest</code> (details + Aadhar/VoterID)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Note</strong>: Identity verification is handled internally during registration via <code class="language-plaintext highlighter-rouge">VerificationService</code>.</p>
+
+<h2 id="admin-endpoints">Admin Endpoints</h2>
+<p>Base URL: <code class="language-plaintext highlighter-rouge">/api/admin</code>
+<strong>Requires Role</strong>: <code class="language-plaintext highlighter-rouge">ADMIN</code></p>
+
+<h3 id="election-management-elections">Election Management (<code class="language-plaintext highlighter-rouge">/elections</code>)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Endpoint</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/</code></td>
+      <td style="text-align: left">Get a list of all elections.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">POST</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/</code></td>
+      <td style="text-align: left">Create a new election.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PUT</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/{id}/status</code></td>
+      <td style="text-align: left">Update the status of an election (e.g., ACTIVE, COMPLETED).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">POST</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/{id}/candidates</code></td>
+      <td style="text-align: left">Add a candidate to a DRAFT election.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">POST</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/{id}/calculate-results</code></td>
+      <td style="text-align: left">Trigger result calculation for an election.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/{id}/results</code></td>
+      <td style="text-align: left">Get results for a specific election.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">POST</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/{id}/candidates/{candidateId}/photo</code></td>
+      <td style="text-align: left">Upload a photo for a candidate.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="user-management-users">User Management (<code class="language-plaintext highlighter-rouge">/users</code>)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Endpoint</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/users</code></td>
+      <td style="text-align: left">Search for users (optional <code class="language-plaintext highlighter-rouge">query</code> param).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PUT</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/users/{userId}</code></td>
+      <td style="text-align: left">Update a user’s details as an admin.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PUT</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/candidates/{candidateId}/image</code></td>
+      <td style="text-align: left">Update a candidate’s image (alternative endpoint).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="user-endpoints">User Endpoints</h2>
+<p>Base URL: <code class="language-plaintext highlighter-rouge">/api/user</code>
+<strong>Requires Role</strong>: <code class="language-plaintext highlighter-rouge">USER</code></p>
+
+<h3 id="profile-management-profile">Profile Management (<code class="language-plaintext highlighter-rouge">/profile</code>)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Endpoint</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/profile</code></td>
+      <td style="text-align: left">Get the authenticated user’s profile.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PUT</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/profile</code></td>
+      <td style="text-align: left">Update the user’s profile information.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">POST</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/profile/photo</code></td>
+      <td style="text-align: left">Upload a profile photo.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/profile/photo/{filename}</code></td>
+      <td style="text-align: left">Serve a profile photo (Public access allowed for resources).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="election--voting-elections">Election &amp; Voting (<code class="language-plaintext highlighter-rouge">/elections</code>)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Endpoint</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/active</code></td>
+      <td style="text-align: left">Get a list of active elections.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/completed</code></td>
+      <td style="text-align: left">Get a list of completed elections (past elections).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/{id}/candidates</code></td>
+      <td style="text-align: left">Get the list of candidates for a specific election.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">POST</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/{id}/vote</code></td>
+      <td style="text-align: left">Cast a vote for a candidate.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/{id}/has-voted</code></td>
+      <td style="text-align: left">Check if the current user has voted in a specific election.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/{id}/results</code></td>
+      <td style="text-align: left">Get results for a completed election.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/candidates/{candidateId}/photo</code></td>
+      <td style="text-align: left">Get a candidate’s photo.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="error-handling">Error Handling</h2>
+
+<p>The API generally returns standard HTTP status codes:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">200 OK</code>: Success.</li>
+  <li><code class="language-plaintext highlighter-rouge">400 Bad Request</code>: Invalid input or validation failure.</li>
+  <li><code class="language-plaintext highlighter-rouge">403 Forbidden</code>: Insufficient permissions or accessing restricted resources (e.g., results of an active election).</li>
+  <li><code class="language-plaintext highlighter-rouge">404 Not Found</code>: Resource not found.</li>
+  <li><code class="language-plaintext highlighter-rouge">500 Internal Server Error</code>: Server-side issues.</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-12-01">December 1, 2025</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/online-voting-system/docs/backend/authentication/" class="pagination--pager" title="Authentication
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    
+      <li><a href="/online-voting-system/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 yadnyeshkolte. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/online-voting-system/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

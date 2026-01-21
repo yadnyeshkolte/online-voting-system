@@ -1,0 +1,424 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Backend Structure - Online Voting System</title>
+<meta name="description" content="Overview for Backend Structure">
+
+
+  <meta name="author" content="yadnyeshkolte">
+  
+  <meta property="article:author" content="yadnyeshkolte">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Online Voting System">
+<meta property="og:title" content="Backend Structure">
+<meta property="og:url" content="https://yadnyeshkolte.github.io/online-voting-system/docs/backend/backend-structure/">
+
+
+  <meta property="og:description" content="Overview for Backend Structure">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-01-21T18:29:05+05:30">
+
+
+
+  <meta property="article:modified_time" content="2025-12-01T00:00:00+05:30">
+
+
+
+
+<link rel="canonical" href="https://yadnyeshkolte.github.io/online-voting-system/docs/backend/backend-structure/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "yadnyeshkolte",
+      "url": "https://yadnyeshkolte.github.io/online-voting-system/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/online-voting-system/feed.xml" type="application/atom+xml" rel="alternate" title="Online Voting System Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/online-voting-system/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <link rel="icon" href="/online-voting-system/assets/images/favicon.svg" type="image/svg+xml">
+
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/online-voting-system/"><img src="/online-voting-system/assets/images/favicon.ico" alt="Online Voting System"></a>
+        
+        <a class="site-title" href="/online-voting-system/">
+          Online Voting System
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/introduction/">Documentation</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/docs/quick-start/">Getting Started</a>
+            </li><li class="masthead__menu-item">
+              <a href="/online-voting-system/about/">About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Getting Started</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/introduction/">Introduction</a></li>
+          
+            <li><a href="/online-voting-system/docs/installation/">Installation</a></li>
+          
+            <li><a href="/online-voting-system/docs/quick-start/">Quick Start</a></li>
+          
+            <li><a href="/online-voting-system/docs/diagrams/">Diagrams</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Backend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/backend/api-reference/">API Reference</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-overview/">Backend Overview</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/backend-structure/" class="active">Backend Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/security-auth/">Security Authentication</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/springcontainer/">Spring Container</a></li>
+          
+            <li><a href="/online-voting-system/docs/backend/authentication/">Authentication</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Database</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/database/ovs-database/">OVS Database</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databasestructure/">Database Structure</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion/">Database Insertion Queries 1 </a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseinsertion2/">Database Insertion Queries 2</a></li>
+          
+            <li><a href="/online-voting-system/docs/database/databaseer/">Database ER Diagram</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Frontend</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/online-voting-system/docs/frontend/usereffectvoting/">User Effect Voting</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/feedback/">Feedback System</a></li>
+          
+            <li><a href="/online-voting-system/docs/frontend/ui-components/">UI Components</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Backend Structure">
+    <meta itemprop="description" content="Overview for Backend Structure">
+    
+    <meta itemprop="dateModified" content="2025-12-01T00:00:00+05:30">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Backend Structure
+</h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#package-organization">Package Organization</a><ul><li><a href="#config">config</a></li><li><a href="#controller">controller</a></li><li><a href="#dto-data-transfer-objects">dto (Data Transfer Objects)</a></li><li><a href="#entity">entity</a></li><li><a href="#repository">repository</a></li><li><a href="#service">service</a></li></ul></li><li><a href="#architecture-layers">Architecture Layers</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>The Online Voting System backend follows a standard Spring Boot layered architecture, promoting separation of concerns and maintainability. The source code is located under <code class="language-plaintext highlighter-rouge">src/main/java/com/project/onlinevotingsystem</code>.</p>
+
+<h2 id="package-organization">Package Organization</h2>
+
+<h3 id="config"><code class="language-plaintext highlighter-rouge">config</code></h3>
+<p>Contains configuration classes for the application context.</p>
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">SecurityConfig.java</code></strong>: Configures Spring Security, defining filter chains, public/private endpoints, and CORS settings.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">JwtRequestFilter.java</code></strong>: A filter that intercepts requests to validate JWT tokens.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">JwtUtils.java</code></strong>: Utility class for generating and parsing JWTs.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">WebConfig.java</code></strong>: General web configurations.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">DataSeeder.java</code></strong>: (If present) Initial data population.</li>
+</ul>
+
+<h3 id="controller"><code class="language-plaintext highlighter-rouge">controller</code></h3>
+<p>The entry point for API requests. Controllers map HTTP requests to service methods.</p>
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">AdminElectionController</code></strong>: Handles election administration.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">AdminUserController</code></strong>: Handles user administration.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">AuthController</code></strong>: Handles login and registration.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">UserController</code></strong>: Handles user profile operations.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">UserElectionController</code></strong>: Handles voting and election viewing for users.</li>
+</ul>
+
+<h3 id="dto-data-transfer-objects"><code class="language-plaintext highlighter-rouge">dto</code> (Data Transfer Objects)</h3>
+<p>Classes used to transfer data between subsystems (e.g., from Controller to Service) without exposing internal database entities.</p>
+<ul>
+  <li>Examples: <code class="language-plaintext highlighter-rouge">LoginRequest</code>, <code class="language-plaintext highlighter-rouge">RegisterRequest</code>, <code class="language-plaintext highlighter-rouge">ElectionCreationRequest</code>, <code class="language-plaintext highlighter-rouge">UserUpdateDTO</code>.</li>
+</ul>
+
+<h3 id="entity"><code class="language-plaintext highlighter-rouge">entity</code></h3>
+<p>JPA Entities representing the database schema.</p>
+<ul>
+  <li><strong>Core</strong>: <code class="language-plaintext highlighter-rouge">User</code>, <code class="language-plaintext highlighter-rouge">Admin</code>, <code class="language-plaintext highlighter-rouge">Election</code>, <code class="language-plaintext highlighter-rouge">Candidate</code>, <code class="language-plaintext highlighter-rouge">Vote</code>.</li>
+  <li><strong>Verification</strong>: <code class="language-plaintext highlighter-rouge">DummyAadharRecord</code>, <code class="language-plaintext highlighter-rouge">DummyVoterIdRecord</code>.</li>
+  <li><strong>Results</strong>: <code class="language-plaintext highlighter-rouge">ElectionResult</code>, <code class="language-plaintext highlighter-rouge">ElectionReport</code>, <code class="language-plaintext highlighter-rouge">VoterElectionStatus</code>.</li>
+</ul>
+
+<h3 id="repository"><code class="language-plaintext highlighter-rouge">repository</code></h3>
+<p>Interfaces extending <code class="language-plaintext highlighter-rouge">JpaRepository</code> for database access. These interfaces provide CRUD operations and custom query methods.</p>
+<ul>
+  <li>Examples: <code class="language-plaintext highlighter-rouge">UserRepository</code>, <code class="language-plaintext highlighter-rouge">ElectionRepository</code>, <code class="language-plaintext highlighter-rouge">VoteRepository</code>.</li>
+</ul>
+
+<h3 id="service"><code class="language-plaintext highlighter-rouge">service</code></h3>
+<p>Contains the business logic of the application. Services interact with repositories to perform operations and enforce business rules.</p>
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">AuthService</code></strong>: Authentication logic.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">ElectionService</code></strong>: Election lifecycle management.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">VoteService</code></strong>: Voting rules and execution.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">UserService</code></strong>: User data management.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">VerificationService</code></strong>: Identity verification logic.</li>
+</ul>
+
+<h2 id="architecture-layers">Architecture Layers</h2>
+
+<ol>
+  <li><strong>Presentation Layer (Controllers)</strong>: Receives HTTP requests, validates basic input, and calls the appropriate Service. Returns <code class="language-plaintext highlighter-rouge">ResponseEntity</code> objects.</li>
+  <li><strong>Service Layer (Services)</strong>: Implements business logic (e.g., “Has this user already voted?”, “Verify Aadhar number”). Transaction management (<code class="language-plaintext highlighter-rouge">@Transactional</code>) happens here.</li>
+  <li><strong>Data Access Layer (Repositories)</strong>: Abstracts the underlying database interactions using Spring Data JPA.</li>
+  <li><strong>Database</strong>: MySQL database storing the persistent data.</li>
+</ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-12-01">December 1, 2025</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/online-voting-system/docs/backend/backend-overview/" class="pagination--pager" title="Backend Overview
+">Previous</a>
+    
+    
+      <a href="/online-voting-system/docs/backend/security-auth/" class="pagination--pager" title="Security Authentication
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    
+      <li><a href="/online-voting-system/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 yadnyeshkolte. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/online-voting-system/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
