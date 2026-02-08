@@ -1,0 +1,53 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-982223}
+      MYSQL_DATABASE: devovs
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - ovs-network
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  backend:
+    build: ./backend/onlinevotingsystem
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/devovs
+      DB_USER: root
+      DB_PASSWORD: ${DB_PASSWORD:-982223}
+      JWT_SECRET: ${JWT_SECRET:-9a2f8c4e6b0d71f3e8b925a45747f894a3d6bc70fa8d5e21a15a6d8c3e9f247b}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:5173,https://your-github-username.github.io}
+      IMAGE_VERIFY_SERVICE_URL: http://imageverify:5001/verify
+      FILE_STORAGE_PATH: /app/user_uploads/profiles/
+    ports:
+      - "8080:8080"
+    volumes:
+      - uploads:/app/user_uploads/profiles
+    depends_on:
+      mysql:
+        condition: service_healthy
+      imageverify:
+        condition: service_started
+    networks:
+      - ovs-network
+
+  imageverify:
+    build: ./backend/imageverify
+    environment:
+      PORT: 5001
+    ports:
+      - "5001:5001"
+    networks:
+      - ovs-network
+
+volumes:
+  mysql_data:
+  uploads:
+
+networks:
+  ovs-network:
+    driver: bridge
