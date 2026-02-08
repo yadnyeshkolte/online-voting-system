@@ -4,7 +4,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-# We don't need the VITE_API_BASE_URL env var anymore because Nginx handles the proxy
+# API URL is relative since it's on the same domain
+ENV VITE_API_BASE_URL=/api
 RUN npm run build
 
 # Production Stage

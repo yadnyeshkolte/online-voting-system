@@ -23,15 +23,7 @@ services:
       ALLOWED_ORIGINS: "*"
       IMAGE_VERIFY_SERVICE_URL: http://imageverify:5001/verify
       FILE_STORAGE_PATH: /app/user_uploads/profiles/
-    ports:
-      - "8080:8080"
-    volumes:
-      - uploads:/app/user_uploads/profiles
-    depends_on:
-      mysql:
-        condition: service_healthy
-      imageverify:
-        condition: service_started
+    # Internal port 8080, Nginx will proxy to it
     networks:
       - ovs-network
 
@@ -39,8 +31,15 @@ services:
     build: ./backend/imageverify
     environment:
       PORT: 5001
+    networks:
+      - ovs-network
+
+  frontend:
+    build: ./frontend
     ports:
-      - "5001:5001"
+      - "80:80"
+    depends_on:
+      - backend
     networks:
       - ovs-network
 
