@@ -17,5 +17,8 @@
     "express": "^5.2.1",
     "face-api.js": "^0.22.2",
     "multer": "^2.0.2"
+  },
+  "overrides": {
+    "node-fetch": "^2.6.7"
   }
 }

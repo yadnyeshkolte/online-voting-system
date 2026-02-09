@@ -3,6 +3,7 @@ package com.project.onlinevotingsystem.service;
 import com.project.onlinevotingsystem.entity.*;
 import com.project.onlinevotingsystem.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +38,12 @@ public class VoteService {
     private final CandidateRepository candidateRepository;
     private final ElectionService electionService;
     private final RestTemplate restTemplate;
+
+    @Value("${app.image-verify-service.url}")
+    private String imageVerifyServiceUrl;
+
+    @Value("${app.file-storage.path}")
+    private String fileStoragePath;
 
     @Transactional
     public Vote castVote(Long electionId, Long userId, Long candidateId, MultipartFile capturedImage) {
@@ -103,14 +110,12 @@ public class VoteService {
 
     private void verifyFace(User user, MultipartFile capturedImage) {
         String profileImageName = user.getProfileImageUrl();
-        System.out.println("DEBUG: User ID: " + user.getUserId());
-        System.out.println("DEBUG: DB Profile Image Name (Raw): '" + profileImageName + "'");
-
+        
         if (profileImageName == null || profileImageName.isEmpty()) {
             throw new RuntimeException("User does not have a profile image for verification.");
         }
 
-        // Extract filename if it contains a path (e.g. /api/user/profile/photo/243.png -> 243.png)
+        // Extract filename if it contains a path
         if (profileImageName.contains("/")) {
             profileImageName = profileImageName.substring(profileImageName.lastIndexOf("/") + 1);
         }
@@ -118,43 +123,12 @@ public class VoteService {
             profileImageName = profileImageName.substring(profileImageName.lastIndexOf("\\") + 1);
         }
 
-        System.out.println("DEBUG: Cleaned Profile Image Name: '" + profileImageName + "'");
-        System.out.println("DEBUG: Working Directory: " + System.getProperty("user.dir"));
+        File storedImageFile = new File(fileStoragePath, profileImageName);
 
-        // Try to find the file in common locations
-        File storedImageFile = null;
-        
-        // 1. Try absolute path based on known structure
-        String projectRoot = "C:\\Users\\Yadnyesh Kolte\\online-voting-system"; 
-        File absPath = new File(projectRoot + "\\backend\\onlinevotingsystem\\user_uploads\\profiles\\" + profileImageName);
-        System.out.println("DEBUG: Checking path 1: " + absPath.getAbsolutePath());
-        
-        if (absPath.exists()) {
-            storedImageFile = absPath;
-        } else {
-            // 2. Try relative to current working directory (backend/onlinevotingsystem)
-            File relPath1 = new File("user_uploads/profiles/" + profileImageName);
-            System.out.println("DEBUG: Checking path 2: " + relPath1.getAbsolutePath());
-            
-            if (relPath1.exists()) {
-                storedImageFile = relPath1;
-            } else {
-                // 3. Try relative one level up (if running from target or similar)
-                File relPath2 = new File("../user_uploads/profiles/" + profileImageName);
-                System.out.println("DEBUG: Checking path 3: " + relPath2.getAbsolutePath());
-                
-                if (relPath2.exists()) {
-                    storedImageFile = relPath2;
-                }
-            }
+        if (!storedImageFile.exists()) {
+            System.out.println("DEBUG: Profile image not found at: " + storedImageFile.getAbsolutePath());
+            throw new RuntimeException("Stored profile image not found on server.");
         }
-
-        if (storedImageFile == null || !storedImageFile.exists()) {
-            System.out.println("DEBUG: FAILURE - Profile image not found in any checked location.");
-            throw new RuntimeException("Stored profile image not found on server. Checked: " + profileImageName);
-        }
-
-        System.out.println("DEBUG: SUCCESS - Found profile image at: " + storedImageFile.getAbsolutePath());
 
         try {
             // Convert MultipartFile to File for RestTemplate
@@ -172,8 +146,7 @@ public class VoteService {
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-            String verifyUrl = "http://localhost:5001/verify";
-            ResponseEntity<Map> response = restTemplate.postForEntity(verifyUrl, requestEntity, Map.class);
+            ResponseEntity<Map> response = restTemplate.postForEntity(imageVerifyServiceUrl, requestEntity, Map.class);
 
             if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
                 Boolean isMatch = (Boolean) response.getBody().get("match");

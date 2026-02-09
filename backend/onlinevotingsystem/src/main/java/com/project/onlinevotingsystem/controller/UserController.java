@@ -4,6 +4,7 @@ import com.project.onlinevotingsystem.dto.UserUpdateDTO;
 import com.project.onlinevotingsystem.entity.User;
 import com.project.onlinevotingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +29,9 @@ import org.springframework.util.StringUtils;
 public class UserController {
 
     private final UserService userService;
+
+    @Value("${app.file-storage.path}")
+    private String fileStoragePath;
 
     private Long getCurrentUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -61,7 +65,7 @@ public class UserController {
             String extension = StringUtils.getFilenameExtension(originalFileName);
             String fileName = userId + "." + extension;
             
-            Path uploadPath = Paths.get("user_uploads/profiles/");
+            Path uploadPath = Paths.get(fileStoragePath);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
@@ -80,7 +84,7 @@ public class UserController {
     @GetMapping("/profile/photo/{filename:.+}")
     public ResponseEntity<Resource> serveProfilePhoto(@PathVariable String filename) {
         try {
-            Path file = Paths.get("user_uploads/profiles/").resolve(filename);
+            Path file = Paths.get(fileStoragePath).resolve(filename);
             Resource resource = new UrlResource(file.toUri());
 
             if (resource.exists() || resource.isReadable()) {
@@ -88,7 +92,7 @@ public class UserController {
                         .header(HttpHeaders.CONTENT_TYPE, Files.probeContentType(file))
                         .body(resource);
             } else {
-                Path defaultFile = Paths.get("user_uploads/profiles/").resolve("default.png");
+                Path defaultFile = Paths.get(fileStoragePath).resolve("default.png");
                 Resource defaultResource = new UrlResource(defaultFile.toUri());
                 return ResponseEntity.ok()
                         .header(HttpHeaders.CONTENT_TYPE, Files.probeContentType(defaultFile))
