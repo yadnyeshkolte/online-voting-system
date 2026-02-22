@@ -18,6 +18,8 @@ const UserDashboard = () => {
     const [capturedImageBlob, setCapturedImageBlob] = useState(null);
     const [capturedImagePreview, setCapturedImagePreview] = useState('');
     const [cameraError, setCameraError] = useState('');
+    const [videoConstraints, setVideoConstraints] = useState({ facingMode: { ideal: "user" } });
+    const [retriedConstraints, setRetriedConstraints] = useState(false);
 
     const { user } = useAuth();
 
@@ -45,7 +47,13 @@ const UserDashboard = () => {
         setSelectedElection(election);
         setCapturedImageBlob(null);
         setCapturedImagePreview('');
-        setCameraError('');
+        setVideoConstraints({ facingMode: { ideal: "user" } });
+        setRetriedConstraints(false);
+        if (!window.isSecureContext) {
+            setCameraError('This page is not secure. Camera works only on HTTPS or localhost.');
+        } else {
+            setCameraError('');
+        }
         const cands = await getCandidates(election.electionId);
         setCandidates(cands);
     };
@@ -87,6 +95,33 @@ const UserDashboard = () => {
         setCapturedImagePreview('');
         setCameraError('');
         setIsVerifying(false);
+    };
+
+    const handleCameraError = (err) => {
+        const errorName = err?.name || 'UnknownError';
+        let message = 'Camera access failed. Please check browser camera permissions.';
+
+        if (errorName === 'NotAllowedError' || errorName === 'PermissionDeniedError') {
+            message = 'Camera permission denied. Allow camera access in browser site settings and reload.';
+        } else if (errorName === 'NotFoundError' || errorName === 'DevicesNotFoundError') {
+            message = 'No camera device found on this system.';
+        } else if (errorName === 'NotReadableError' || errorName === 'TrackStartError') {
+            message = 'Camera is busy (used by another app/tab). Close other apps using camera and try again.';
+        } else if (errorName === 'OverconstrainedError' || errorName === 'ConstraintNotSatisfiedError') {
+            message = 'Requested camera mode is not available on this device.';
+        } else if (!window.isSecureContext) {
+            message = 'This page is not secure. Camera works only on HTTPS or localhost.';
+        }
+
+        // Retry once with no facing-mode constraint for wider device compatibility.
+        if ((errorName === 'OverconstrainedError' || errorName === 'ConstraintNotSatisfiedError') && !retriedConstraints) {
+            setRetriedConstraints(true);
+            setVideoConstraints(undefined);
+            setCameraError(`${message} Retrying with default camera settings...`);
+            return;
+        }
+
+        setCameraError(`${message} (${errorName})`);
     };
 
     const handleVote = async (candidateId) => {
@@ -236,8 +271,8 @@ const UserDashboard = () => {
                             width={320}
                             height={240}
                             onUserMedia={() => setCameraError('')}
-                            onUserMediaError={() => setCameraError('Camera access failed. Allow camera permission and use HTTPS/localhost.')}
-                            videoConstraints={{ facingMode: "user" }}
+                            onUserMediaError={handleCameraError}
+                            videoConstraints={videoConstraints}
                             style={{ borderRadius: '10px', border: '2px solid #ddd' }}
                         />
                         <div className="mt-3 d-flex justify-content-center gap-2">
