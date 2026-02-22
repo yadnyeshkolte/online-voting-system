@@ -66,7 +66,14 @@ const Register = () => {
             await registerUser(formData);
             navigate('/login');
         } catch (err) {
-            setError(err.response?.data || 'Registration failed. Please check your details.');
+            const serverMessage = typeof err.response?.data === 'string'
+                ? err.response.data
+                : err.response?.data?.message;
+            if (!err.response) {
+                setError('Cannot reach server. Please check backend service and HTTPS configuration.');
+            } else {
+                setError(serverMessage || 'Registration failed. Please check your details.');
+            }
         } finally {
             setIsLoading(false);
         }

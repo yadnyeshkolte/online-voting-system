@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface DummyVoterIdRecordRepository extends JpaRepository<DummyVoterIdRecord, Long> {
     Optional<DummyVoterIdRecord> findByVoterIdNumberAndFullNameAndDateOfBirth(String voterIdNumber, String fullName, LocalDate dateOfBirth);
+    Optional<DummyVoterIdRecord> findByVoterIdNumber(String voterIdNumber);
 }
