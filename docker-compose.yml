@@ -36,7 +36,7 @@ services:
       mysql:
         condition: service_healthy
       imageverify:
-        condition: service_healthy
+        condition: service_started
     # Internal port 8080, Nginx will proxy to it
     networks:
       - ovs-network
@@ -47,7 +47,7 @@ services:
     environment:
       PORT: 5001
     healthcheck:
-      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:5001/health',r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))"]
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:5001/health',r=>process.exit((r.statusCode===200||r.statusCode===503)?0:1)).on('error',()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 30

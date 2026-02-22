@@ -85,13 +85,11 @@ app.post('/verify', upload.fields([{ name: 'storedImage', maxCount: 1 }, { name:
     }
 });
 
-loadModels()
-    .then(() => {
-        app.listen(port, () => {
-            console.log(`Image Verification Service running on http://localhost:${port}`);
-        });
-    })
-    .catch((error) => {
-        console.error('Failed to load FaceAPI models:', error);
-        process.exit(1);
-    });
+app.listen(port, () => {
+    console.log(`Image Verification Service running on http://localhost:${port}`);
+});
+
+loadModels().catch((error) => {
+    console.error('Failed to load FaceAPI models:', error);
+    process.exit(1);
+});
