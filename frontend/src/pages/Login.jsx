@@ -35,7 +35,7 @@ const Login = () => {
                 return;
             }
 
-            login(data.token);
+            login(data.token, data);
             navigate('/user');
         } catch (err) {
             const serverMessage = typeof err.response?.data === 'string'

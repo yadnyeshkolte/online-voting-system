@@ -35,7 +35,7 @@ const AdminLogin = () => {
                 return;
             }
 
-            login(data.token);
+            login(data.token, data);
             navigate('/admin');
         } catch (err) {
             const serverMessage = typeof err.response?.data === 'string'
