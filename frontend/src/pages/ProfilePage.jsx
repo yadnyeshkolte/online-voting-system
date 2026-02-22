@@ -2,6 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { getUserProfile, updateUserProfile, uploadProfilePhoto } from '../services/api';
 import { Container, Row, Col, Card, Form, Button, Alert, Image } from 'react-bootstrap';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+
+const buildApiImageUrl = (path) => {
+    if (!path || !path.startsWith('/api')) return path;
+    if (API_BASE_URL === '/api') return path;
+
+    const normalizedBase = API_BASE_URL.replace(/\/+$/, '');
+    if (normalizedBase.endsWith('/api')) {
+        return `${normalizedBase}${path.substring('/api'.length)}`;
+    }
+    return `${normalizedBase}${path}`;
+};
+
 const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [editMode, setEditMode] = useState(false);
@@ -21,12 +34,12 @@ const ProfilePage = () => {
             if (user.profileImageUrl.startsWith('http')) {
                 setProfileImageUrl(user.profileImageUrl);
             } else if (user.profileImageUrl.startsWith('/api')) {
-                setProfileImageUrl(`${user.profileImageUrl}?t=${new Date().getTime()}`);
+                setProfileImageUrl(`${buildApiImageUrl(user.profileImageUrl)}?t=${new Date().getTime()}`);
             } else {
-                setProfileImageUrl(`/api/user/profile/photo/${user.profileImageUrl}?t=${new Date().getTime()}`);
+                setProfileImageUrl(`${buildApiImageUrl(`/api/user/profile/photo/${user.profileImageUrl}`)}?t=${new Date().getTime()}`);
             }
         } else {
-            setProfileImageUrl('/api/user/profile/photo/default.png');
+            setProfileImageUrl(buildApiImageUrl('/api/user/profile/photo/default.png'));
         }
     }, [user]);
 
@@ -91,7 +104,7 @@ const ProfilePage = () => {
                                 <div className="position-relative d-inline-block">
                                     <Image
                                         src={profileImageUrl}
-                                        onError={(e) => { e.target.src = '/api/user/profile/photo/default.png'; }}
+                                        onError={(e) => { e.target.src = buildApiImageUrl('/api/user/profile/photo/default.png'); }}
                                         roundedCircle
                                         className="shadow-sm border border-4 border-light"
                                         style={{ width: '160px', height: '160px', objectFit: 'cover' }}

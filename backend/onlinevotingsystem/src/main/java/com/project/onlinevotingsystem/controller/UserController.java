@@ -2,9 +2,10 @@ package com.project.onlinevotingsystem.controller;
 
 import com.project.onlinevotingsystem.dto.UserUpdateDTO;
 import com.project.onlinevotingsystem.entity.User;
+import com.project.onlinevotingsystem.service.ProfileImageStorageService;
 import com.project.onlinevotingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,14 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.web.bind.annotation.GetMapping;
-import java.io.File;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import org.springframework.util.StringUtils;
+import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -29,9 +26,13 @@ import org.springframework.util.StringUtils;
 public class UserController {
 
     private final UserService userService;
+    private final ProfileImageStorageService profileImageStorageService;
 
-    @Value("${app.file-storage.path}")
-    private String fileStoragePath;
+    private static final String DEFAULT_PROFILE_SVG = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'>"
+            + "<rect width='160' height='160' fill='#f1f3f5'/>"
+            + "<circle cx='80' cy='58' r='30' fill='#adb5bd'/>"
+            + "<path d='M30 140c0-28 22-46 50-46s50 18 50 46' fill='#adb5bd'/>"
+            + "</svg>";
 
     private Long getCurrentUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -60,21 +61,8 @@ public class UserController {
     public ResponseEntity<?> uploadProfilePhoto(@RequestParam("file") MultipartFile file) {
         Long userId = getCurrentUserId();
         try {
-            // Sanitize and create filename
-            String originalFileName = StringUtils.cleanPath(file.getOriginalFilename());
-            String extension = StringUtils.getFilenameExtension(originalFileName);
-            String fileName = userId + "." + extension;
-            
-            Path uploadPath = Paths.get(fileStoragePath);
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
-
-            Path filePath = uploadPath.resolve(fileName);
-            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-            
-            userService.updateUserProfilePhoto(userId, fileName);
-
+            String storedReference = profileImageStorageService.storeUserProfileImage(userId, file);
+            userService.updateUserProfilePhoto(userId, storedReference);
             return ResponseEntity.ok("Photo uploaded successfully");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Failed to upload photo: " + e.getMessage());
@@ -84,22 +72,33 @@ public class UserController {
     @GetMapping("/profile/photo/{filename:.+}")
     public ResponseEntity<Resource> serveProfilePhoto(@PathVariable String filename) {
         try {
-            Path file = Paths.get(fileStoragePath).resolve(filename);
-            Resource resource = new UrlResource(file.toUri());
+            Path requestedFile = profileImageStorageService.resolveLocalImagePath(filename);
+            if (Files.exists(requestedFile) && Files.isReadable(requestedFile)) {
+                return serveLocalFile(requestedFile);
+            }
 
-            if (resource.exists() || resource.isReadable()) {
-                return ResponseEntity.ok()
-                        .header(HttpHeaders.CONTENT_TYPE, Files.probeContentType(file))
-                        .body(resource);
-            } else {
-                Path defaultFile = Paths.get(fileStoragePath).resolve("default.png");
-                Resource defaultResource = new UrlResource(defaultFile.toUri());
-                return ResponseEntity.ok()
-                        .header(HttpHeaders.CONTENT_TYPE, Files.probeContentType(defaultFile))
-                        .body(defaultResource);
+            Optional<Path> defaultFile = profileImageStorageService.findDefaultLocalImagePath();
+            if (defaultFile.isPresent()) {
+                return serveLocalFile(defaultFile.get());
             }
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
+            // Return inline fallback image
         }
+
+        ByteArrayResource fallback = new ByteArrayResource(DEFAULT_PROFILE_SVG.getBytes(StandardCharsets.UTF_8));
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, "image/svg+xml")
+                .body(fallback);
+    }
+
+    private ResponseEntity<Resource> serveLocalFile(Path filePath) throws Exception {
+        Resource resource = new UrlResource(filePath.toUri());
+        String contentType = Files.probeContentType(filePath);
+        if (contentType == null || contentType.isBlank()) {
+            contentType = "application/octet-stream";
+        }
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, contentType)
+                .body(resource);
     }
 }

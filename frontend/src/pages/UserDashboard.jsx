@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Container, Row, Col, Card, Button, Badge, Modal } from 'react-bootstrap';
 import Webcam from 'react-webcam';
 import { getActiveElections, getCompletedElections, getCandidates, castVote, checkHasVoted, getUserElectionResults } from '../services/api';
@@ -15,6 +15,9 @@ const UserDashboard = () => {
     
     const webcamRef = useRef(null);
     const [isVerifying, setIsVerifying] = useState(false);
+    const [capturedImageBlob, setCapturedImageBlob] = useState(null);
+    const [capturedImagePreview, setCapturedImagePreview] = useState('');
+    const [cameraError, setCameraError] = useState('');
 
     const { user } = useAuth();
 
@@ -40,14 +43,12 @@ const UserDashboard = () => {
 
     const handleSelectElection = async (election) => {
         setSelectedElection(election);
+        setCapturedImageBlob(null);
+        setCapturedImagePreview('');
+        setCameraError('');
         const cands = await getCandidates(election.electionId);
         setCandidates(cands);
     };
-
-    const capture = useCallback(() => {
-        const imageSrc = webcamRef.current.getScreenshot();
-        return imageSrc;
-    }, [webcamRef]);
 
     // Convert base64 to blob
     const dataURItoBlob = (dataURI) => {
@@ -62,22 +63,45 @@ const UserDashboard = () => {
         return new Blob([ab], { type: mimeString });
     };
 
+    const capture = () => {
+        const imageSrc = webcamRef.current?.getScreenshot();
+        if (!imageSrc) {
+            setCameraError('Could not capture image from webcam. Please allow camera access and ensure HTTPS/localhost is used.');
+            return;
+        }
+
+        const blob = dataURItoBlob(imageSrc);
+        if (!blob) {
+            setCameraError('Could not process captured image. Please try again.');
+            return;
+        }
+
+        setCapturedImageBlob(blob);
+        setCapturedImagePreview(imageSrc);
+        setCameraError('');
+    };
+
+    const closeVotingModal = () => {
+        setSelectedElection(null);
+        setCapturedImageBlob(null);
+        setCapturedImagePreview('');
+        setCameraError('');
+        setIsVerifying(false);
+    };
+
     const handleVote = async (candidateId) => {
-        if (window.confirm('Are you sure? This will capture your image for verification.')) {
+        if (!capturedImageBlob) {
+            alert('Please capture your image for verification before voting.');
+            return;
+        }
+
+        if (window.confirm('Are you sure you want to cast your vote?')) {
             try {
                 setIsVerifying(true);
-                const imageSrc = capture();
-                if (!imageSrc) {
-                    alert('Could not capture image from webcam. Please ensure camera permissions are allowed.');
-                    setIsVerifying(false);
-                    return;
-                }
-                const blob = dataURItoBlob(imageSrc);
-
-                await castVote(selectedElection.electionId, candidateId, blob);
+                await castVote(selectedElection.electionId, candidateId, capturedImageBlob);
                 alert('Vote cast successfully!');
                 loadElections(); // Refresh status
-                setSelectedElection(null);
+                closeVotingModal();
             } catch (e) {
                 alert('Voting failed: ' + (e.response?.data || e.message));
             } finally {
@@ -186,7 +210,7 @@ const UserDashboard = () => {
             </Row>
 
             {/* Voting Modal */}
-            <Modal show={!!selectedElection && !showResults} onHide={() => setSelectedElection(null)} size="lg">
+            <Modal show={!!selectedElection && !showResults} onHide={closeVotingModal} size="lg">
                 <Modal.Header 
                     closeButton 
                     closeVariant="white" /* This ensures the cross is white like the Results modal */
@@ -198,17 +222,51 @@ const UserDashboard = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="mb-4 text-center">
-                            <h5>Face Verification Required</h5>
-                            <p className="text-muted small">Please ensure your face is clearly visible.</p>
-                            <Webcam
-                                audio={false}
-                                ref={webcamRef}
-                                screenshotFormat="image/jpeg"
-                                width={320}
-                                height={240}
-                                videoConstraints={{ facingMode: "user" }}
-                                style={{ borderRadius: '10px', border: '2px solid #ddd' }}
-                            />
+                        <h5>Face Verification Required</h5>
+                        <p className="text-muted small">Capture your face clearly before selecting a candidate.</p>
+                        {cameraError && (
+                            <div className="alert alert-warning py-2 text-start">
+                                {cameraError}
+                            </div>
+                        )}
+                        <Webcam
+                            audio={false}
+                            ref={webcamRef}
+                            screenshotFormat="image/jpeg"
+                            width={320}
+                            height={240}
+                            onUserMedia={() => setCameraError('')}
+                            onUserMediaError={() => setCameraError('Camera access failed. Allow camera permission and use HTTPS/localhost.')}
+                            videoConstraints={{ facingMode: "user" }}
+                            style={{ borderRadius: '10px', border: '2px solid #ddd' }}
+                        />
+                        <div className="mt-3 d-flex justify-content-center gap-2">
+                            {!capturedImageBlob ? (
+                                <Button variant="outline-primary" onClick={capture}>
+                                    Capture Photo
+                                </Button>
+                            ) : (
+                                <Button
+                                    variant="outline-secondary"
+                                    onClick={() => {
+                                        setCapturedImageBlob(null);
+                                        setCapturedImagePreview('');
+                                    }}
+                                >
+                                    Retake Photo
+                                </Button>
+                            )}
+                        </div>
+                        {capturedImagePreview && (
+                            <div className="mt-3">
+                                <p className="text-muted small mb-2">Captured preview</p>
+                                <img
+                                    src={capturedImagePreview}
+                                    alt="Captured for verification"
+                                    style={{ width: '160px', height: '120px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #ddd' }}
+                                />
+                            </div>
+                        )}
                     </div>
                     <hr />
                     <h5>Candidates</h5>
@@ -237,7 +295,7 @@ const UserDashboard = () => {
                                             style={{ background: primaryGradient, border: 'none' }} 
                                             className="w-100 mt-2"
                                             onClick={() => handleVote(c.candidateId)}
-                                            disabled={isVerifying}
+                                            disabled={isVerifying || !capturedImageBlob}
                                         >
                                             {isVerifying ? 'Verifying...' : `Vote for ${c.partySymbol}`}
                                         </Button>

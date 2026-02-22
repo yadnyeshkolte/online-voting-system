@@ -23,6 +23,13 @@ services:
       ALLOWED_ORIGINS: "*"
       IMAGE_VERIFY_SERVICE_URL: http://imageverify:5001/verify
       FILE_STORAGE_PATH: /app/user_uploads/profiles/
+      PROFILE_IMAGE_STORAGE: ${PROFILE_IMAGE_STORAGE:-cloudinary}
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-dyma4n2c2}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-736826671997363}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-vpH5Yqw2kogKEDeBIskye0Gl44w}
+      CLOUDINARY_FOLDER: ${CLOUDINARY_FOLDER:-online-voting/profiles}
+    volumes:
+      - uploads:/app/user_uploads/profiles
     # Internal port 8080, Nginx will proxy to it
     networks:
       - ovs-network

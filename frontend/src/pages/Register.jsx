@@ -18,7 +18,7 @@ const Register = () => {
         pincode: '',
         aadharNumber: '',
         voterIdNumber: '',
-        profileImageUrl: '/api/user/profile/photo/default.jpg' // Default value
+        profileImageUrl: '/api/user/profile/photo/default.png' // Default value
     });
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
