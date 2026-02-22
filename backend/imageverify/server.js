@@ -1,5 +1,6 @@
 const express = require('express');
 const multer = require('multer');
+require('@tensorflow/tfjs-node');
 const faceapi = require('face-api.js');
 const canvas = require('canvas');
 const fs = require('fs');
@@ -71,8 +72,8 @@ app.post('/verify', upload.fields([{ name: 'storedImage', maxCount: 1 }, { name:
 
         const distance = faceapi.euclideanDistance(storedDetection.descriptor, capturedDetection.descriptor);
         
-        // Threshold is usually 0.6, but lowering to 0.4 for stricter security
-        const threshold = 0.4;
+        // Default 0.6 (standard face-api baseline). Configurable via env.
+        const threshold = Number.parseFloat(process.env.FACE_MATCH_THRESHOLD || '0.6');
         const isMatch = distance < threshold;
 
         console.log(`Verification result: Distance = ${distance}, Threshold = ${threshold}, Match = ${isMatch}`);
