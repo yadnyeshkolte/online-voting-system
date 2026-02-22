@@ -1,11 +1,18 @@
 const express = require('express');
 const multer = require('multer');
-require('@tensorflow/tfjs-node');
 const faceapi = require('face-api.js');
 const canvas = require('canvas');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught exception in imageverify:', error);
+});
+
+process.on('unhandledRejection', (reason) => {
+    console.error('Unhandled promise rejection in imageverify:', reason);
+});
 
 const app = express();
 const port = process.env.PORT || 5001; // Environment variable or default

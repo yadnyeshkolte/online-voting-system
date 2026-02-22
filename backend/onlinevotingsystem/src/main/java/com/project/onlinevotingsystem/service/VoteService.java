@@ -25,6 +25,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.Map;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -140,14 +141,14 @@ public class VoteService {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            headers.set(HttpHeaders.CONNECTION, "close");
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
             body.add("storedImage", new FileSystemResource(storedImage.file()));
             body.add("capturedImage", new FileSystemResource(tempCapturedFile));
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-
-            ResponseEntity<Map> response = restTemplate.postForEntity(imageVerifyServiceUrl, requestEntity, Map.class);
+            ResponseEntity<Map> response = callImageVerifyWithRetry(requestEntity);
 
             if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
                 Boolean isMatch = (Boolean) response.getBody().get("match");
@@ -181,6 +182,32 @@ public class VoteService {
             }
             profileImageStorageService.cleanupResolvedVerificationImage(storedImage);
         }
+    }
+
+    private ResponseEntity<Map> callImageVerifyWithRetry(HttpEntity<MultiValueMap<String, Object>> requestEntity) {
+        int maxAttempts = 2;
+        ResourceAccessException lastException = null;
+
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+            try {
+                return restTemplate.postForEntity(imageVerifyServiceUrl, requestEntity, Map.class);
+            } catch (ResourceAccessException e) {
+                String message = e.getMessage() == null ? "" : e.getMessage();
+                boolean transientEof = message.contains("Unexpected end of file from server");
+                if (!transientEof || attempt == maxAttempts) {
+                    throw e;
+                }
+                lastException = e;
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException interruptedException) {
+                    Thread.currentThread().interrupt();
+                    throw e;
+                }
+            }
+        }
+
+        throw lastException != null ? lastException : new ResourceAccessException("Image verification service call failed.");
     }
 
     public boolean hasUserVoted(Long electionId, Long userId) {
