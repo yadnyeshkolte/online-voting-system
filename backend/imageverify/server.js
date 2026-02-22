@@ -8,6 +8,7 @@ const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 5001; // Environment variable or default
+let modelsLoaded = false;
 
 app.use(cors());
 app.use(express.json());
@@ -25,12 +26,21 @@ async function loadModels() {
     await faceapi.nets.ssdMobilenetv1.loadFromDisk(modelPath);
     await faceapi.nets.faceLandmark68Net.loadFromDisk(modelPath);
     await faceapi.nets.faceRecognitionNet.loadFromDisk(modelPath);
+    modelsLoaded = true;
     console.log('FaceAPI models loaded');
 }
 
-loadModels();
+app.get('/health', (_req, res) => {
+    if (!modelsLoaded) {
+        return res.status(503).json({ status: 'starting' });
+    }
+    return res.json({ status: 'ok' });
+});
 
 app.post('/verify', upload.fields([{ name: 'storedImage', maxCount: 1 }, { name: 'capturedImage', maxCount: 1 }]), async (req, res) => {
+    if (!modelsLoaded) {
+        return res.status(503).json({ error: 'Face models are still loading. Please retry.' });
+    }
     try {
         if (!req.files || !req.files.storedImage || !req.files.capturedImage) {
             return res.status(400).json({ error: 'Both storedImage and capturedImage are required.' });
@@ -75,6 +85,13 @@ app.post('/verify', upload.fields([{ name: 'storedImage', maxCount: 1 }, { name:
     }
 });
 
-app.listen(port, () => {
-    console.log(`Image Verification Service running on http://localhost:${port}`);
-});
+loadModels()
+    .then(() => {
+        app.listen(port, () => {
+            console.log(`Image Verification Service running on http://localhost:${port}`);
+        });
+    })
+    .catch((error) => {
+        console.error('Failed to load FaceAPI models:', error);
+        process.exit(1);
+    });
