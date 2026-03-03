@@ -96,10 +96,9 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUserProfilePhoto(Long userId, String filename) {
+    public void updateUserProfilePhoto(Long userId, String profileImageReference) {
         User user = getUserProfile(userId);
-        String imageUrl = "/api/user/profile/photo/" + filename;
-        user.setProfileImageUrl(imageUrl);
+        user.setProfileImageUrl(profileImageReference);
         userRepository.save(user);
     }
 }

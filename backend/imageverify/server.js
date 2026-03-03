@@ -6,8 +6,17 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught exception in imageverify:', error);
+});
+
+process.on('unhandledRejection', (reason) => {
+    console.error('Unhandled promise rejection in imageverify:', reason);
+});
+
 const app = express();
 const port = process.env.PORT || 5001; // Environment variable or default
+let modelsLoaded = false;
 
 app.use(cors());
 app.use(express.json());
@@ -25,12 +34,21 @@ async function loadModels() {
     await faceapi.nets.ssdMobilenetv1.loadFromDisk(modelPath);
     await faceapi.nets.faceLandmark68Net.loadFromDisk(modelPath);
     await faceapi.nets.faceRecognitionNet.loadFromDisk(modelPath);
+    modelsLoaded = true;
     console.log('FaceAPI models loaded');
 }
 
-loadModels();
+app.get('/health', (_req, res) => {
+    if (!modelsLoaded) {
+        return res.status(503).json({ status: 'starting' });
+    }
+    return res.json({ status: 'ok' });
+});
 
 app.post('/verify', upload.fields([{ name: 'storedImage', maxCount: 1 }, { name: 'capturedImage', maxCount: 1 }]), async (req, res) => {
+    if (!modelsLoaded) {
+        return res.status(503).json({ error: 'Face models are still loading. Please retry.' });
+    }
     try {
         if (!req.files || !req.files.storedImage || !req.files.capturedImage) {
             return res.status(400).json({ error: 'Both storedImage and capturedImage are required.' });
@@ -61,8 +79,8 @@ app.post('/verify', upload.fields([{ name: 'storedImage', maxCount: 1 }, { name:
 
         const distance = faceapi.euclideanDistance(storedDetection.descriptor, capturedDetection.descriptor);
         
-        // Threshold is usually 0.6, but lowering to 0.4 for stricter security
-        const threshold = 0.4;
+        // Default 0.6 (standard face-api baseline). Configurable via env.
+        const threshold = Number.parseFloat(process.env.FACE_MATCH_THRESHOLD || '0.6');
         const isMatch = distance < threshold;
 
         console.log(`Verification result: Distance = ${distance}, Threshold = ${threshold}, Match = ${isMatch}`);
@@ -77,4 +95,9 @@ app.post('/verify', upload.fields([{ name: 'storedImage', maxCount: 1 }, { name:
 
 app.listen(port, () => {
     console.log(`Image Verification Service running on http://localhost:${port}`);
+});
+
+loadModels().catch((error) => {
+    console.error('Failed to load FaceAPI models:', error);
+    process.exit(1);
 });

@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 
@@ -111,7 +112,11 @@ public class AuthService {
         user.setPincode(request.getPincode());
         user.setAadharNumber(request.getAadharNumber());
         user.setVoterIdNumber(request.getVoterIdNumber());
-        user.setProfileImageUrl(request.getProfileImageUrl());
+        String profileImageUrl = request.getProfileImageUrl();
+        if (!StringUtils.hasText(profileImageUrl)) {
+            profileImageUrl = "/api/user/profile/photo/default.png";
+        }
+        user.setProfileImageUrl(profileImageUrl);
         user.setIsVerified(isVerified);
 
         return userRepository.save(user);

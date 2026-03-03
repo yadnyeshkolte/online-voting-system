@@ -1,6 +1,7 @@
 services:
   mysql:
     image: mysql:8.0
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-982223}
       MYSQL_DATABASE: devovs
@@ -15,31 +16,54 @@ services:
 
   backend:
     build: ./backend/onlinevotingsystem
+    restart: unless-stopped
     environment:
       DB_URL: jdbc:mysql://mysql:3306/devovs
       DB_USER: root
       DB_PASSWORD: ${DB_PASSWORD:-982223}
       JWT_SECRET: ${JWT_SECRET:-9a2f8c4e6b0d71f3e8b925a45747f894a3d6bc70fa8d5e21a15a6d8c3e9f247b}
-      ALLOWED_ORIGINS: "*"
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-https://onlinevotingsystem.duckdns.org,http://localhost:5173}
       IMAGE_VERIFY_SERVICE_URL: http://imageverify:5001/verify
       FILE_STORAGE_PATH: /app/user_uploads/profiles/
+      PROFILE_IMAGE_STORAGE: ${PROFILE_IMAGE_STORAGE:-cloudinary}
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-dyma4n2c2}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-736826671997363}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-vpH5Yqw2kogKEDeBIskye0Gl44w}
+      CLOUDINARY_FOLDER: ${CLOUDINARY_FOLDER:-online-voting/profiles}
+    volumes:
+      - uploads:/app/user_uploads/profiles
+    depends_on:
+      mysql:
+        condition: service_healthy
+      imageverify:
+        condition: service_started
     # Internal port 8080, Nginx will proxy to it
     networks:
       - ovs-network
 
   imageverify:
     build: ./backend/imageverify
+    restart: unless-stopped
     environment:
       PORT: 5001
+      FACE_MATCH_THRESHOLD: ${FACE_MATCH_THRESHOLD:-0.6}
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:5001/health',r=>process.exit((r.statusCode===200||r.statusCode===503)?0:1)).on('error',()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 180s
     networks:
       - ovs-network
 
   frontend:
     build: ./frontend
+    restart: unless-stopped
     ports:
-      - "80:80"
+      - "127.0.0.1:8080:80"
     depends_on:
-      - backend
+      backend:
+        condition: service_started
     networks:
       - ovs-network
 

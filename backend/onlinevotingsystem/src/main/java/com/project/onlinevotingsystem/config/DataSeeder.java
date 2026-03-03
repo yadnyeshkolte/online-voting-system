@@ -36,27 +36,27 @@ public class DataSeeder {
                 System.out.println("Admin seeded: admin@voting.com / admin123");
             }
 
-            // Seed Dummy Aadhar
-            if (aadharRepository.count() == 0) {
-                DummyAadharRecord record = new DummyAadharRecord();
-                record.setAadharNumber("123456789012");
-                record.setFullName("John Doe");
-                record.setDateOfBirth(LocalDate.of(1990, 1, 1));
-                record.setIsValid(true);
-                aadharRepository.save(record);
-                System.out.println("Aadhar seeded: 123456789012 / John Doe / 1990-01-01");
-            }
+            // Ensure a consistent verification pair exists for registration demos.
+            String demoFullName = "John Doe";
+            LocalDate demoDob = LocalDate.of(1990, 1, 1);
+            String demoAadhar = "123456789012";
+            String demoVoterId = "ABC1234567";
 
-            // Seed Dummy Voter ID
-             if (voterIdRepository.count() == 0) {
-                DummyVoterIdRecord record = new DummyVoterIdRecord();
-                record.setVoterIdNumber("ABC1234567");
-                record.setFullName("Jane Doe");
-                record.setDateOfBirth(LocalDate.of(1992, 2, 2));
-                record.setIsValid(true);
-                voterIdRepository.save(record);
-                System.out.println("Voter ID seeded: ABC1234567 / Jane Doe / 1992-02-02");
-            }
+            DummyAadharRecord aadharRecord = aadharRepository.findByAadharNumber(demoAadhar).orElseGet(DummyAadharRecord::new);
+            aadharRecord.setAadharNumber(demoAadhar);
+            aadharRecord.setFullName(demoFullName);
+            aadharRecord.setDateOfBirth(demoDob);
+            aadharRecord.setIsValid(true);
+            aadharRepository.save(aadharRecord);
+            System.out.println("Aadhar ensured: 123456789012 / John Doe / 1990-01-01");
+
+            DummyVoterIdRecord voterRecord = voterIdRepository.findByVoterIdNumber(demoVoterId).orElseGet(DummyVoterIdRecord::new);
+            voterRecord.setVoterIdNumber(demoVoterId);
+            voterRecord.setFullName(demoFullName);
+            voterRecord.setDateOfBirth(demoDob);
+            voterRecord.setIsValid(true);
+            voterIdRepository.save(voterRecord);
+            System.out.println("Voter ID ensured: ABC1234567 / John Doe / 1990-01-01");
         };
     }
 }

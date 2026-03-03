@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.core.io.FileSystemResource;
@@ -24,6 +25,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.Map;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -38,12 +40,10 @@ public class VoteService {
     private final CandidateRepository candidateRepository;
     private final ElectionService electionService;
     private final RestTemplate restTemplate;
+    private final ProfileImageStorageService profileImageStorageService;
 
     @Value("${app.image-verify-service.url}")
     private String imageVerifyServiceUrl;
-
-    @Value("${app.file-storage.path}")
-    private String fileStoragePath;
 
     @Transactional
     public Vote castVote(Long electionId, Long userId, Long candidateId, MultipartFile capturedImage) {
@@ -109,44 +109,46 @@ public class VoteService {
     }
 
     private void verifyFace(User user, MultipartFile capturedImage) {
-        String profileImageName = user.getProfileImageUrl();
-        
-        if (profileImageName == null || profileImageName.isEmpty()) {
+        String profileImageReference = user.getProfileImageUrl();
+
+        if (!StringUtils.hasText(profileImageReference)) {
             throw new RuntimeException("User does not have a profile image for verification.");
         }
 
-        // Extract filename if it contains a path
-        if (profileImageName.contains("/")) {
-            profileImageName = profileImageName.substring(profileImageName.lastIndexOf("/") + 1);
-        }
-        if (profileImageName.contains("\\")) {
-            profileImageName = profileImageName.substring(profileImageName.lastIndexOf("\\") + 1);
+        if (profileImageStorageService.isDefaultProfileImage(profileImageReference)) {
+            throw new RuntimeException("Please upload your own profile photo before voting.");
         }
 
-        File storedImageFile = new File(fileStoragePath, profileImageName);
-
-        if (!storedImageFile.exists()) {
-            System.out.println("DEBUG: Profile image not found at: " + storedImageFile.getAbsolutePath());
-            throw new RuntimeException("Stored profile image not found on server.");
-        }
-
+        ProfileImageStorageService.ResolvedImageForVerification storedImage = null;
+        File tempCapturedFile = null;
         try {
+            storedImage = profileImageStorageService.resolveForVerification(profileImageReference);
+
             // Convert MultipartFile to File for RestTemplate
-            File tempCapturedFile = File.createTempFile("captured", capturedImage.getOriginalFilename());
+            String capturedFileName = capturedImage.getOriginalFilename();
+            String suffix = ".jpg";
+            if (StringUtils.hasText(capturedFileName) && capturedFileName.lastIndexOf('.') >= 0) {
+                String extractedSuffix = capturedFileName.substring(capturedFileName.lastIndexOf('.'));
+                if (extractedSuffix.length() <= 10) {
+                    suffix = extractedSuffix;
+                }
+            }
+
+            tempCapturedFile = File.createTempFile("captured-", suffix);
             try (FileOutputStream fos = new FileOutputStream(tempCapturedFile)) {
                 fos.write(capturedImage.getBytes());
             }
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            headers.set(HttpHeaders.CONNECTION, "close");
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-            body.add("storedImage", new FileSystemResource(storedImageFile));
+            body.add("storedImage", new FileSystemResource(storedImage.file()));
             body.add("capturedImage", new FileSystemResource(tempCapturedFile));
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-
-            ResponseEntity<Map> response = restTemplate.postForEntity(imageVerifyServiceUrl, requestEntity, Map.class);
+            ResponseEntity<Map> response = callImageVerifyWithRetry(requestEntity);
 
             if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
                 Boolean isMatch = (Boolean) response.getBody().get("match");
@@ -156,9 +158,6 @@ public class VoteService {
             } else {
                  throw new RuntimeException("Face verification service error.");
             }
-            
-            // Clean up temp file
-            tempCapturedFile.delete();
 
         } catch (HttpClientErrorException e) {
             try {
@@ -176,7 +175,39 @@ public class VoteService {
             throw new RuntimeException("Error processing images for verification.", e);
         } catch (Exception e) {
              throw new RuntimeException("Face verification failed: " + e.getMessage());
+        } finally {
+            if (tempCapturedFile != null && tempCapturedFile.exists()) {
+                //noinspection ResultOfMethodCallIgnored
+                tempCapturedFile.delete();
+            }
+            profileImageStorageService.cleanupResolvedVerificationImage(storedImage);
         }
+    }
+
+    private ResponseEntity<Map> callImageVerifyWithRetry(HttpEntity<MultiValueMap<String, Object>> requestEntity) {
+        int maxAttempts = 2;
+        ResourceAccessException lastException = null;
+
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+            try {
+                return restTemplate.postForEntity(imageVerifyServiceUrl, requestEntity, Map.class);
+            } catch (ResourceAccessException e) {
+                String message = e.getMessage() == null ? "" : e.getMessage();
+                boolean transientEof = message.contains("Unexpected end of file from server");
+                if (!transientEof || attempt == maxAttempts) {
+                    throw e;
+                }
+                lastException = e;
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException interruptedException) {
+                    Thread.currentThread().interrupt();
+                    throw e;
+                }
+            }
+        }
+
+        throw lastException != null ? lastException : new ResourceAccessException("Image verification service call failed.");
     }
 
     public boolean hasUserVoted(Long electionId, Long userId) {

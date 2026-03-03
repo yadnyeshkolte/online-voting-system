@@ -30,14 +30,29 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    const login = (token) => {
+    const login = (token, authData = null) => {
         localStorage.setItem('token', token);
-        const decoded = jwtDecode(token);
-        setUser({
-            sub: decoded.sub,
-            role: decoded.role,
-            id: decoded.id
-        });
+        if (authData?.role && authData?.id) {
+            setUser({
+                sub: authData.sub || authData.identifier || '',
+                role: authData.role,
+                id: authData.id
+            });
+            return;
+        }
+
+        try {
+            const decoded = jwtDecode(token);
+            setUser({
+                sub: decoded.sub,
+                role: decoded.role,
+                id: decoded.id
+            });
+        } catch (error) {
+            console.error("Failed to decode token during login", error);
+            logout();
+            throw new Error("Invalid token received from server.");
+        }
     };
 
     const logout = () => {

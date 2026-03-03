@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface DummyAadharRecordRepository extends JpaRepository<DummyAadharRecord, Long> {
     Optional<DummyAadharRecord> findByAadharNumberAndFullNameAndDateOfBirth(String aadharNumber, String fullName, LocalDate dateOfBirth);
+    Optional<DummyAadharRecord> findByAadharNumber(String aadharNumber);
 }

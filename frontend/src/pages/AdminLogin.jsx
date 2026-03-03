@@ -35,10 +35,17 @@ const AdminLogin = () => {
                 return;
             }
 
-            login(data.token);
+            login(data.token, data);
             navigate('/admin');
         } catch (err) {
-            setError('Invalid credentials. Please check your email and password.');
+            const serverMessage = typeof err.response?.data === 'string'
+                ? err.response.data
+                : err.response?.data?.message;
+            if (!err.response) {
+                setError('Cannot reach server. Please check backend service and HTTPS configuration.');
+            } else {
+                setError(serverMessage || 'Invalid credentials. Please check your email and password.');
+            }
         } finally {
             setIsLoading(false);
         }
